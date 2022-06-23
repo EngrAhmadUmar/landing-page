@@ -10,11 +10,13 @@ import {
 export default function main() {
   return (
     <React.Fragment>
-      <HeroSection />
-      <PlanningVisa />
-      <FeaturedDestination />
-      <AreasOfConservation />
-      <Footer />
+      <div className="bg-[#000107] font-syne">
+        <HeroSection />
+        <PlanningVisa />
+        <FeaturedDestination />
+        <AreasOfConservation />
+        <Footer />
+      </div>
     </React.Fragment>
   );
 }
