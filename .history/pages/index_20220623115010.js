@@ -4,7 +4,7 @@ import {
   About,
   JoinUs,
   Partners
-} from "../src/Components/HomePageComponents/Index";
+} from "../src/Components/HomePageComponents";
 
 export default function Home() {
   return (
