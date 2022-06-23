@@ -9,7 +9,7 @@ const DestinationCard = () => {
       layout='fill'
       objectFit='cover'
       src={destinationPic} />
-    <div className="text-left absolute top-5 left-5">
+    <div className="text-left absolute top-10 left-5">
       <h3 className="text-2xl font-bold xl:text-4xl">Explore featured destinations</h3>
       <p className="mt-4 leading-loose text-[1rem] lg:text-[1.2rem] xl:text-[1.5rem]">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?
