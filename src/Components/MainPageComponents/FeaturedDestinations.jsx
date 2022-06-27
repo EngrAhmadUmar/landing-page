@@ -1,7 +1,37 @@
 import React from "react";
 import DestinationCard from "./DestinationCard";
+import Link from 'next/link';
+import { useQuery, gql } from '@apollo/client'
+
+const featuredDestinations = gql`
+  query GetfeaturedDestinations{
+    futureDestinations{
+      data{
+        id
+        attributes{
+          title,
+          short_description
+        }
+      }
+    }
+  }
+`
 
 const FeaturedDestinations = () => {
+  try {
+    const { loading, error, data } = useQuery(featuredDestinations)
+    if (loading) return <p>Loading...</p>
+    if (error) {
+      console.log("couldn't fetch")
+      console.log(error)
+    }else{
+      destinations = data.futureDestinations.data
+    }
+  } catch (error) {
+    console.log("couldn't fetch")
+    console.log(error)
+  }
+
   return <div className="bg-[#000107] font-syne flex justify-center text-center text-white">
     <div className="mt-[1rem] max-w-[90vw]">
       <div className="">
@@ -11,16 +41,33 @@ const FeaturedDestinations = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?
       </p>
 
-      <div className="grid grid-cols-1 p-2 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 p-2 gap-12 md:grid-cols-2 lg:grid-cols-2">
       {destinations.map(destination => {
-        return <DestinationCard />
+        return <DestinationCard title={destination.title} short_description={destination.short_description} />
       })}
       </div>
+      <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3 py-1">
+          <Link href="#">
+            <a className="px-20 text-lg md:text-2xl lg:text-4xl">see more</a>
+          </Link>
+        </button>
     </div>
   </div>;
 };
 
-let destinations = [1,2,3,4,5]
+let destinations = [{
+  title: 'Featured destination',
+  short_description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?'
+},{
+  title: 'Featured destination',
+  short_description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?'
+},{
+  title: 'Featured destination',
+  short_description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?'
+},{
+  title: 'Featured destination',
+  short_description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?'
+}]
 
 
 export default FeaturedDestinations;
