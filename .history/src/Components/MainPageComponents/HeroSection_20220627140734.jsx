@@ -29,7 +29,7 @@ const HeroSection = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
           turpis molestie, dictum est a, mattis tellus...
         </p>
-        <button className="bg-[#000107] md:bg-[#418d89] rounded-md border-2 border-[#418d89] mt-12 mb-3 py-1 ">
+        <button className="bg-[#000107] md:bg-[#418d89] rounded-sm border-2 border-[#418d89] mt-12 mb-3 py-1 ">
           <Link href="#Apply">
             <a className="p-6 text-xl md:text-2xl">Apply for the Visa</a>
           </Link>
