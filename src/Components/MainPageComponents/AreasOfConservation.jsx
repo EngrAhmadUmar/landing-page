@@ -3,8 +3,34 @@ import Head from "next/head";
 import Image from 'next/image';
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
+import { useQuery, gql } from '@apollo/client'
+
+const InvestmentAreas = gql`
+  query GetAreasOfConservation{
+    conservationAreas{
+      data{
+        id
+        attributes{
+          title,
+          short_description
+        }
+      }
+    }
+  }
+`
 
 const AreasOfConservation = () => {
+  const { loading, error, data } = useQuery(InvestmentAreas)
+  if (loading) return <p>Loading...</p>
+  if (error) {
+    console.log(error)
+    return <p>Couldn't fetch</p>
+  }
+
+  // console.log(data)
+  const areas = data.conservationAreas.data
+  console.log(areas)
+
   return(
     <div className="font-syne text-white">
       <Head>
@@ -22,53 +48,23 @@ const AreasOfConservation = () => {
         it is directed to preserve the following areas.
         </p>
       </div>
+
       <div className="w-full flex flex-col justify-content items-center">
         <div className="my-10 w-11/12 gap-12 flex-wrap flex justify-center items-center">
-          <div className="w-96 md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-            <div className="p-2">
-              <Image src="/an1.svg" alt="" width={500} height={300}></Image>
-              <h2 className="font-bold my-4 text-[1.3rem] md:text-[1.5rem] lg:text-[2rem]">MegaFauna</h2>
-              <p className=" text-[1rem] md:text-[1.2rem] lg:text-[1.5rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptatibus saepe quaerat autem praesentium rerum expedita in 
-                fugit, laboriosam reiciendis voluptas eligendi, repudiandae voluptate nihil qui ab vero et voluptates.             
-              </p>
-            </div>
-          </div>
-          <div className="w-96 md:w-[23rem] lg:w-[25rem] p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-            <div className="p-2">
-              <Image src="/an2.svg" alt="" width={500} height={300}></Image>
-              <h2 className="font-bold my-4 text-[1.3rem] md:text-[1.5rem] lg:text-[2rem] ">Bird Conservation</h2>
-              <p className="text-[1rem] md:text-[1.2rem] lg:text-[1.5rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptatibus saepe quaerat autem praesentium rerum expedita in 
-                fugit, laboriosam reiciendis voluptas eligendi, repudiandae voluptate nihil qui ab vero et voluptates.                           </p>
-            </div>
-          </div>
-        
+          {areas.map(area => (
+            <div className="w-96 md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
+            
+                <div className="p-2">
+                  <Image src="/an1.svg" alt="" width={500} height={300}></Image>
+                  <h2 className="font-bold my-4 text-[1.3rem] md:text-[1.5rem] lg:text-[2rem]">{area['attributes'].title}</h2>
+                  <p className=" text-[1rem] md:text-[1.2rem] lg:text-[1.5rem]">
+                    {area['attributes'].short_description.substring(0,200)}
+                  </p>
+                </div>
+              
 
-          <div className="w-96  md:w-[23rem] lg:w-[25rem] p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-            <div className="p-2">
-              <Image src="/an3.svg" alt="" width={500} height={300}></Image>
-              <h2 className="font-bold my-4 text-[1.3rem] md:text-[1.5rem] lg:text-[2rem]">Watershed protection</h2>
-              <p className="text-[1rem] md:text-[1.2rem] lg:text-[1.5rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptatibus saepe quaerat autem praesentium rerum expedita in 
-                fugit, laboriosam reiciendis voluptas eligendi, repudiandae voluptate nihil qui ab vero et voluptates.                           </p>
             </div>
-          </div>
-
-          <div className="w-96 md:w-[23rem] lg:w-[25rem] p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-            <div className="p-2">
-              <Image src="/an4.svg" alt="" width={500} height={300}></Image>
-              <h2 className="font-bold my-4 text-[1.3rem] md:text-[1.5rem] lg:text-[2rem]">Forest Restoration</h2>
-              <p className="text-[1rem] md:text-[1.2rem] lg:text-[1.5rem] ">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptatibus saepe quaerat autem praesentium rerum expedita in 
-                fugit, laboriosam reiciendis voluptas eligendi, repudiandae voluptate nihil qui ab vero et voluptates.                           </p>
-            </div>
-          </div>
-
+          ))}
         </div>
 
         <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3 py-1">
