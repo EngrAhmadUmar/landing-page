@@ -13,6 +13,11 @@ const HeroSection = () => {
       <div className=" ml-[1.2rem] md:ml-[5rem] lg:ml-[5rem] w-[60px] h-50 py-5">
         <Image src="/logo.svg" layout="responsive" width={5} height={5} />
       </div>
+      <button className="ml-[60rem] rounded-md border-2 border-[#418d89] mt-0 mb-3 py-1 z-20 right ">
+          <Link href="#Apply">
+            <a className="p-6 text-xl md:text-2xl">Apply for the Visa</a>
+          </Link>
+      </button>
       <div className="ml-[1.2rem] md:ml-[5rem] lg:ml-[5rem] mt-[8vh]">
         <h3
           className={`${
@@ -34,7 +39,9 @@ const HeroSection = () => {
             <a className="p-6 text-xl md:text-2xl">Apply for the Visa</a>
           </Link>
         </button>
+        
       </div>
+      
     </div>
   );
 };
