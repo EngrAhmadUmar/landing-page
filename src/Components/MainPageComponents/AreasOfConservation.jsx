@@ -3,32 +3,19 @@ import Head from "next/head";
 import Image from 'next/image';
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
-import { useQuery, gql } from '@apollo/client'
+import { gql, ApolloClient, InMemoryCache } from '@apollo/client'
 
-const InvestmentAreas = gql`
-  query GetAreasOfConservation{
-    conservationAreas{
-      data{
-        id
-        attributes{
-          title,
-          short_description
-        }
-      }
-    }
-  }
-`
 
-const AreasOfConservation = () => {
-  const { loading, error, data } = useQuery(InvestmentAreas)
-  if (loading) return <p>Loading...</p>
-  if (error) {
-    console.log(error)
-    return <p>Couldn't fetch</p>
-  }
+const AreasOfConservation = ({areas}) => {
+  // const { loading, error, data } = useQuery(InvestmentAreas)
+  // if (loading) return <p>Loading...</p>
+  // if (error) {
+  //   console.log(error)
+  //   return <p>Couldn't fetch</p>
+  // }
 
   // console.log(data)
-  const areas = data.conservationAreas.data
+  // const areas = data.conservationAreas.data
   console.log(areas)
 
   return(
@@ -52,7 +39,7 @@ const AreasOfConservation = () => {
       <div className="w-full flex flex-col justify-content items-center">
         <div className="my-10 w-11/12 gap-12 flex-wrap flex justify-center items-center">
           {areas.map(area => (
-            <div className="w-96 md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
+            <div key={area.id} className="w-96 md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
             
                 <div className="p-2">
                   <Image src="/an1.svg" alt="" width={500} height={300}></Image>
@@ -69,12 +56,42 @@ const AreasOfConservation = () => {
 
         <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3 py-1">
           <Link href="#joinUs">
-            <a className="px-20 text-lg md:text-2xl lg:text-4xl">Apply for the Visa</a>
+            <a className="px-20 text-lg md:text-xl lg:text-2xl">Apply for the Visa</a>
           </Link>
         </button>
       </div>
     </div>
   )
 };
+
+// export async function getServerSideProps() {
+//   const client = new ApolloClient({
+//     uri: "http://localhost:1337/graphql",
+//     cache: new InMemoryCache()
+//   })
+
+//   const { data } = await client.query({
+//     query: gql`
+//        query GetInvestmentAreas{
+//         conservationAreas{
+//           data{
+//             id
+//             attributes{
+//               title,
+//               short_description
+//             }
+//           }
+//         }
+//       } 
+//     `
+//   })
+
+//   console.log('data',data)
+//   return{
+//     props: {
+//       areas: data.conservationAreas.data
+//     }
+//   }
+// }
 
 export default AreasOfConservation;
