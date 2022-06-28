@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="text-md border-white border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center">
           C
         </div>
-        <div className="text-xs md:text-lg">All rights reserved 2022 GGV</div>
+        <div className="text-xs">All rights reserved 2022 GGV</div>
       </div>
     </div>
   );

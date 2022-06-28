@@ -42,7 +42,7 @@ const FeaturedDestinations = () => {
             Explore featured destinations
           </h3>
         </div>
-        <p className="mt-5 leading-loose text-lg lg:text-2xl xl:text-3xl ">
+        <p className="mt-5 leading-loose text-lg lg:text-2xl ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id
           ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero
           ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?

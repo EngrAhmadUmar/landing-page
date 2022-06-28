@@ -19,7 +19,7 @@ const Footer = () => {
         <h1 className="text-[#418D89] font-semibold text-[33px] md:text-[2.4rem] ">
           Stay in touch
         </h1>
-        <p className="font-normal text-[1.5rem] mt-5 md:text-[1.8rem] ">
+        <p className="font-normal text-[1.5rem] mt-5  ">
           Keep in touch with us on our social media pages
         </p>
       </div>
@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="text-md border-white border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center">
           C
         </div>
-        <div className="text-xs md:text-lg">All rights reserved 2022 GGV</div>
+        <div className="text-xs">All rights reserved 2022 GGV</div>
       </div>
     </div>
   );

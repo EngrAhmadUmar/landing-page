@@ -14,7 +14,7 @@ const PlanningVisa = () => {
             Planning for your Global Green Visa
           </h3>
         </div>
-        <div className=" mt-16 grid grid-cols-1 p-2 gap-12 md:grid-cols-3">
+        <div className=" mt-16 grid grid-cols-1 p-2 gap-12 md:grid-cols-3 md:max-w-lg">
           <VisaDesc
             title="Choose your destination"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."

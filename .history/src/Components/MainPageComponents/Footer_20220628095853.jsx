@@ -7,7 +7,7 @@ import LinkedIn from "../../../public/linkedin.png";
 
 const Footer = () => {
   return (
-    <div className="bg-[#000107] text-center font-syne mt-[5rem] flex flex-col justify-center items-center text-white">
+    <div className="bg-[#000107] h-[100vh] text-center font-syne relative sm:px-10 flex flex-col justify-center items-center w-full">
       <Head>
         <title>Stay In Touch</title>
         <meta
@@ -15,25 +15,25 @@ const Footer = () => {
           content="social media, stay in touch, reach out, ggv, global green visa"
         />
       </Head>
-      <div className="top-[20%] px-8">
-        <h1 className="text-[#418D89] font-semibold text-[33px] md:text-[2.4rem] ">
+      <div className="absolute top-[20%] px-8 sm:top-28">
+        <h1 className="text-[#418D89] font-semibold text-[33px] sm:text-[90px] sm:leading-[108px]">
           Stay in touch
         </h1>
-        <p className="font-normal text-[1.5rem] mt-5 md:text-[1.8rem] ">
+        <p className="text-white text-[34px] leading-[43px] font-normal sm:text-md sm:font-semibold sm:leading-[80px]">
           Keep in touch with us on our social media pages
         </p>
       </div>
 
-      <div className="flex justify-between gap-6 mt-[5rem]">
+      <div className="absolute bottom-[20%] flex justify-between w-7/12 m-auto sm:w-2/12 sm:bottom-36">
         <Image src={Instagram} alt="Instagram" width={46} height={46} />
         <Image src={Twitter} alt="Instagram" width={46} height={46} />
         <Image src={LinkedIn} alt="Instagram" width={46} height={46} />
       </div>
-      <div className=" font-semibold flex justify-center items-center gap-5 mt-[3rem] mb-6">
-        <div className="text-md border-white border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center">
+      <div className="text-white font-semibold absolute bottom-3 sm:bottom-5 sm:text-sm flex justify-center items-center">
+        <div className="text-[18px] sm:text-[20px] border-white border-solid border-2 rounded-full w-8 h-8 flex justify-center items-center">
           C
         </div>
-        <div className="text-xs md:text-lg">All rights reserved 2022 GGV</div>
+        <div className="text-xs sm:text-sm">All rights reserved 2022 GGV</div>
       </div>
     </div>
   );
