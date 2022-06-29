@@ -15,7 +15,11 @@ export default function main({areas}) {
         <HeroSection />
         <PlanningVisa />
         <FeaturedDestination />
-        <AreasOfConservation areas={areas} />
+// <<<<<<< areas-of-conservation
+//         <AreasOfConservation areas={areas} />
+// =======
+//         <AreasOfConservation />
+// >>>>>>> main
         <Footer />
       </div>
     </React.Fragment>
