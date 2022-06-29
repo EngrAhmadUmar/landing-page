@@ -8,18 +8,14 @@ import {
   Footer
 } from "../src/Components/MainPageComponents";
 
-export default function main({areas}) {
+export default function main({areas, destinations}) {
   return (
     <React.Fragment>
       <div className="bg-[#000107] font-syne">
         <HeroSection />
         <PlanningVisa />
-        <FeaturedDestination />
-// <<<<<<< areas-of-conservation
-//         <AreasOfConservation areas={areas} />
-// =======
-//         <AreasOfConservation />
-// >>>>>>> main
+        <FeaturedDestination destinations={destinations} />
+        <AreasOfConservation areas={areas} />
         <Footer />
       </div>
     </React.Fragment>
@@ -35,12 +31,21 @@ export async function getServerSideProps() {
 
   const { data } = await client.query({
     query: gql`
-       query GetInvestmentAreas{
+       query GetMainPageInfo{
         conservationAreas{
           data{
             id
             attributes{
               title,
+              short_description
+            }
+          }
+        }
+        futureDestinations {
+          data {
+            id
+            attributes {
+              title
               short_description
             }
           }
@@ -52,7 +57,8 @@ export async function getServerSideProps() {
   console.log('data',data)
   return{
     props: {
-      areas: data.conservationAreas.data
+      areas: data.conservationAreas.data,
+      destinations: data.futureDestinations.data
     }
   }
 }
