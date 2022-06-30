@@ -3,74 +3,83 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 
 const Apply = () => {
-    const fullNamesInputRef = useRef();
-    const emailInputRef = useRef();
-    const passPortNoInputRef = useRef();
-    const expiryDateInputRef = useRef();
-    const destinationCountryInputRef = useRef();
-    const ggvFeeInputRef = useRef();
-    const conservationAreasInputRef = useRef();
+  const fullNamesInputRef = useRef();
+  const emailInputRef = useRef();
+  const passPortNoInputRef = useRef();
+  const expiryDateInputRef = useRef();
+  const destinationCountryInputRef = useRef();
+  const ggvFeeInputRef = useRef();
+  const conservationAreasInputRef = useRef();
 
-    const [enteredFullNames, setEnteredFullNames] = useState("");
-    const [enteredEmail, setEnteredEmail] = useState("");
-    const [enteredPassportNo, setEnteredPassportNo] = useState("");
-    const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
-    const [enteredDestinationCountry, setEnteredDestinationCountry] = useState("");
-    const [enteredGgvFee, setEnteredGgvFee] = useState("");
-    const [enteredConservationAreas, setEnteredConservationAreas] = useState("");
+  const [enteredFullNames, setEnteredFullNames] = useState("");
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassportNo, setEnteredPassportNo] = useState("");
+  const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
+  const [enteredDestinationCountry, setEnteredDestinationCountry] =
+    useState("");
+  const [enteredGgvFee, setEnteredGgvFee] = useState("");
+  const [enteredConservationAreas, setEnteredConservationAreas] = useState("");
 
-    const fullNamesChangeHandler = (event) => {
-        setEnteredFullNames(event.target.value);
-    };
-    const emailChangeHandler = (event) => {
-        setEnteredEmail(event.target.value);
-    };
-    const passPortNoChangeHandler = (event) => {
-        setEnteredPassportNo(event.target.value);
-    };
+  const fullNamesChangeHandler = (event) => {
+    setEnteredFullNames(event.target.value);
+  };
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+  const passPortNoChangeHandler = (event) => {
+    setEnteredPassportNo(event.target.value);
+  };
 
-    const expiryDateChangeHandler = (event) => {
-        setEnteredExpiryDate(event.target.value);
-    };
+  const expiryDateChangeHandler = (event) => {
+    setEnteredExpiryDate(event.target.value);
+  };
 
-    const destinationCountryChangeHandler = (event) => {
-        setEnteredDestinationCountry(event.target.value);
-    };
+  const destinationCountryChangeHandler = (event) => {
+    setEnteredDestinationCountry(event.target.value);
+  };
 
-    const ggvFeeChangeHandler = (event) => {
-        setEnteredGgvFee(event.target.value);
-    };
+  const ggvFeeChangeHandler = (event) => {
+    setEnteredGgvFee(event.target.value);
+  };
 
-    const conservationAreasChangeHandler = (event) => {
-        setEnteredConservationAreas(event.target.value);
-    };
+  const conservationAreasChangeHandler = (event) => {
+    setEnteredConservationAreas(event.target.value);
+  };
 
-    const submitHandler = (event) => {
-        event.preventDefault();
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-        // collecting the user Info for the backend
+    // collecting the user Info for the backend
 
-        setEnteredFullNames("");
-        setEnteredEmail("");
-        setEnteredPassportNo("");
-        setEnteredExpiryDate("");
-        setEnteredDestinationCountry("");
-        setEnteredGgvFee("");
-        setEnteredConservationAreas("");
-    };
+    setEnteredFullNames("");
+    setEnteredEmail("");
+    setEnteredPassportNo("");
+    setEnteredExpiryDate("");
+    setEnteredDestinationCountry("");
+    setEnteredGgvFee("");
+    setEnteredConservationAreas("");
+  };
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
-
-        <div className="grid grid-column-1">
+      <div className="grid grid-column-1">
         <div className="lg:w-[120px]  w-[60px] h-50 pt-5 ">
-          <Image src="/logo.svg" layout="responsive" width={5} height={5} opacity={100}/>
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            width={5}
+            height={5}
+            opacity={100}
+          />
         </div>
         <form
           onSubmit={submitHandler}
           className="shadow-md rounded-lg px-7 pt-6 pb-8 m-4 lg:mx-12 xl:mx-auto border-gray border-2 "
         >
           <div className="mb-4">
-            <label className="text-lg md:text-xl">Full Names <span className="text-sm">(As They appear on passport)</span></label>
+            <label className="text-lg md:text-xl">
+              Full Names{" "}
+              <span className="text-sm">(As They appear on passport)</span>
+            </label>
             <input
               type="text"
               ref={fullNamesInputRef}
@@ -113,18 +122,18 @@ const Apply = () => {
               value={enteredExpiryDate}
             />
           </div>
-          
-        
+
           <div className="mb-6">
             <label className="text-lg md:text-xl">Destination Country</label>
-            <select 
-                ref={destinationCountryInputRef} 
-                onChange={destinationCountryChangeHandler} 
-                placeholder="" 
-                value={enteredDestinationCountry}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <option defaultValue>Choose a country</option>
-                <option value="Rwanda">Rwanda</option>
+            <select
+              ref={destinationCountryInputRef}
+              onChange={destinationCountryChangeHandler}
+              placeholder=""
+              value={enteredDestinationCountry}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option defaultValue>Choose a country</option>
+              <option value="Rwanda">Rwanda</option>
             </select>
           </div>
           <div className="mb-6">
@@ -139,23 +148,49 @@ const Apply = () => {
             />
           </div>
           <div>
-            <label className="text-lg md:text-xl">Preferred Areas of Conservation</label>
+            <label className="text-lg md:text-xl">
+              Preferred Areas of Conservation
+            </label>
           </div>
           <div className="flex items-center mt-4">
             <div>
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
+              <input
+                type="checkbox"
+                ref={conservationAreasInputRef}
+                value={enteredConservationAreas}
+                onChange={conservationAreasChangeHandler}
+                className="mr-2 leading-tight"
+              />
               <span className="text-sm text-center md:text-lg">Mega Fauna</span>
             </div>
             <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
+              <input
+                type="checkbox"
+                ref={conservationAreasInputRef}
+                value={enteredConservationAreas}
+                onChange={conservationAreasChangeHandler}
+                className="mr-2 leading-tight"
+              />
               <span className="text-sm text-center md:text-xl">Birds </span>
             </div>
             <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
+              <input
+                type="checkbox"
+                ref={conservationAreasInputRef}
+                value={enteredConservationAreas}
+                onChange={conservationAreasChangeHandler}
+                className="mr-2 leading-tight"
+              />
               <span className="text-sm text-center md:text-lg">Mega Fauna</span>
             </div>
             <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
+              <input
+                type="checkbox"
+                ref={conservationAreasInputRef}
+                value={enteredConservationAreas}
+                onChange={conservationAreasChangeHandler}
+                className="mr-2 leading-tight"
+              />
               <span className="text-sm text-center md:text-xl">Birds</span>
             </div>
           </div>
@@ -174,14 +209,13 @@ const Apply = () => {
       <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
           <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
-              GGV
+            GGV
           </h3>
-          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">Your gateway to <br></br>environmental tourism</p>
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
+            Your gateway to <br></br>environmental tourism
+          </p>
         </div>
-        
       </div>
-
-      
     </div>
   );
 };
