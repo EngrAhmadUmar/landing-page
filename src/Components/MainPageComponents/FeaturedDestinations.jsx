@@ -1,37 +1,27 @@
 import React from "react";
 import DestinationCard from "./DestinationCard";
-import Link from "next/link";
-import { useQuery, gql } from "@apollo/client";
-
-const featuredDestinations = gql`
-  query GetfeaturedDestinations {
-    futureDestinations {
-      data {
-        id
-        attributes {
-          title
-          short_description
-        }
-      }
-    }
-  }
-`;
+// import Link from "next/link";
+// import { useQuery, gql } from "@apollo/client";
+// 
+// const featuredDestinations = gql`
+//   query GetfeaturedDestinations {
+//     futureDestinations {
+//       data {
+//         id
+//         attributes {
+//           title
+//           short_description
+//         }
+//       }
+//     }
+//   }
+// `;
 
 // componentDidMount, ComponentDidUpdate, ComponentDIdRemove
 
-const FeaturedDestinations = () => {
-  try {
-    const { loading, error, data } = useQuery(featuredDestinations);
-    if (loading) return <p>Loading...</p>;
-    if (error) {
-      console.log("couldn't fetch");
-      console.log(error);
-    } else {
-      destinations = data.futureDestinations.data;
-    }
-  } catch (error) {
-    console.log("couldn't fetch");
-    console.log(error);
+const FeaturedDestinations = ({destinations}) => {
+  if (destinations.length == 0){
+    destinations = static_destinations;
   }
 
   return (
@@ -52,8 +42,8 @@ const FeaturedDestinations = () => {
           {destinations.map((destination) => {
             return (
               <DestinationCard
-                title={destination.title}
-                short_description={destination.short_description}
+                title={destination.attributes.title}
+                short_description={destination.attributes.short_description}
               />
             );
           })}
@@ -70,7 +60,7 @@ const FeaturedDestinations = () => {
   );
 };
 
-let destinations = [
+let static_destinations = [
   {
     title: "Featured destination",
     short_description:
