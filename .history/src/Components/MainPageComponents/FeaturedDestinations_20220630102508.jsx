@@ -35,7 +35,7 @@ const FeaturedDestinations = () => {
   }
 
   return (
-    <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
+    <div className="bg-[#faf9f6] font-syne flex justify-center text-center text-white mt-[2rem]">
       <div className="mt-[1rem] max-w-[90vw]">
         <div className="">
           <h3 className="text-3xl lg:text-4xl mt-[7rem] text-[#418D89] font-semibold">

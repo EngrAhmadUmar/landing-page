@@ -1,48 +1,36 @@
 import React from "react";
 import DestinationCard from "./DestinationCard";
-import Link from "next/link";
-import { useQuery, gql } from "@apollo/client";
+// import Link from "next/link";
+// import { useQuery, gql } from "@apollo/client";
+//
+// const featuredDestinations = gql`
+//   query GetfeaturedDestinations {
+//     futureDestinations {
+//       data {
+//         id
+//         attributes {
+//           title
+//           short_description
+//         }
+//       }
+//     }
+//   }
+// `;
 
-const featuredDestinations = gql`
-  query GetfeaturedDestinations {
-    futureDestinations {
-      data {
-        id
-        attributes {
-          title
-          short_description
-        }
-      }
-    }
-  }
-`;
-
-// componentDidMount, ComponentDidUpdate, ComponentDIdRemove
-
-const FeaturedDestinations = () => {
-  try {
-    const { loading, error, data } = useQuery(featuredDestinations);
-    if (loading) return <p>Loading...</p>;
-    if (error) {
-      console.log("couldn't fetch");
-      console.log(error);
-    } else {
-      destinations = data.futureDestinations.data;
-    }
-  } catch (error) {
-    console.log("couldn't fetch");
-    console.log(error);
+const FeaturedDestinations = ({ destinations }) => {
+  if (destinations == undefined) {
+    destinations = static_destinations;
   }
 
   return (
-    <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
+    <div className="bg-[#000107] font-syne flex justify-center text-center text-white mt-[2rem]">
       <div className="mt-[1rem] max-w-[90vw]">
         <div className="">
           <h3 className="text-3xl lg:text-4xl mt-[7rem] text-[#418D89] font-semibold">
             Explore featured destinations
           </h3>
         </div>
-        <p className="mt-5 leading-loose text-lg lg:text-2xl xl:text-[2rem] ">
+        <p className="mt-5 leading-loose text-lg lg:text-2xl xl:text-3xl ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id
           ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero
           ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?
@@ -52,8 +40,8 @@ const FeaturedDestinations = () => {
           {destinations.map((destination) => {
             return (
               <DestinationCard
-                title={destination.title}
-                short_description={destination.short_description}
+                title={destination.attributes.title}
+                short_description={destination.attributes.short_description}
               />
             );
           })}
@@ -70,7 +58,7 @@ const FeaturedDestinations = () => {
   );
 };
 
-let destinations = [
+let static_destinations = [
   {
     title: "Featured destination",
     short_description:

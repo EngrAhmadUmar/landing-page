@@ -9,7 +9,7 @@ const PlanningVisa = () => {
           <h3
             className={`${
               styles.headings
-            }  ${"text-center text-3xl text-[#418D89] md:text-4xl  font-semibold"}`}
+            }  ${"text-center text-3xl md:text-4xl  font-semibold"}`}
           >
             Planning for your Global Green Visa
           </h3>

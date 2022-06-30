@@ -13,7 +13,7 @@ const DestinationCard = ({ title, short_description }) => {
       />
       <div className="text-left absolute top-10 left-5">
         <h3 className="text-2xl font-bold xl:text-4xl ">{title}</h3>
-        <p className="mt-4 text-lg leading-5">{short_description}</p>
+        <p className="mt-4 leading-[1] text-lg">{short_description}</p>
       </div>
     </div>
   );

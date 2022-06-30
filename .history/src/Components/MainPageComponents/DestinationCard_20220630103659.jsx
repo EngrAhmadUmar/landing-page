@@ -4,7 +4,7 @@ import destinationPic from "../../../public/sample-pic.jpeg";
 
 const DestinationCard = ({ title, short_description }) => {
   return (
-    <div className="relative h-[50vh] w-full text-white ">
+    <div className="relative h-[50vh] w-full  ">
       <Image
         className="rounded opacity-100"
         layout="fill"
@@ -12,8 +12,10 @@ const DestinationCard = ({ title, short_description }) => {
         src={destinationPic}
       />
       <div className="text-left absolute top-10 left-5">
-        <h3 className="text-2xl font-bold xl:text-4xl ">{title}</h3>
-        <p className="mt-4 text-lg leading-5">{short_description}</p>
+        <h3 className="text-2xl font-bold xl:text-4xl text-white">{title}</h3>
+        <p className="mt-4 leading-loose text-[1rem] lg:text-[1.2rem]">
+          {short_description}
+        </p>
       </div>
     </div>
   );

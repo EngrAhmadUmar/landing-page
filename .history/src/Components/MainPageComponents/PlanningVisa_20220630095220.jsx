@@ -4,12 +4,12 @@ import VisaDesc from "./VisaDesc";
 const PlanningVisa = () => {
   return (
     <div className="font-syne flex justify-center bg-[#faf9f6]">
-      <div className="mt-[7rem] max-w-[90vw]">
+      <div className="mt-[5rem] max-w-[90vw]">
         <div className="">
           <h3
             className={`${
               styles.headings
-            }  ${"text-center text-3xl text-[#418D89] md:text-4xl  font-semibold"}`}
+            }  ${"text-center text-3xl md:text-4xl  font-semibold"}`}
           >
             Planning for your Global Green Visa
           </h3>
