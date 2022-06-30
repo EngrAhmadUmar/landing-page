@@ -1,6 +1,6 @@
 import styles from "../../../styles/Home.module.css";
 import { useState, useRef } from "react";
-import Head from "next/head";
+import Image from "next/image";
 
 const Apply = () => {
     const fullNamesInputRef = useRef();
@@ -61,11 +61,13 @@ const Apply = () => {
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
 
-        <div className=" my-auto max-w-md md:max-w-3xl  flex justify-center">
-        
+        <div className="grid grid-column-1">
+        <div className="lg:w-[120px]  w-[60px] h-50 pt-5 ">
+          <Image src="/logo.svg" layout="responsive" width={5} height={5} opacity={100}/>
+        </div>
         <form
           onSubmit={submitHandler}
-          className="shadow-md rounded-lg px-7 pt-6 pb-8 m-5 border-gray border-2 "
+          className="shadow-md rounded-lg px-7 pt-6 pb-8 m-4 lg:mx-12 xl:mx-auto border-gray border-2 "
         >
           <div className="mb-4">
             <label className="text-lg md:text-xl">Full Names <span className="text-sm">(As They appear on passport)</span></label>
@@ -121,7 +123,7 @@ const Apply = () => {
                 placeholder="" 
                 value={enteredDestinationCountry}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <option selected>Choose a country</option>
+                <option defaultValue>Choose a country</option>
                 <option value="Rwanda">Rwanda</option>
             </select>
           </div>
@@ -169,7 +171,13 @@ const Apply = () => {
         </form>
       </div>
 
-      <div className=" flex-row  bg-[url('/apply_for_visa_bg.png')] bg-cover bg-no-repeat bg-center md:bg-bottom xl:bg-bottom 2xl:bg-center">
+      <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+        <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
+          <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
+              GGV
+          </h3>
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">Your gateway to <br></br>environmental tourism</p>
+        </div>
         
       </div>
 
