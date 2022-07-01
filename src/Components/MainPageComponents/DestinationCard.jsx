@@ -1,19 +1,23 @@
 import React from "react";
 import Image from "next/image";
-import destinationPic from "../../../public/sample-pic.jpeg";
 
-const DestinationCard = ({ title, short_description }) => {
+const DestinationCard = ({ image, title, short_description }) => {
   return (
-    <div className="relative h-[50vh] w-full text-white ">
+    <div className="relative h-[50vh] w-full text-white bg-[#000107] rounded-lg lg:h-[45rem]">
       <Image
         className="rounded opacity-100"
         layout="fill"
         objectFit="cover"
-        src={destinationPic}
+        src={image}
+        style={{ opacity: 0.7 }}
       />
       <div className="text-left absolute top-10 left-5">
-        <h3 className="text-2xl font-bold xl:text-4xl ">{title}</h3>
-        <p className="mt-4 text-lg leading-5">{short_description}</p>
+        <h3 className="text-2xl font-bold xl:text-4xl max-w-[18rem]">
+          {title}
+        </h3>
+        <p className="mt-4 text-lg lg:text-xl leading-relaxed">
+          {short_description}
+        </p>
       </div>
     </div>
   );

@@ -16,22 +16,22 @@ const Footer = () => {
             content="social media, stay in touch, reach out, ggv, global green visa"
           />
         </Head>
-        <div className="top-[20%] px-8">
-          <h1 className="text-[#418D89] font-semibold text-[33px] md:text-[2.4rem] ">
+        <div className="px-8">
+          <h1 className="text-3xl lg:text-4xl mt-[7rem] text-[#418D89] font-semibold ">
             Stay in touch
           </h1>
-          <p className="font-normal text-[1.5rem] mt-5 md:text-[1.8rem] ">
+          <p className="text-center px-2 text-xl leading-loose md:text-2xl md:leading-relaxed ">
             Keep in touch with us on our social media pages
           </p>
         </div>
 
-        <div className="flex justify-between gap-6 mt-[5rem]">
+        <div className="flex justify-between gap-6 mt-[2.5rem]">
           <Image src={Instagram} alt="Instagram" width={46} height={46} />
           <Image src={Twitter} alt="Instagram" width={46} height={46} />
           <Image src={LinkedIn} alt="Instagram" width={46} height={46} />
         </div>
-        <div className=" font-semibold flex justify-center items-center gap-5 mt-[3rem] mb-6">
-          <div className="text-md border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center">
+        <div className=" font-semibold flex justify-center items-center gap-3 mt-[3rem] mb-6">
+          <div className="text-md border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center border-black p-3">
             C
           </div>
           <div className="text-xs md:text-lg">All rights reserved 2022 GGV</div>

@@ -1,7 +1,10 @@
 import React from "react";
 import DestinationCard from "./DestinationCard";
-import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
+import gorillaLake from "../../../public/sample-pic.jpeg";
+import fazhenda from "../../../public/fazhenda.jpg";
+import gorilla from "../../../public/gorilla.jpg";
+import akagera from "../../../public/akagera.jpg";
 
 const featuredDestinations = gql`
   query GetfeaturedDestinations {
@@ -42,7 +45,7 @@ const FeaturedDestinations = () => {
             Explore featured destinations
           </h3>
         </div>
-        <p className="mt-5 leading-loose text-lg lg:text-2xl xl:text-[2rem] ">
+        <p className="mt-3 md:mt-4 text-center px-2 text-xl leading-loose ml-2 md:text-2xl md:leading-relaxed ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id
           ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero
           ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?
@@ -53,6 +56,7 @@ const FeaturedDestinations = () => {
             return (
               <DestinationCard
                 title={destination.title}
+                image={destination.image}
                 short_description={destination.short_description}
               />
             );
@@ -72,22 +76,26 @@ const FeaturedDestinations = () => {
 
 let destinations = [
   {
-    title: "Featured destination",
+    title: "Gorilla Lake in Gisenyi",
+    image: "/sample-pic.jpeg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
-    title: "Featured destination",
+    title: "Akagera National Park",
+    image: "/akagera.jpg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
-    title: "Featured destination",
+    title: "Fazhenda Sengha",
+    image: "/fazhenda.jpg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
-    title: "Featured destination",
+    title: "Gorilla Nest",
+    image: "/gorilla.jpg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   }
