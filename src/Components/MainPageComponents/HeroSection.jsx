@@ -11,25 +11,33 @@ const HeroSection = () => {
         <meta name="description" content="Welcome to GGV" />
       </Head>
       <div
-        className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-hidden"} ${
-          styles.bgImage
-        }`}
+        className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
       >
         <Image
           src="/hero.jpg"
           layout="fill"
           objectFit="cover"
-          quality={80}
+          quality={100}
           alt="hero"
-          style={{ opacity: 0.6 }}
+          style={{
+            backgroundColor: "rgba(0,0,0,0.1)",
+            opacity: 0.6,
+            overflow: "hidden"
+          }}
         />
       </div>
-      <div className={`${"absolute ml-[3rem] mt-[30vh] "} ${styles.heroText}`}>
-        <h3 className="text-5xl">GGV</h3>
+      <div className={`${"absolute ml-[2rem] mt-[30vh] "} ${styles.heroText}`}>
+        <h3 className="text-5xl md:text-[5.5rem]">GGV</h3>
 
-        <h3 className="text-3xl mt-3">Your gateway to environmental tourism</h3>
+        <h3 className="text-3xl md:text-5xl mt-3">
+          Your gateway to environmental tourism
+        </h3>
+        {/* <p className="text-lg italic leading-5">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+          turpis molestie, dictum est a, mattis tellus. Sed dignissim.
+        </p> */}
         <Link href="#">
-          <button className="mt-4 border-green border-[3px] rounded-md text-xl font-semibold px-4 py-1">
+          <button className="mt-4 border-green border-[3px] rounded-md text-xl md:text-2xl font-semibold px-4 py-1 md:py-2">
             Apply for a Visa
           </button>
         </Link>
