@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import Head from "next/head";
 import styles from "../../../styles/Home.module.css";
 import { useState } from "react";
 import Image from "next/image";
@@ -48,6 +49,10 @@ const Login = () => {
   };
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+        <Head>
+        <title>Login</title>
+        <meta name="description" content="Login to GGV" />
+      </Head>
       <div>
         <div className="lg:w-[120px]  w-[60px] h-50 pt-5 ">
           <Image

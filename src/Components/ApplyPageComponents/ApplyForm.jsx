@@ -1,4 +1,5 @@
 import styles from "../../../styles/Home.module.css";
+import Head from "next/head";
 import { useState, useRef } from "react";
 import Image from "next/image";
 
@@ -61,8 +62,12 @@ const Apply = () => {
   };
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
+      <Head>
+        <title>Apply for Visa</title>
+        <meta name="description" content="Apply for Global Green Visa" />
+      </Head>
       <div className="grid grid-column-1">
-        <div className="lg:w-[120px]  w-[60px] h-50 pt-5 ">
+        <div className="w-[60px] h-50 pt-5 ">
           <Image
             src="/logo.svg"
             layout="responsive"
@@ -71,6 +76,13 @@ const Apply = () => {
             opacity={100}
           />
         </div>
+        <h3
+          className={`${
+            styles.headings
+          }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
+        >
+          Apply for Global Green Visa
+        </h3>
         <form
           onSubmit={submitHandler}
           className="shadow-md rounded-lg px-7 pt-6 pb-8 m-4 lg:mx-12 xl:mx-auto border-gray border-2 "
