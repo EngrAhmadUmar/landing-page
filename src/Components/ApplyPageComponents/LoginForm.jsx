@@ -1,28 +1,50 @@
+import { gql, useMutation } from "@apollo/client";
 import styles from "../../../styles/Home.module.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
+const reg = gql`
+  mutation signIn($email: String!, $password: String!) {
+    login(
+      input: { identifier: $email, password: $password }
+    ) {
+      jwt
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
+
 const Login = () => {
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+    const [email, setEmail] = useState("");
+    const onChangeEmail = (e) => {
+      setEmail(e.target.value);
+    };
+    const [password, setPassword] = useState("");
+    const onChangePassword = (e) => {
+      setPassword(e.target.value);
+    };
+   
+    const [signIn, { data, loading, error }] = useMutation(reg, {
+      variables: {
+        email: email,
+        password: password,
+      },
+    });
+   
+    const onSubmit = (e) => {
+      e.preventDefault();
+      if (email === "" || password === "") {
+        return alert("please fill in all fields");
+      }
+      signIn(password, email);
+   
+      setEmail("");
+      setPassword("");
 
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    // collecting the user Info for the backend
-
-    setEnteredEmail("");
-    setEnteredPassword("");
   };
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
@@ -38,18 +60,18 @@ const Login = () => {
         </div>
         <div className="flex justify-center">
           <form
-            onSubmit={submitHandler}
+            onSubmit={onSubmit}
             className=" shadow-md rounded-lg px-7 pt-6   mx-4 my-8  border-gray border-2"
           >
             <div className="mb-6">
               <label className="text-lg md:text-xl">Email</label>
               <input
                 type="email"
-                ref={emailInputRef}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={emailChangeHandler}
+                name="email"
+                onChange={onChangeEmail}
                 placeholder="Enter Your Email"
-                value={enteredEmail}
+                value={email}
               />
             </div>
 
@@ -57,11 +79,12 @@ const Login = () => {
               <label className="text-lg md:text-xl">Password</label>
               <input
                 type="text"
-                ref={passwordInputRef}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="password"
                 placeholder="Enter Your Password"
-                value={enteredPassword}
-                onChange={passwordChangeHandler}
+                value={password}
+                onChange={onChangePassword}
+
               />
             </div>
             <div className="flex items-center mt-4">
@@ -76,15 +99,21 @@ const Login = () => {
             </div>
 
             <div className="mt-5 ml-[8vh]">
-              <button
-                className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
-                onClick={submitHandler}
-              >
-                Login
+              <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
+                {loading ? "Sending" : "Login"}
               </button>
             </div>
           </form>
         </div>
+        <>
+        {data && (
+          <div>
+            <h1>Token: {data.login?.jwt}</h1>
+            <span>UserID: {data.login.user?.id} </span>
+            <span>UserEmail: {data.login.user?.email} </span>
+          </div>
+        )}
+      </>
       </div>
 
       <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
