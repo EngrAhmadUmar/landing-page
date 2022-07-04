@@ -1,10 +1,13 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "../styles/globals.css";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 //apollo clients
 const client = new ApolloClient({
-  uri: "http://localhost:1337/graphql",
-  cache: new InMemoryCache()
+  uri: "http://localhost:5000/graphql",
+  cache: new InMemoryCache(),
+  // headers: {
+  //   "Allow-Control-Allow-Origin": "*",
+  // },
 });
 
 function MyApp({ Component, pageProps }) {

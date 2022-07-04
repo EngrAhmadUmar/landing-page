@@ -1,101 +1,151 @@
-import styles from "../../../styles/Home.module.css";
-import { useState, useRef } from "react";
+// import styles from "../../../styles/Home.module.css";
+import { useState } from "react";
 import Head from "next/head";
+import { useQuery, gql, useMutation } from "@apollo/client";
+import { GET_AREAS_OF_CONSERVATION } from '../../Queries/areaOfConservationQuery';
+import GetConservationAreas from "../GetConservationAreas";
+import { APPLY_VISA } from "../../mutations/ApplyVisa";
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
+
+const conservationAreas = [
+  {
+    value: "megaFauna", label: 'mega fauna'
+  },
+  { value: "birdConservation", label: "bird conservation" }
+]
 const Apply = () => {
-    const fullNamesInputRef = useRef();
-    const emailInputRef = useRef();
-    const passPortNoInputRef = useRef();
-    const expiryDateInputRef = useRef();
-    const destinationCountryInputRef = useRef();
-    const ggvFeeInputRef = useRef();
-    const conservationAreasInputRef = useRef();
+  function customTheme(theme){
+    return{
+      ...theme,
+      colors:{
+        ...theme.colors,
+        primary25: 'orange',
+        primary: 'green',
+      }
+    }
+  }
 
-    const [enteredFullNames, setEnteredFullNames] = useState("");
-    const [enteredEmail, setEnteredEmail] = useState("");
-    const [enteredPassportNo, setEnteredPassportNo] = useState("");
-    const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
-    const [enteredDestinationCountry, setEnteredDestinationCountry] = useState("");
-    const [enteredGgvFee, setEnteredGgvFee] = useState("");
-    const [enteredConservationAreas, setEnteredConservationAreas] = useState("");
 
-    const fullNamesChangeHandler = (event) => {
-        setEnteredFullNames(event.target.value);
-    };
-    const emailChangeHandler = (event) => {
-        setEnteredEmail(event.target.value);
-    };
-    const passPortNoChangeHandler = (event) => {
-        setEnteredPassportNo(event.target.value);
-    };
 
-    const expiryDateChangeHandler = (event) => {
-        setEnteredExpiryDate(event.target.value);
-    };
 
-    const destinationCountryChangeHandler = (event) => {
-        setEnteredDestinationCountry(event.target.value);
-    };
 
-    const ggvFeeChangeHandler = (event) => {
-        setEnteredGgvFee(event.target.value);
-    };
+  const [enteredFirstName, setEnteredFirstName] = useState("");
+  const onChangeFirstName = (e) => {
+    setEnteredFirstName(e.target.value);
+  }
+  const [enteredLastName, setEnteredLastName] = useState("");
+  const onChangeLastName = (e) => {
+    setEnteredLastName(e.target.value);
+  }
 
-    const conservationAreasChangeHandler = (event) => {
-        setEnteredConservationAreas(event.target.value);
-    };
+  const [enteredPassportNo, setEnteredPassportNo] = useState("");
+  const onChangePassportNo = (e) => {
+    setEnteredPassportNo(e.target.value);
+  }
+  const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
+  const onChangeExpiryDate = (e) => {
+    setEnteredExpiryDate(e.target.value);
+  }
+  const [enteredDestinationCountry, setEnteredDestinationCountry] = useState("");
+  const onChangeDestinationCountry = (e) => {
+    setEnteredDestinationCountry(e.target.value);
+  }
+  const [enteredGgvFee, setEnteredGgvFee] = useState("");
+  const onChangeGgvFee = (e) => {
+    setEnteredGgvFee(e.target.value);
+  }
+  const [enteredConservationAreas, setEnteredConservationAreas] = useState("");
+  const onChangeConservationAreas = (e) => {
+    setEnteredConservationAreas(e.target.value);
+  }
 
-    const submitHandler = (event) => {
-        event.preventDefault();
+  const [createVisaHolder] = useMutation(APPLY_VISA, {
+    variables: {
+      first_name: enteredFirstName,
+      last_name: enteredLastName,
+      user: 5,
 
-        // collecting the user Info for the backend
+      passport_no: enteredPassportNo,
+      passport_expiry: enteredExpiryDate,
 
-        setEnteredFullNames("");
-        setEnteredEmail("");
-        setEnteredPassportNo("");
-        setEnteredExpiryDate("");
-        setEnteredDestinationCountry("");
-        setEnteredGgvFee("");
-        setEnteredConservationAreas("");
-    };
+
+    }
+
+  }
+
+  )
+
+
+  const { loading: areaLoading, error: areaError, data: areas } = useQuery(GET_AREAS_OF_CONSERVATION);
+  if (areaError) return <p>Error :{areaError?.message}</p>;
+  console.log(areas)
+
+
+
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (enteredFirstName === "" || enteredLastName === "" || enteredPassportNo === "" || enteredExpiryDate === "" || enteredConservationAreas) {
+      return alert("please .... fill all the fields")
+    }
+    createVisaHolder(enteredFirstName, enteredLastName, enteredPassportNo, enteredExpiryDate, GetConservationAreas);
+
+    // collecting the user Info for the backend
+
+    setEnteredLastName("");
+    setEnteredFirstName("");
+
+    setEnteredPassportNo("");
+    setEnteredExpiryDate("");
+    setEnteredDestinationCountry("");
+    setEnteredGgvFee("");
+    setEnteredConservationAreas("");
+  };
+
+
+
+
   return (
-    <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
+    <div className="font-syne bg-cover text-red grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
 
-        <div className=" my-auto max-w-md md:max-w-3xl  flex justify-center">
-        
+      <div className=" my-auto max-w-md md:max-w-3xl  flex justify-center">
+
         <form
-          onSubmit={submitHandler}
+          onSubmit={onSubmit}
           className="shadow-md rounded-lg px-7 pt-6 pb-8 m-5 border-gray border-2 "
         >
           <div className="mb-4">
             <label className="text-lg md:text-xl">Full Names <span className="text-sm">(As They appear on passport)</span></label>
             <input
               type="text"
-              ref={fullNamesInputRef}
-              value={enteredFullNames}
-              onChange={fullNamesChangeHandler}
+              name="first_name"
+              value={enteredFirstName}
+              onChange={(e) => onChangeFirstName(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="mb-4">
-            <label className="text-lg md:text-xl">Email</label>
+            <label className="text-lg md:text-xl">Full Names <span className="text-sm">(As They appear on passport)</span></label>
             <input
-              type="email"
-              ref={emailInputRef}
-              value={enteredEmail}
-              onChange={emailChangeHandler}
+              type="text"
+              name="last_name"
+              value={enteredLastName}
+              onChange={(e) => onChangeLastName(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+
           <div className="mb-4">
             <label className="text-lg md:text-xl">Passport Number</label>
             <input
               type="text"
-              ref={passPortNoInputRef}
+              name="passport_no"
               value={enteredPassportNo}
-              onChange={passPortNoChangeHandler}
+              onChange={(e) => onChangePassportNo(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -104,64 +154,35 @@ const Apply = () => {
             <label className="text-lg md:text-xl">Expiry Date</label>
             <input
               type="date"
-              ref={expiryDateInputRef}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={expiryDateChangeHandler}
-              placeholder=""
+              name="passport_expiry"
               value={enteredExpiryDate}
-            />
-          </div>
-          
-        
-          <div className="mb-6">
-            <label className="text-lg md:text-xl">Destination Country</label>
-            <select 
-                ref={destinationCountryInputRef} 
-                onChange={destinationCountryChangeHandler} 
-                placeholder="" 
-                value={enteredDestinationCountry}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <option selected>Choose a country</option>
-                <option value="Rwanda">Rwanda</option>
-            </select>
-          </div>
-          <div className="mb-6">
-            <label className="text-lg md:text-xl">GGV Fees</label>
-            <input
-              type="text"
-              ref={ggvFeeInputRef}
+              onChange={(e) => onChangeExpiryDate(e)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={ggvFeeChangeHandler}
+
               placeholder=""
-              value={enteredGgvFee}
+
             />
           </div>
+
+
           <div>
             <label className="text-lg md:text-xl">Preferred Areas of Conservation</label>
           </div>
           <div className="flex items-center mt-4">
-            <div>
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
-              <span className="text-sm text-center md:text-lg">Mega Fauna</span>
-            </div>
-            <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
-              <span className="text-sm text-center md:text-xl">Birds </span>
-            </div>
-            <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
-              <span className="text-sm text-center md:text-lg">Mega Fauna</span>
-            </div>
-            <div className="ml-5">
-              <input type="checkbox" ref={conservationAreasInputRef} value={enteredConservationAreas} onChange={conservationAreasChangeHandler} className="mr-2 leading-tight" />
-              <span className="text-sm text-center md:text-xl">Birds</span>
-            </div>
+            <Select className=" px-2 py-1" name="conservation_areas" id="" options={conservationAreas} theme={customTheme}  isSearchable isMulti autoFocus>
+              {/* <option value="" hidden>Select conservation area</option>
+              {areas?.conservationAreas?.data.map((area) => (<option key={area.id} value={area.id}>{area.attributes.title}</option>))} */}
+
+            </Select>
+
+
+
           </div>
 
           <div className="mt-5 ml-[8vh]">
             <button
               className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
-              onClick={submitHandler}
+
             >
               Proceed to payment
             </button>
@@ -170,12 +191,36 @@ const Apply = () => {
       </div>
 
       <div className=" flex-row  bg-[url('/apply_for_visa_bg.png')] bg-cover bg-no-repeat bg-center md:bg-bottom xl:bg-bottom 2xl:bg-center">
-        
+
       </div>
 
-      
+
     </div>
+
+    // <div className="">
+
+    //   <form action="">
+
+    //   </form>
+    //   <div className="mt-10">
+    //     <h1>hey</h1>
+    //     {data.conservationAreas.data.length > 0 ? (
+    //       <div>
+    //         {data.conservationAreas.data.map((area, index) => (
+    //           <div key={index}>
+
+    //             {area.attributes.title}
+    //           </div>
+    //         ))}
+    //       </div>
+    //     ) : (
+    //       <p>No areas</p>
+    //     )}
+    //   </div>
+
+    // </div>
   );
+
 };
 
 export default Apply;

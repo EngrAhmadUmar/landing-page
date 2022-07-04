@@ -6,7 +6,7 @@ import {
 export default function Apply() {
   return (
     <React.Fragment>
-      <div className="bg-[#000107] font-syne">
+      <div className="px-4 font-syne">
         <ApplyForm />
       </div>
     </React.Fragment>
