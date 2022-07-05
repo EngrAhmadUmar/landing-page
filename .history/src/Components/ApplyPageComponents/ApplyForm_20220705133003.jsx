@@ -63,13 +63,13 @@ const Apply = () => {
     setEnteredConservationAreas("");
   };
   return (
-    <div className="font-syne bg-[#faf9f6] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
+    <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
       <Head>
         <title>Apply for Visa</title>
         <meta name="description" content="Apply for Global Green Visa" />
       </Head>
       <div className="grid grid-column-1">
-        <div className="w-[50px] h-40 pt-5 ml-6">
+        <div className="w-[60px] h-50 pt-5">
           <Image
             src="/logo.svg"
             layout="responsive"
@@ -220,16 +220,15 @@ const Apply = () => {
         </form>
       </div>
 
-      <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+      <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
           <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
             GGV
           </h3>
-          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5 md:block hidden">
             Your gateway to <br></br>environmental tourism
           </p>
         </div>
-        <div></div>
       </div>
     </div>
   );

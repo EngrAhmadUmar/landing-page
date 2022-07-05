@@ -69,7 +69,7 @@ const Apply = () => {
         <meta name="description" content="Apply for Global Green Visa" />
       </Head>
       <div className="grid grid-column-1">
-        <div className="w-[50px] h-40 pt-5 ml-6">
+        <div className="w-[60px] h-50 pt-5">
           <Image
             src="/logo.svg"
             layout="responsive"
@@ -220,7 +220,7 @@ const Apply = () => {
         </form>
       </div>
 
-      <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+      <div className="md:flex hidden bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
           <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
             GGV
