@@ -50,9 +50,7 @@ const Apply = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    // collecting the user Info for the backend, like this
-    const fullNames = fullNamesInputRef.current.value;
-    console.log(fullNames);
+    // collecting the user Info for the backend
 
     setEnteredFullNames("");
     setEnteredEmail("");
@@ -69,7 +67,7 @@ const Apply = () => {
         <meta name="description" content="Apply for Global Green Visa" />
       </Head>
       <div className="grid grid-column-1">
-        <div className="w-[60px] h-50 pt-5">
+        <div className="w-[60px] h-50 pt-5 ">
           <Image
             src="/logo.svg"
             layout="responsive"
@@ -211,7 +209,7 @@ const Apply = () => {
 
           <div className="mt-5 ml-[8vh]">
             <button
-              className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
+              className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
               onClick={submitHandler}
             >
               Proceed to payment

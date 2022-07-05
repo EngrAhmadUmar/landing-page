@@ -6,7 +6,9 @@ import Image from "next/image";
 
 const reg = gql`
   mutation signIn($email: String!, $password: String!) {
-    login(input: { identifier: $email, password: $password }) {
+    login(
+      input: { identifier: $email, password: $password }
+    ) {
       jwt
       user {
         id
@@ -18,35 +20,36 @@ const reg = gql`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const [password, setPassword] = useState("");
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+    const [email, setEmail] = useState("");
+    const onChangeEmail = (e) => {
+      setEmail(e.target.value);
+    };
+    const [password, setPassword] = useState("");
+    const onChangePassword = (e) => {
+      setPassword(e.target.value);
+    };
+   
+    const [signIn, { data, loading, error }] = useMutation(reg, {
+      variables: {
+        email: email,
+        password: password,
+      },
+    });
+   
+    const onSubmit = (e) => {
+      e.preventDefault();
+      if (email === "" || password === "") {
+        return alert("please fill in all fields");
+      }
+      signIn(password, email);
+   
+      setEmail("");
+      setPassword("");
 
-  const [signIn, { data, loading, error }] = useMutation(reg, {
-    variables: {
-      email: email,
-      password: password
-    }
-  });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (email === "" || password === "") {
-      return alert("please fill in all fields");
-    }
-    signIn(password, email);
-
-    setEmail("");
-    setPassword("");
   };
   return (
     <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
-      <Head>
+        <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
       </Head>
@@ -86,6 +89,7 @@ const Login = () => {
                 placeholder="Enter Your Password"
                 value={password}
                 onChange={onChangePassword}
+
               />
             </div>
             <div className="flex items-center mt-4">
@@ -100,21 +104,21 @@ const Login = () => {
             </div>
 
             <div className="mt-5 ml-[8vh]">
-              <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
+              <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
                 {loading ? "Sending" : "Login"}
               </button>
             </div>
           </form>
         </div>
         <>
-          {data && (
-            <div>
-              <h1>Token: {data.login?.jwt}</h1>
-              <span>UserID: {data.login.user?.id} </span>
-              <span>UserEmail: {data.login.user?.email} </span>
-            </div>
-          )}
-        </>
+        {data && (
+          <div>
+            <h1>Token: {data.login?.jwt}</h1>
+            <span>UserID: {data.login.user?.id} </span>
+            <span>UserEmail: {data.login.user?.email} </span>
+          </div>
+        )}
+      </>
       </div>
 
       <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
