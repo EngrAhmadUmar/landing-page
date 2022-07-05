@@ -17,7 +17,7 @@ export default function main({ areas }) {
         <About />
         <PlanningVisa />
         <FeaturedDestination />
-        < AreasOfConservation areas={areas} />
+        < AreasOfConservation />
         {/* <AreasOfConservation areas={areas} /> */}
 
         <Footer />
