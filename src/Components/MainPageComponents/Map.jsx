@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
+import Image from "next/image";
+import Link from "next/link";
 
 const markers = [
   {
     id: 1,
-    name: "Kigali, Rwanda",
-    position: {lat: -1.9441, lng: 30.0619},
+    name: "Gorilla Lake in Gisenyi",
+    position: {lat: -1.70278, lng: 29.25639},
+    image: "/sample-pic.jpeg",
   },
   {
     id: 2,
     name: "Akagera National Park",
-    position: {lat: -1.6333308, lng: 30.7833302}
+    position: {lat: -1.6333308, lng: 30.7833302},
+    image: "/akagera.jpg",
   },
   {
     id: 3,
-    name: "Lake Kivu",
-    position: {lat: -2.0448, lng: 29.1856}
+    name: "Fazenda Sengha",
+    position: {lat: -1.6154808935029508, lng: 29.945828955849198},
+    image: "/fazhenda.jpg",
   },
   {
     id: 4,
-    name: "Gahinga Volcano",
-    position: {lat: -1.3868, lng: 29.6462}
+    name: "Gorilla Nest",
+    position: {lat: -1.3673198545680096, lng: 29.575345442511793},
+    image: "/gorilla.jpg",
   }
 ];
 
@@ -49,7 +55,7 @@ function Map() {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
-      {markers.map(({ id, name, position }) => (
+      {markers.map(({ id, name, position, image }) => (
         <Marker
           key={id}
           position={position}
@@ -57,7 +63,20 @@ function Map() {
         >
           {activeMarker === id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+              <Link href={name}>
+              <div className="flex flex-col cursor-pointer font-semibold text-[#418D89] hover:text-blue-600">
+                {name} 
+                {image && 
+                  <Image
+                    className="rounded opacity-100 pt-9"
+                    width={"100%"}
+                    height={"100%"}
+                    objectFit="cover"
+                    src={image}
+                  />
+                }
+              </div>
+              </Link>
             </InfoWindow>
           ) : null}
         </Marker>
