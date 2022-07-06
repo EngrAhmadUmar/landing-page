@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useState } from "react";
-import Router from "next/router";
+
 import Image from "next/image";
 
 const reg = gql`
@@ -39,11 +39,6 @@ const Login = () => {
     if (email === "" || password === "") {
       return alert("please fill in all fields");
     }
-    // check if the password and email are matched then proceed with this logiv
-    //which is redirect the user to the /apply
-
-    // const router = useRouter();
-    Router.push("/apply");
     signIn(password, email);
 
     setEmail("");

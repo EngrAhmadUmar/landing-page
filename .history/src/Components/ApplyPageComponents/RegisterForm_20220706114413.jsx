@@ -132,14 +132,12 @@ const JoinUs = () => {
               </Link>
             </div>
             <div className="mt-5 flex items-center justify-center">
-              <Link href="/login">
-                <button
-                  className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-1 px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3"
-                  onClick={onSubmit}
-                >
-                  Sign Up
-                </button>
-              </Link>
+              <button
+                className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-1 px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3"
+                onClick={onSubmit}
+              >
+                Sign Up
+              </button>
             </div>
           </form>
         </div>

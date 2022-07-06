@@ -47,7 +47,7 @@ const AreasOfConservation = () => {
                     src={area.image}
                     alt=""
                     width={500}
-                    // layout="fill"
+                    layout="fill"
                     height={300}
                   ></Image>
                   <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">

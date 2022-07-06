@@ -40,15 +40,15 @@ const AreasOfConservation = () => {
             {areas.map((area) => (
               <div
                 key={area.id}
-                className="w-full h-[35rem] md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+                className="w-full h-[25rem] md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
               >
-                <div className="p-2">
+                <div className="p-2 h-[20rem] w-full">
                   <Image
                     src={area.image}
                     alt=""
-                    width={500}
-                    // layout="fill"
-                    height={300}
+                    // width={500}
+                    layout="fill"
+                    // height={300}
                   ></Image>
                   <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
                     {area.title}

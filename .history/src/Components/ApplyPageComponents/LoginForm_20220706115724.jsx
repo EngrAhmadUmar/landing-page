@@ -1,7 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useState } from "react";
-import Router from "next/router";
 import Image from "next/image";
 
 const reg = gql`
@@ -39,18 +38,13 @@ const Login = () => {
     if (email === "" || password === "") {
       return alert("please fill in all fields");
     }
-    // check if the password and email are matched then proceed with this logiv
-    //which is redirect the user to the /apply
-
-    // const router = useRouter();
-    Router.push("/apply");
     signIn(password, email);
 
     setEmail("");
     setPassword("");
   };
   return (
-    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+    <div className="font-syne bg-cover text-white grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
@@ -68,7 +62,7 @@ const Login = () => {
         <div className="flex justify-center">
           <form
             onSubmit={onSubmit}
-            className="shadow-md rounded-lg px-7 pt-6 pb-8 mt-[5rem] lg:mx-12 xl:mx-auto border-gray border-2 font-Syne md:max-w-lg"
+            className=" shadow-md rounded-lg px-7 pt-6   mx-4 my-8  border-gray border-2"
           >
             <div className="mb-6">
               <label className="text-lg md:text-xl">Email</label>
@@ -93,7 +87,7 @@ const Login = () => {
                 onChange={onChangePassword}
               />
             </div>
-            {/* <div className="flex items-center mt-4">
+            <div className="flex items-center mt-4">
               <div>
                 <input type="checkbox" className="mr-2 leading-tight" />
                 <span className="text-sm text-center md:text-lg">Tourist</span>
@@ -102,10 +96,10 @@ const Login = () => {
                 <input type="checkbox" className="mr-2 leading-tight" />
                 <span className="text-sm text-center md:text-xl">Investor</span>
               </div>
-            </div> */}
+            </div>
 
             <div className="mt-5 ml-[8vh]">
-              <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3 py-1">
+              <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
                 {loading ? "Sending" : "Login"}
               </button>
             </div>

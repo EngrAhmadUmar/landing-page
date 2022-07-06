@@ -1,7 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useRef } from "react";
 import styles from "../../../styles/Home.module.css";
 
@@ -123,23 +122,17 @@ const JoinUs = () => {
               />
             </div>
 
-            <div className="text-sm flex items-center justify-between mt-3  cursor-pointer">
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
-                <h3 className="hover:text-green">
-                  Already have an Account? Log in
-                </h3>
-              </Link>
+            <div className="text-sm flex items-center justify-between mt-3">
+              <h3>Forgot Password?</h3>
+              <h3>Already have an Account? Log in</h3>
             </div>
-            <div className="mt-5 flex items-center justify-center">
-              <Link href="/login">
-                <button
-                  className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-1 px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3"
-                  onClick={onSubmit}
-                >
-                  Sign Up
-                </button>
-              </Link>
+            <div className="mt-5 ml-[8vh]">
+              <button
+                className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
+                onClick={onSubmit}
+              >
+                Proceed to payment
+              </button>
             </div>
           </form>
         </div>
