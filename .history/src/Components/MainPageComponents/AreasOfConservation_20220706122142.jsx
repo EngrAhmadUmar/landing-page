@@ -47,7 +47,6 @@ const AreasOfConservation = () => {
                     src={area.image}
                     alt=""
                     width={500}
-                    // layout="fill"
                     height={300}
                   ></Image>
                   <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
@@ -63,7 +62,7 @@ const AreasOfConservation = () => {
 
           <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
             <Link href="/register">
-              <a className="px-10 text-lg md:text-xl lg:text-2xl">
+              <a className="px-20 text-lg md:text-xl lg:text-2xl">
                 Apply for the Visa
               </a>
             </Link>

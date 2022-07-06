@@ -1,13 +1,14 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useRef } from "react";
 import styles from "../../../styles/Home.module.css";
 
 const reg = gql`
   mutation joinUs($username: String!, $email: String!, $password: String!) {
-    register(input: { email: $email, password: $password }) {
+    register(
+      input: { username: $username, email: $email, password: $password }
+    ) {
       jwt
       user {
         id
@@ -18,10 +19,10 @@ const reg = gql`
 `;
 
 const JoinUs = () => {
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-  const confirmPasswordInputRef = useRef();
-
+  const [username, setUsername] = useState("");
+  const onChangeUsername = (e) => {
+    setUsername(e.target.value);
+  };
   const [email, setEmail] = useState("");
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -31,12 +32,9 @@ const JoinUs = () => {
     setPassword(e.target.value);
   };
 
-  const [confirmPassowrd, setConfirmPassword] = useState("");
-  const confirmPasswordChangeHandler = (event) => {
-    setConfirmPassword(event.target.value);
-  };
   const [joinUs, { data, loading, error }] = useMutation(reg, {
     variables: {
+      username: username,
       email: email,
       password: password
     }
@@ -44,21 +42,14 @@ const JoinUs = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
+    if (username === "" || email === "" || password === "") {
       return alert("please fill in all fields");
     }
-
-    // check if the password match
-    if (
-      passwordInputRef.current.value != confirmPasswordInputRef.current.value
-    ) {
-      return alert("Passwords must match");
-    }
-    joinUs(password, email);
+    joinUs(username, password, email);
 
     setEmail("");
     setPassword("");
-    setConfirmPassword("");
+    setUsername("");
   };
 
   return (
@@ -68,7 +59,7 @@ const JoinUs = () => {
         <meta name="description" content="Join Our Family" />
       </Head>
       <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
-        <div className="">
+        <div className="grid grid-column-1">
           <div className="w-[50px] h-40 pt-5 ml-6">
             <Image
               src="/logo.svg"
@@ -83,18 +74,18 @@ const JoinUs = () => {
               styles.headings
             }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
           >
-            Login or Sign Up to apply the Visa
+            Apply for Global Green Visa
           </h3>
           <form
             onSubmit={onSubmit}
-            className="shadow-md rounded-lg px-7 pt-6 pb-8 mt-[5rem] lg:mx-12 xl:mx-auto border-gray border-2 font-Syne md:max-w-lg"
+            className="shadow-md rounded-lg px-7 pt-6 pb-8 m-4 lg:mx-12 xl:mx-auto border-gray border-2 "
           >
             <div className="mb-4">
               <label className="text-lg md:text-xl">Email</label>
               <input
                 type="email"
                 ref={emailInputRef}
-                value={email}
+                value={enteredEmail}
                 onChange={onChangeEmail}
                 placeholder=""
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -104,42 +95,20 @@ const JoinUs = () => {
               <label className="text-lg md:text-xl">Password</label>
               <input
                 type="password"
-                ref={passwordInputRef}
-                value={password}
+                ref={emailInputRef}
+                value={enteredEmail}
                 onChange={onChangePassword}
                 placeholder=""
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-            <div className="">
-              <label className="text-lg md:text-xl">Confirm Password</label>
-              <input
-                type="password"
-                ref={confirmPasswordInputRef}
-                value={confirmPassowrd}
-                onChange={confirmPasswordChangeHandler}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-
-            <div className="text-sm flex items-center justify-between mt-3  cursor-pointer">
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
-                <h3 className="hover:text-green">
-                  Already have an Account? Log in
-                </h3>
-              </Link>
-            </div>
-            <div className="mt-5 flex items-center justify-center">
-              <Link href="/login">
-                <button
-                  className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-1 px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3"
-                  onClick={onSubmit}
-                >
-                  Sign Up
-                </button>
-              </Link>
+            <div className="mt-5 ml-[8vh]">
+              <button
+                className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
+                onClick={submitHandler}
+              >
+                Proceed to payment
+              </button>
             </div>
           </form>
         </div>

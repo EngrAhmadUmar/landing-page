@@ -1,7 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useState } from "react";
-import Router from "next/router";
 import Image from "next/image";
 
 const reg = gql`
@@ -39,11 +38,6 @@ const Login = () => {
     if (email === "" || password === "") {
       return alert("please fill in all fields");
     }
-    // check if the password and email are matched then proceed with this logiv
-    //which is redirect the user to the /apply
-
-    // const router = useRouter();
-    Router.push("/apply");
     signIn(password, email);
 
     setEmail("");
@@ -105,7 +99,7 @@ const Login = () => {
             </div> */}
 
             <div className="mt-5 ml-[8vh]">
-              <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3 py-1">
+              <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
                 {loading ? "Sending" : "Login"}
               </button>
             </div>

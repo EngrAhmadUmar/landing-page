@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 const reg = gql`
@@ -43,7 +43,7 @@ const Login = () => {
     //which is redirect the user to the /apply
 
     // const router = useRouter();
-    Router.push("/apply");
+    router.push("/apply");
     signIn(password, email);
 
     setEmail("");

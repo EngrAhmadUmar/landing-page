@@ -35,7 +35,7 @@ const AreasOfConservation = () => {
           </p>
         </div>
 
-        <div className="w-full flex flex-col justify-content items-center">
+        <div className="">
           <div className="grid grid-cols-1 p-2 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
             {areas.map((area) => (
               <div
@@ -46,9 +46,9 @@ const AreasOfConservation = () => {
                   <Image
                     src={area.image}
                     alt=""
-                    width={500}
-                    // layout="fill"
-                    height={300}
+                    // width={500}
+                    layout="fill"
+                    // height={300}
                   ></Image>
                   <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
                     {area.title}
@@ -102,3 +102,38 @@ let areas = [
 ];
 
 export default AreasOfConservation;
+
+// <div className="w-full flex flex-col justify-content items-center">
+// <div className="grid grid-cols-1 p-2 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
+//   {areas.map((area) => (
+//     <div
+//       key={area.id}
+//       className="w-full h-[35rem] md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+//     >
+//       <div className="p-2">
+//         <Image
+//           src={area.image}
+//           alt=""
+//           // width={500}
+//           layout="fill"
+//           // height={300}
+//         ></Image>
+//         <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
+//           {area.title}
+//         </h2>
+//         <p className=" text-lg lg:text-xl leading-relaxed">
+//           {area.short_description.substring(0, 200)}
+//         </p>
+//       </div>
+//     </div>
+//   ))}
+// </div>
+
+// <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+//   <Link href="/register">
+//     <a className="px-10 text-lg md:text-xl lg:text-2xl">
+//       Apply for the Visa
+//     </a>
+//   </Link>
+// </button>
+// </div>

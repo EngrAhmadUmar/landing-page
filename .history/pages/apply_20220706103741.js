@@ -4,7 +4,9 @@ import { ApplyForm } from "../src/Components/ApplyPageComponents/Index";
 export default function Apply() {
   return (
     <React.Fragment>
-      <ApplyForm />
+      <div className="">
+        <ApplyForm />
+      </div>
     </React.Fragment>
   );
 }
