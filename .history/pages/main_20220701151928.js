@@ -17,7 +17,9 @@ export default function main({ areas }) {
         <About />
         <PlanningVisa />
         <FeaturedDestination />
-        < AreasOfConservation />        
+        {/* < AreasOfConservation areas={areas} /> */}
+        {/* <AreasOfConservation areas={areas} /> */}
+
         <Footer />
       </div>
     </React.Fragment>
