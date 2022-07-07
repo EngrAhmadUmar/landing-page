@@ -1,7 +1,6 @@
 import React from "react";
-import {
-  ApplyForm,
-} from "../src/Components/ApplyPageComponents/Index";
+// import { Link } from "react-router-dom";
+import { ApplyForm } from "../src/Components/ApplyPageComponents/Index";
 
 export default function Apply() {
   return (
