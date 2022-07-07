@@ -4,62 +4,57 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef } from "react";
 import styles from "../../../styles/Home.module.css";
+import { SIGNUP_MUTATION } from "../../mutations/auth";
+import { AUTH_TOKEN } from "../constant";
 
-const reg = gql`
-  mutation joinUs($username: String!, $email: String!, $password: String!) {
-    register(input: { email: $email, password: $password }) {
-      jwt
-      user {
-        id
-        email
-      }
-    }
-  }
-`;
 
 const JoinUs = () => {
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-  const confirmPasswordInputRef = useRef();
-
-  const [email, setEmail] = useState("");
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const [password, setPassword] = useState("");
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const [confirmPassowrd, setConfirmPassword] = useState("");
-  const confirmPasswordChangeHandler = (event) => {
-    setConfirmPassword(event.target.value);
-  };
-  const [joinUs, { data, loading, error }] = useMutation(reg, {
-    variables: {
-      email: email,
-      password: password
+  const [username, setUsername] = useState("");
+    const onChangeUsername = (e) => {
+      setUsername(e.target.value);
+    };
+    const [email, setEmail] = useState("");
+    const onChangeEmail = (e) => {
+      setEmail(e.target.value);
+    };
+    const [password, setPassword] = useState("");
+    const onChangePassword = (e) => {
+      setPassword(e.target.value);
+    };
+  
+    const [signup, {data, loading, error}] = useMutation(SIGNUP_MUTATION, {
+      variables: {
+          username: username,
+          email: email,
+          password: password,
+      },
+      
+      
+    });
+  
+    if(data){
+      
+          localStorage.setItem(AUTH_TOKEN, data.register.jwt);
+          console.log(data)
+          console.log(data.register.user?.id)
+          console.log(data.register.user?.email)
+        
     }
-  });
+  
+    
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (email === "" || password === "") {
-      return alert("please fill in all fields");
-    }
-
-    // check if the password match
-    if (
-      passwordInputRef.current.value != confirmPasswordInputRef.current.value
-    ) {
-      return alert("Passwords must match");
-    }
-    joinUs(password, email);
-
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-  };
+    const onSubmit = (e) => {
+      e.preventDefault();
+      if (username === "" || email === "" || password === "") {
+        return alert("please fill in all fields");
+      }
+      signup(username, password, email);
+  
+      setEmail("");
+      setPassword("");
+      setUsername("");
+    };
+  
 
   return (
     <div className=" font-syne " id="joinUs">
@@ -86,62 +81,51 @@ const JoinUs = () => {
             Login or Sign Up to apply the Visa
           </h3>
           <form
-            onSubmit={onSubmit}
-            className="shadow-md rounded-lg px-7 pt-6 pb-8 mt-[5rem] lg:mx-12 xl:mx-auto border-gray border-2 font-Syne md:max-w-lg"
-          >
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">Email</label>
-              <input
-                type="email"
-                ref={emailInputRef}
-                value={email}
-                onChange={onChangeEmail}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">Password</label>
-              <input
-                type="password"
-                ref={passwordInputRef}
-                value={password}
-                onChange={onChangePassword}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="">
-              <label className="text-lg md:text-xl">Confirm Password</label>
-              <input
-                type="password"
-                ref={confirmPasswordInputRef}
-                value={confirmPassowrd}
-                onChange={confirmPasswordChangeHandler}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
+        onSubmit={onSubmit}
+        className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
+      >
+        <div className="mb-4">
+          <label className="text-lg md:text-xl">username</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => onChangeUsername(e)}
+            placeholder="Enter Your Name"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="text-lg md:text-xl">Pass</label>
+          <input
+            type="text"
+            name="password"
+            value={password}
+            onChange={onChangePassword}
+            placeholder="Enter Your Name"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-6">
+          <label className="text-lg md:text-xl">Email</label>
+          <input
+            type="email"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            name="email"
+            onChange={onChangeEmail}
+            placeholder="Enter Your Email"
+            value={email}
+          />
+        </div>
 
-            <div className="text-sm flex items-center justify-between mt-3  cursor-pointer">
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
-                <h3 className="hover:text-green">
-                  Already have an Account? Log in
-                </h3>
-              </Link>
-            </div>
-            <div className="mt-5 flex items-center justify-center">
-              <Link href="/login">
-                <button
-                  className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-1 px-6 md:text-xl bg-[#418d89] rounded-md mt-8 mb-3"
-                  onClick={onSubmit}
-                >
-                  Sign Up
-                </button>
-              </Link>
-            </div>
-          </form>
+       
+
+        <div className="mt-5 ml-[8vh]">
+          <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
+            {loading ? "Sending" : "Join Us"}
+          </button>
+        </div>
+      </form>
         </div>
 
         <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
@@ -156,15 +140,7 @@ const JoinUs = () => {
           <div></div>
         </div>
       </div>
-      <>
-        {data && (
-          <div>
-            <h1>Token: {data.register?.jwt}</h1>
-            <span>UserID: {data.register.user?.id} </span>
-            <span>UserEmail: {data.register.user?.email} </span>
-          </div>
-        )}
-      </>
+
     </div>
   );
 };
