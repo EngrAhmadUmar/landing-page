@@ -1,67 +1,123 @@
 import styles from "../../../styles/Home.module.css";
 import Head from "next/head";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { AUTH_TOKEN } from "../constant";
+import { useQuery, gql, useMutation } from "@apollo/client";
+import { GET_AREAS_OF_CONSERVATION } from "../../Queries/conservationAreas";
+import { APPLY_VISA } from "../../mutations/applyVisa";
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
+import GetConservationAreas from "../GetConservationAreas";
 
 const Apply = () => {
-  const fullNamesInputRef = useRef();
-  const emailInputRef = useRef();
-  const passPortNoInputRef = useRef();
-  const expiryDateInputRef = useRef();
-  const destinationCountryInputRef = useRef();
-  const ggvFeeInputRef = useRef();
-  const conservationAreasInputRef = useRef();
+  function customTheme(theme) {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: 'orange',
+        primary: 'green',
+      }
+    }
+  }
+  const [enteredFirstName, setEnteredFirstName] = useState("");
+  const onChangeFirstName = (e) => {
+    setEnteredFirstName(e.target.value);
+  }
+  const [enteredLastName, setEnteredLastName] = useState("");
+  const onChangeLastName = (e) => {
+    setEnteredLastName(e.target.value);
+  }
 
-  const [enteredFullNames, setEnteredFullNames] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassportNo, setEnteredPassportNo] = useState("");
+  const onChangePassportNo = (e) => {
+    setEnteredPassportNo(e.target.value);
+  }
   const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
-  const [enteredDestinationCountry, setEnteredDestinationCountry] =
-    useState("");
+  const onChangeExpiryDate = (e) => {
+    setEnteredExpiryDate(e.target.value);
+  }
+  const [enteredDestinationCountry, setEnteredDestinationCountry] = useState("");
+  const onChangeDestinationCountry = (e) => {
+    setEnteredDestinationCountry(e.target.value);
+  }
   const [enteredGgvFee, setEnteredGgvFee] = useState("");
+  const onChangeGgvFee = (e) => {
+    setEnteredGgvFee(e.target.value);
+  }
   const [enteredConservationAreas, setEnteredConservationAreas] = useState("");
+  const onChangeConservationAreas = (e) => {
+    setEnteredConservationAreas(e.value);
+  }
 
-  const fullNamesChangeHandler = (event) => {
-    setEnteredFullNames(event.target.value);
-  };
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-  const passPortNoChangeHandler = (event) => {
-    setEnteredPassportNo(event.target.value);
-  };
+  const [user, setUser]=useState(null)
 
-  const expiryDateChangeHandler = (event) => {
-    setEnteredExpiryDate(event.target.value);
-  };
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem("user") || "{}");
+    setUser(auth)
 
-  const destinationCountryChangeHandler = (event) => {
-    setEnteredDestinationCountry(event.target.value);
-  };
+  },[])
 
-  const ggvFeeChangeHandler = (event) => {
-    setEnteredGgvFee(event.target.value);
-  };
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
 
-  const conservationAreasChangeHandler = (event) => {
-    setEnteredConservationAreas(event.target.value);
-  };
+  const [createVisaHolder] = useMutation(APPLY_VISA, {
+    variables: {
+      first_name: enteredFirstName,
+      last_name: enteredLastName,
+      user: parseInt(user?.login?.user.id),
+      conservationAreas: enteredConservationAreas,
+      passport_no: enteredPassportNo,
+      passport_expiry: enteredExpiryDate,
 
-  const submitHandler = (event) => {
-    event.preventDefault();
 
-    // collecting the user Info for the backend, like this
-    const fullNames = fullNamesInputRef.current.value;
-    console.log(fullNames);
+    }
 
-    setEnteredFullNames("");
-    setEnteredEmail("");
+  }
+
+  )
+
+  const handleSelect = (e) => {
+    // console.log(e)
+    const choices = e.map(item => parseInt(item.value))
+    setEnteredConservationAreas(choices)
+    console.log(choices)
+  }
+
+
+
+  const { loading: areaLoading, error: areaError, data } = useQuery(GET_AREAS_OF_CONSERVATION);
+
+  if (areaError) return <p>Error :{areaError?.message}</p>;
+  const availableOptions = data?.conservationAreas?.data.map(area => { return { value: area.id, label: area.attributes.title } })
+
+
+
+
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (enteredFirstName === "" || enteredLastName === "" || enteredPassportNo === "" || enteredExpiryDate === "") {
+      return alert("please .... fill all the fields")
+    }
+    createVisaHolder(enteredFirstName, enteredLastName, enteredPassportNo, enteredExpiryDate, enteredConservationAreas);
+    console.log("submitted", enteredFirstName, enteredLastName, enteredPassportNo, enteredExpiryDate, enteredConservationAreas)
+
+    // collecting the user Info for the backend
+
+    setEnteredLastName("");
+    setEnteredFirstName("");
+
     setEnteredPassportNo("");
     setEnteredExpiryDate("");
     setEnteredDestinationCountry("");
     setEnteredGgvFee("");
     setEnteredConservationAreas("");
   };
+
+
+
+
   return (
     <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
       <Head>
@@ -86,41 +142,39 @@ const Apply = () => {
           Apply for Global Green Visa
         </h3>
         <form
-          onSubmit={submitHandler}
-          className="shadow-md rounded-lg px-7 pt-6 pb-8 m-4 lg:mx-12 xl:mx-auto border-gray border-2 "
+          onSubmit={onSubmit}
+          className="shadow-md rounded-lg px-7 pt-6 pb-8 m-5 border-gray border-2 "
         >
           <div className="mb-4">
-            <label className="text-lg md:text-xl">
-              Full Names{" "}
-              <span className="text-sm">(As They appear on passport)</span>
-            </label>
+            <label className="text-lg md:text-xl">First name <span className="text-sm">(As They appear on passport)</span></label>
             <input
               type="text"
-              ref={fullNamesInputRef}
-              value={enteredFullNames}
-              onChange={fullNamesChangeHandler}
+              name="first_name"
+              value={enteredFirstName}
+              onChange={(e) => onChangeFirstName(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="mb-4">
-            <label className="text-lg md:text-xl">Email</label>
+            <label className="text-lg md:text-xl">Last name <span className="text-sm">(As They appear on passport)</span></label>
             <input
-              type="email"
-              ref={emailInputRef}
-              value={enteredEmail}
-              onChange={emailChangeHandler}
+              type="text"
+              name="last_name"
+              value={enteredLastName}
+              onChange={(e) => onChangeLastName(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+
           <div className="mb-4">
             <label className="text-lg md:text-xl">Passport Number</label>
             <input
               type="text"
-              ref={passPortNoInputRef}
+              name="passport_no"
               value={enteredPassportNo}
-              onChange={passPortNoChangeHandler}
+              onChange={(e) => onChangePassportNo(e)}
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -129,94 +183,40 @@ const Apply = () => {
             <label className="text-lg md:text-xl">Expiry Date</label>
             <input
               type="date"
-              ref={expiryDateInputRef}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={expiryDateChangeHandler}
-              placeholder=""
+              name="passport_expiry"
               value={enteredExpiryDate}
+              onChange={(e) => onChangeExpiryDate(e)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+
+              placeholder=""
+
             />
           </div>
 
-          <div className="mb-6">
-            <label className="text-lg md:text-xl">Destination Country</label>
-            <select
-              ref={destinationCountryInputRef}
-              onChange={destinationCountryChangeHandler}
-              placeholder=""
-              value={enteredDestinationCountry}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            >
-              <option defaultValue>Choose a country</option>
-              <option value="Rwanda">Rwanda</option>
-            </select>
-          </div>
-          <div className="mb-6">
-            <label className="text-lg md:text-xl">GGV Fees</label>
-            <input
-              type="text"
-              ref={ggvFeeInputRef}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={ggvFeeChangeHandler}
-              placeholder=""
-              value={enteredGgvFee}
-            />
-          </div>
+
           <div>
-            <label className="text-lg md:text-xl">
-              Preferred Areas of Conservation
-            </label>
+            <label className="text-lg md:text-xl">Preferred Areas of Conservation</label>
           </div>
           <div className="flex items-center mt-4">
-            <div>
-              <input
-                type="checkbox"
-                ref={conservationAreasInputRef}
-                value={enteredConservationAreas}
-                onChange={conservationAreasChangeHandler}
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm text-center md:text-lg">Mega Fauna</span>
-            </div>
-            <div className="ml-5">
-              <input
-                type="checkbox"
-                ref={conservationAreasInputRef}
-                value={enteredConservationAreas}
-                onChange={conservationAreasChangeHandler}
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm text-center md:text-xl">Birds </span>
-            </div>
-            <div className="ml-5">
-              <input
-                type="checkbox"
-                ref={conservationAreasInputRef}
-                value={enteredConservationAreas}
-                onChange={conservationAreasChangeHandler}
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm text-center md:text-lg">Mega Fauna</span>
-            </div>
-            <div className="ml-5">
-              <input
-                type="checkbox"
-                ref={conservationAreasInputRef}
-                value={enteredConservationAreas}
-                onChange={conservationAreasChangeHandler}
-                className="mr-2 leading-tight"
-              />
-              <span className="text-sm text-center md:text-xl">Birds</span>
-            </div>
+            <Select className=" px-2 py-1" name="conservation_areas" id="" onChange={handleSelect} options={availableOptions} theme={customTheme} isSearchable isMulti autoFocus >
+              {/* <option value="" hidden>Select conservation area</option>
+              {areas?.conservationAreas?.data.map((area) => (<option key={area.id} value={area.id}>{area.attributes.title}</option>))} */}
+
+            </Select>
+
+
+
           </div>
 
           <div className="mt-5 ml-[8vh]">
             <button
-              className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
-              onClick={submitHandler}
+              className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1"
+
             >
               Proceed to payment
             </button>
           </div>
+
         </form>
       </div>
 

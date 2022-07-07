@@ -20,8 +20,12 @@
     "next": "^12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
     "react-router-dom": "^6.3.0",
     "stripe": "^9.11.0"
+=======
+    "react-select": "^5.4.0"
+>>>>>>> ef66d41721fd4029aab6f86ec54ecec9f80c8717
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

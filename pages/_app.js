@@ -1,11 +1,28 @@
 import "../styles/globals.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
+import { AUTH_TOKEN } from "../src/Components/constant";
 
-//apollo clients
-const client = new ApolloClient({
-  uri: "http://localhost:1337/graphql",
-  cache: new InMemoryCache()
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  };
 });
+const client = new ApolloClient({
+  // link: authLink.concat(httpLink),
+  uri: "http://localhost:5000/graphql",
+  cache: new InMemoryCache(),
+  // headers: {
+  //   "Allow-Control-Allow-Origin": "*",
+  // },
+});
+
+
 
 function MyApp({ Component, pageProps }) {
   return (
