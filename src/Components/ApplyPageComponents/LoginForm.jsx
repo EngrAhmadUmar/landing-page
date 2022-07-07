@@ -62,21 +62,10 @@ const Login = () => {
           onSubmit={onSubmit}
           className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
         >
-          <div className="mb-4">
-            <label className="text-lg md:text-xl">Pass</label>
-            <input
-              type="text"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              placeholder="Enter Your Name"
-              className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            />
-          </div>
           <div className="mb-6">
             <label className="text-lg md:text-xl">Email</label>
             <input
-              type="text"
+              type="email"
               className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
               name="username"
               onChange={onChangeUsername}
@@ -84,6 +73,19 @@ const Login = () => {
               value={username}
             />
           </div>
+
+          <div className="mb-4">
+            <label className="text-lg md:text-xl">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChangePassword}
+              placeholder="Enter Password"
+              className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          
 
 
           <div className="mt-5 ml-[8vh]">
@@ -98,10 +100,11 @@ const Login = () => {
 
       <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
-          <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
+          <h3 className=" text-white.
+           text-4xl md:text-5xl lg:text-6xl font-semibold">
             GGV
           </h3>
-          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5 text-white">
             Your gateway to <br></br>environmental tourism
           </p>
         </div>
