@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
+import { Router } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,9 +25,6 @@ const Login = () => {
     }
     login(username, password);
 
-    // here check if the user is logged in and redirect him to the /apply
-    Router.push("/apply");
-
     setUsername("");
     setPassword("");
   };
@@ -38,6 +35,8 @@ const Login = () => {
       password: password
     }
   });
+
+  Router.push("/apply");
 
   if (data) {
     localStorage.setItem(AUTH_TOKEN, data.login.jwt);

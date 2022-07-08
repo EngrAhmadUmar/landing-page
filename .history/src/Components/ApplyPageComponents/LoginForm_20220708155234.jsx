@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
+import { Router } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
