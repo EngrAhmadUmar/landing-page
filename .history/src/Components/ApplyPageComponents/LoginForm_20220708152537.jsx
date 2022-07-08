@@ -1,9 +1,7 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
@@ -24,9 +22,6 @@ const Login = () => {
       return alert("please fill in all fields");
     }
     login(username, password);
-
-    // here check if the user is logged in and redirect him to the /apply
-    Router.push("/apply");
 
     setUsername("");
     setPassword("");
@@ -97,13 +92,9 @@ const Login = () => {
             <div className="mt-5 ml-[8vh]">
               <FormButton buttonInfo={loading ? "Sending" : "Login"} />
             </div>
-            <div className="text-sm mt-3  cursor-pointer">
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
-                <h3 className="hover:text-green mt-3">
-                  Don't have an Account? Sign in
-                </h3>
-              </Link>
+            <div className="flex justify-between text-sm items-center">
+              <p>Forgot Password</p>
+              <p>Don't have an account? Sign Up</p>
             </div>
           </form>
         </div>

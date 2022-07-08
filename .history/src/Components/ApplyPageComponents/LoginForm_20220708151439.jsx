@@ -1,9 +1,7 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
@@ -24,9 +22,6 @@ const Login = () => {
       return alert("please fill in all fields");
     }
     login(username, password);
-
-    // here check if the user is logged in and redirect him to the /apply
-    Router.push("/apply");
 
     setUsername("");
     setPassword("");
@@ -52,7 +47,7 @@ const Login = () => {
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
       </Head>
-      <div className="h-[100vh]">
+      <div>
         <div className="w-[50px] h-40 pt-5 ml-6">
           <Image
             src="/logo.svg"
@@ -62,13 +57,13 @@ const Login = () => {
             opacity={100}
           />
         </div>
-        <h3 className="text-center text-xl mt-[3rem]">
+        <h3 className="text-center text-xl mb-3">
           Welcome back, Please Login to apply for a Visa
         </h3>
         <div className="flex justify-center">
           <form
             onSubmit={onSubmit}
-            className="pt-6 pb-8 mb-4 mt-[5rem] border-2 rounded-lg shadow-md px-7 border-gray "
+            className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
           >
             <div className="mb-6">
               <label className="text-lg md:text-xl">Email</label>
@@ -95,21 +90,13 @@ const Login = () => {
             </div>
 
             <div className="mt-5 ml-[8vh]">
-              <FormButton buttonInfo={loading ? "Sending" : "Login"} />
-            </div>
-            <div className="text-sm mt-3  cursor-pointer">
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
-                <h3 className="hover:text-green mt-3">
-                  Don't have an Account? Sign in
-                </h3>
-              </Link>
+              <FormButton buttonInfo={loading ? "Sending" : "Join Us"} />
             </div>
           </form>
         </div>
       </div>
 
-      <div className="hidden md:flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+      <div className=" flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
           <h3
             className=" text-white
