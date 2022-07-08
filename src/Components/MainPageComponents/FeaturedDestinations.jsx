@@ -8,7 +8,7 @@ import akagera from "../../../public/akagera.jpg";
 
 const featuredDestinations = gql`
   query GetfeaturedDestinations {
-    futureDestinations {
+    featuredDestinations {
       data {
         id
         attributes {
@@ -30,7 +30,7 @@ const FeaturedDestinations = () => {
       console.log("couldn't fetch");
       console.log(error);
     } else {
-      destinations = data.futureDestinations.data;
+      destinations = data.featuredDestinations.data;
     }
   } catch (error) {
     console.log("couldn't fetch");

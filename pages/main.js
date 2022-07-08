@@ -44,6 +44,17 @@ export default function main({ areas }) {
 //             }
 //           }
 //         }
+//         featuredDestinations {
+//           data {
+//             id
+//             attributes {
+//               title
+//               short_description
+//               longitude
+//               latitude
+//             }
+//           }
+//         }
 //       }
 //     `
 //   });
@@ -51,7 +62,8 @@ export default function main({ areas }) {
 //   console.log("data", data);
 //   return {
 //     props: {
-//       areas: data.conservationAreas.data
+//       areas: data.conservationAreas.data,
+//       destinations: data.featuredDestinations.data
 //     }
 //   };
 // }

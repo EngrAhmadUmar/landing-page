@@ -103,34 +103,3 @@ function Map() {
 }
 
 export default Map;
-
-
-// export async function getStaticProps() {
-
-//   const client = new ApolloClient({
-//     uri: 'http://localhost:1337/graphql',
-//     cache: new InMemoryCache()
-//   });
-
-//   const { data } = await client.query({
-//     query: gql`
-//     query getFeaturedDestinations{
-//       future-destinations {        
-//         attributes {
-//           id
-//           title
-//           short_description
-//           images
-//           longitude
-//           latitude
-//         }
-//       }
-//     }
-//     `
-//   });
-//   return {
-//     props: {
-//       futuredestinations: data.future-destinations
-//     }
-//   }
-// }
