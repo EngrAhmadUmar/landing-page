@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,9 +23,6 @@ const Login = () => {
       return alert("please fill in all fields");
     }
     login(username, password);
-
-    // here check if the user is logged in and redirect him to the /apply
-    Router.push("/apply");
 
     setUsername("");
     setPassword("");
@@ -100,7 +96,7 @@ const Login = () => {
             <div className="text-sm mt-3  cursor-pointer">
               <h3 className="hover:text-green">Forgot Password?</h3>
               <Link href="/login">
-                <h3 className="hover:text-green mt-3">
+                <h3 className="hover:text-green">
                   Don't have an Account? Sign in
                 </h3>
               </Link>
