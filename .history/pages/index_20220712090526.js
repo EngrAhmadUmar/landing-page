@@ -13,6 +13,10 @@ import {
 export default function main({ areas }) {
   return (
     <React.Fragment>
+      <Head>
+        <title>Welcome to GGV</title>
+        <meta name="description" content="Welcome to GGV" />
+      </Head>
       <div className=" font-syne">
         <HeroSection />
         <About />

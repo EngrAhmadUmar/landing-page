@@ -23,19 +23,19 @@ const featuredDestinations = gql`
 // componentDidMount, ComponentDidUpdate, ComponentDIdRemove
 
 const FeaturedDestinations = () => {
-  try {
-    const { loading, error, data } = useQuery(featuredDestinations);
-    if (loading) return <p>Loading...</p>;
-    if (error) {
-      console.log("couldn't fetch");
-      console.log(error);
-    } else {
-      destinations = data.featuredDestinations.data;
-    }
-  } catch (error) {
-    console.log("couldn't fetch");
-    console.log(error);
-  }
+  // try {
+  //   const { loading, error, data } = useQuery(featuredDestinations);
+  //   if (loading) return <p>Loading...</p>;
+  //   if (error) {
+  //     console.log("couldn't fetch");
+  //     console.log(error);
+  //   } else {
+  //     destinations = data.featuredDestinations.data;
+  //   }
+  // } catch (error) {
+  //   console.log("couldn't fetch");
+  //   console.log(error);
+  // }
 
   return (
     <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
