@@ -113,7 +113,7 @@ const JoinUs = () => {
                 </button>
               </div>
 
-              <h3 className="text- md:text-base mt-3 hover:text-green">
+              <h3 className="text-sm mt-3 hover:text-green">
                 Already have an account? Login
               </h3>
             </form>

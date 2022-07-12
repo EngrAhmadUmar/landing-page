@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../UI/Button";
 
 const AreasOfConservation = () => {
   // const { loading, error, data } = useQuery(InvestmentAreas)
@@ -56,7 +55,13 @@ const AreasOfConservation = () => {
             ))}
           </div>
 
-          <Button btnCaption="Apply for the Visa" href="register" />
+          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+            <Link href="/register">
+              <a className="px-10 text-lg md:text-xl lg:text-2xl">
+                Apply for the Visa
+              </a>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

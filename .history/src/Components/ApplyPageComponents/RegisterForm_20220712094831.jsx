@@ -64,7 +64,7 @@ const JoinUs = () => {
           <h3
             className={`${
               styles.headings
-            }  ${"text-center text-3xl md:text-[2rem] mb-5 font-semibold"}`}
+            }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
           >
             Login or Sign Up to apply the Visa
           </h3>
@@ -113,23 +113,14 @@ const JoinUs = () => {
                 </button>
               </div>
 
-              <h3 className="text- md:text-base mt-3 hover:text-green">
+              <h3 className="text-sm mt-3 hover:text-green">
                 Already have an account? Login
               </h3>
             </form>
           </div>
-
-          <div className="flex items-center justify-center">
-            <div className=" font-semibold flex justify-center items-center gap-3 mt-[3rem] mb-6 absolute bottom-0">
-              <p className="text-md border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center border-black p-3">
-                C
-              </p>
-              <p className="text-xs md:text-lg">All rights reserved 2022 GGV</p>
-            </div>
-          </div>
         </div>
 
-        <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center h-[100vh]">
+        <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
           <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
             <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
               GGV

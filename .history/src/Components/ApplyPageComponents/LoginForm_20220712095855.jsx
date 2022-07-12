@@ -94,7 +94,7 @@ const Login = () => {
               <h3 className="hover:text-green">Forgot Password?</h3>
               <Link href="/login">
                 <h3 className="hover:text-green mt-3">
-                  Don&apost have an Account? Sign in
+                  Don't have an Account? Sign in
                 </h3>
               </Link>
             </div>

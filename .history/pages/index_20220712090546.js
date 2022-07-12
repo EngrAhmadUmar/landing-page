@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import {
   HeroSection,
   PlanningVisa,
