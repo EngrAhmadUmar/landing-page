@@ -6,6 +6,7 @@ import {
   FeaturedDestination,
   About,
   AreasOfConservation,
+  Map,
   Footer
 } from "../src/Components/MainPageComponents";
 
@@ -22,6 +23,7 @@ export default function main({ areas }) {
         <PlanningVisa />
         <FeaturedDestination />
         <AreasOfConservation />
+        <Map />
         <Footer />
       </div>
     </React.Fragment>

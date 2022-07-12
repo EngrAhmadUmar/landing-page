@@ -6,19 +6,19 @@ import fazhenda from "../../../public/fazhenda.jpg";
 import gorilla from "../../../public/gorilla.jpg";
 import akagera from "../../../public/akagera.jpg";
 
-const featuredDestinations = gql`
-  query GetfeaturedDestinations {
-    featuredDestinations {
-      data {
-        id
-        attributes {
-          title
-          short_description
-        }
-      }
-    }
-  }
-`;
+// const featuredDestinations = gql`
+//   query GetfeaturedDestinations {
+//     featuredDestinations {
+//       data {
+//         id
+//         attributes {
+//           title
+//           short_description
+//         }
+//       }
+//     }
+//   }
+// `;
 
 // componentDidMount, ComponentDidUpdate, ComponentDIdRemove
 

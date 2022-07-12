@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoogleMap, InfoWindow, Marker, useJsApiLoader, StandaloneSearchBox } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,14 +39,9 @@ const markers = [
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
-              googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-              libraries:["places"]
+              googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
           })
   const [activeMarker, setActiveMarker] = useState(null);
-
-  // const [places, setPlaces] = useState([]);
-
-  // const [refs, setRefs] = useState({});
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -60,15 +55,6 @@ function Map() {
     markers.forEach(({ position }) => bounds.extend(position));
     map.fitBounds(bounds);
   };
-
-  // const onSearchBoxMounted = (ref) => {
-  //   // setRefs({searchBox: ref})
-  //   refs.searchBox = ref;
-  // };
-
-  // const onPlacesChanged = () => {
-  //   setPlaces(refs.searchBox.getPlaces())
-  // };
 
   return isLoaded ? (
     <GoogleMap
@@ -113,43 +99,6 @@ function Map() {
         </Marker>
         
       ))}
-  {/* <div data-standalone-searchbox="">
-    <StandaloneSearchBox
-      ref={onSearchBoxMounted}
-      onPlacesChanged={onPlacesChanged}
-    >
-      <input
-        type="text"
-        placeholder="Customized your placeholder"
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `240px`,
-          height: `32px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `14px`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-          top: `0`,
-          right: `5`,
-          position: `absolute`
-        }}
-      />
-    </StandaloneSearchBox>
-    <ol>
-      {places.map(
-        ({ place_id, formatted_address, geometry: { location } }) => (
-          <li key={place_id}>
-            {formatted_address}
-            {" at "}
-            ({location.lat()}, {location.lng()})
-          </li>
-        )
-      )}
-    </ol>
-    </div> */}
     </GoogleMap>
   ): null;
 }
