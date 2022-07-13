@@ -6,9 +6,6 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import { GET_AREAS_OF_CONSERVATION } from "../../Queries/conservationAreas";
 import { APPLY_VISA } from "../../mutations/applyVisa";
 import Select from "react-select";
-import makeAnimated from "react-select/animated";
-import GetConservationAreas from "../GetConservationAreas";
-import Logo from "../UI/Logo";
 import { toast } from "react-toastify";
 
 
@@ -142,7 +139,15 @@ const Apply = () => {
         <meta name="description" content="Apply for Global Green Visa" />
       </Head>
       <div className="grid grid-column-1">
-        <Logo />
+        <div className="w-[50px] h-40 pt-5 ml-6">
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            width={5}
+            height={5}
+            opacity={100}
+          />
+        </div>
         <h3
           className={`${
             styles.headings

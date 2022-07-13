@@ -1,3 +1,5 @@
+import React from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Instagram from "../../../public/instagram.png";
 import Twitter from "../../../public/twitter.png";
@@ -7,6 +9,13 @@ const Footer = () => {
   return (
     <div className="bg-[#faf9f6] text-center ">
       <div className="pt-[3rem] flex flex-col justify-center items-center">
+        <Head>
+          <title>Stay In Touch</title>
+          <meta
+            name="keywords"
+            content="social media, stay in touch, reach out, ggv, global green visa"
+          />
+        </Head>
         <div className="px-8">
           <h1 className="text-3xl lg:text-4xl mt-[7rem] text-[#418D89] font-semibold ">
             Stay in touch
