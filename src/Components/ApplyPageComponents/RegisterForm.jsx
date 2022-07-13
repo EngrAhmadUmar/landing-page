@@ -2,13 +2,20 @@ import { gql, useMutation } from "@apollo/client";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useRef } from "react";
+import { toast } from "react-toastify";
 import styles from "../../../styles/Home.module.css";
-import { SIGNUP_MUTATION } from "../../mutations/auth";
+import { DELETE_USER, SIGNUP_MUTATION } from "../../mutations/auth";
+import { CREATE_USER_MUTATION } from "../../mutations/auth";
 import { AUTH_TOKEN } from "../constant";
 import Logo from "../UI/Logo";
+import { USER } from '../constant'
+import { useForm } from "react-hook-form";
+
 
 const JoinUs = () => {
+  const { register, handleSubmit, formState:{errors}} = useForm()
   const [username, setUsername] = useState("");
   const onChangeUsername = (e) => {
     setUsername(e.target.value);

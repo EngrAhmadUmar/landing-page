@@ -6,20 +6,28 @@ const GET_AREAS_OF_CONSERVATION = gql`
         id
         attributes {
           title
-
           short_description
-          country {
-            data {
-              id
-              attributes {
-                name
-              }
-            }
-          }
+          
         }
       }
     }
   }
 `;
+
+const GET_AREAS_USER_DETAILS_BY_ID = gql`
+  query conservationAreas {
+    conservationAreas {
+      data {
+        id
+        attributes {
+          title
+          short_description
+          
+        }
+      }
+    }
+  }
+`;
+
 
 export { GET_AREAS_OF_CONSERVATION };
