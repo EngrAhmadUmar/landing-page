@@ -1,6 +1,7 @@
+import React from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../UI/Button";
 
 const AreasOfConservation = () => {
   // const { loading, error, data } = useQuery(InvestmentAreas)
@@ -15,6 +16,10 @@ const AreasOfConservation = () => {
   return (
     <div className="bg-[#faf9f6] font-syne text-black flex flex-col justify-center items-center ">
       <div className="max-w-[90vw]">
+        <Head>
+          <title>Welcome to GGV</title>
+          <meta name="description" content="A little bit about Us" />
+        </Head>
         <div className="pt-[5rem]">
           <div className="max-w-[90vw]">
             <h3 className="text-center text-3xl lg:text-4xl text-[#418D89] font-semibold">
@@ -56,7 +61,13 @@ const AreasOfConservation = () => {
             ))}
           </div>
 
-          <Button btnCaption="Apply for the Visa" href="register" />
+          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+            <Link href="/register">
+              <a className="px-10 text-lg md:text-xl lg:text-2xl">
+                Apply for the Visa
+              </a>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
-import Logo from "../UI/Logo";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -69,7 +68,15 @@ const Login = () => {
         <meta name="description" content="Login to GGV" />
       </Head>
       <div className="h-[100vh]">
-        <Logo />
+        <div className="w-[50px] h-40 pt-5 ml-6">
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            width={5}
+            height={5}
+            opacity={100}
+          />
+        </div>
         <h3 className="text-center text-xl mt-[3rem]">
           Welcome back, Please Login to apply for a Visa
         </h3>
@@ -109,7 +116,6 @@ const Login = () => {
               <h3 className="hover:text-green">Forgot Password?</h3>
               <Link href="/login">
                 <h3 className="hover:text-green mt-3">
-                  
                   Dont have an Account? Sign in
                 </h3>
               </Link>
