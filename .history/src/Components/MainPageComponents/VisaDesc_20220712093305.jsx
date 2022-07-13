@@ -6,7 +6,6 @@ const VisaDesc = ({ title, description }) => {
       <Image
         src="/img2.jpg"
         layout="responsive"
-        alt=""
         width="300"
         height="250"
         style={{ borderRadius: "10px" }}

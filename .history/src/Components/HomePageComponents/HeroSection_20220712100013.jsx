@@ -21,7 +21,6 @@ const HeroSection = () => {
         <div className="lg:w-[120px] lg: ml-[2rem]  w-[60px] h-50 py-5 ">
           <Image
             src="/logo.svg"
-            alt=""
             layout="responsive"
             width={5}
             height={5}

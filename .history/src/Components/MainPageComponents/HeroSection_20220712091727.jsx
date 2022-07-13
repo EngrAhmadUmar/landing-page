@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
+import Head from "next/head";
 import Button from "../UI/Button";
-import Logo from "../UI/Logo";
 
 const HeroSection = () => {
   return (
@@ -10,15 +10,17 @@ const HeroSection = () => {
       <div
         className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
       >
-        <div className="flex pt-5 justify-between">
-          <Logo />
-          <div className="flex gap-2 md:gap-5 mr-5 mt-3">
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Investors</h3>
-            </Link>
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Login</h3>
-            </Link>
+        <div className="w-[50px] h-40 pt-5 ml-6">
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            width={5}
+            height={5}
+            opacity={100}
+          />
+
+          <div>
+            <h3 className="text-white text-lg">Investors</h3>
           </div>
         </div>
         <Image

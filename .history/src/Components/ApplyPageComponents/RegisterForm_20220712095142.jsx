@@ -113,18 +113,18 @@ const JoinUs = () => {
                 </button>
               </div>
 
-              <h3 className="text- md:text-base mt-3 hover:text-green">
+              <h3 className="text-sm mt-3 hover:text-green">
                 Already have an account? Login
               </h3>
             </form>
           </div>
 
-          <div className="flex items-center justify-center">
-            <div className=" font-semibold flex justify-center items-center gap-3 mt-[3rem] mb-6 absolute bottom-0">
-              <p className="text-md border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center border-black p-3">
-                C
-              </p>
-              <p className="text-xs md:text-lg">All rights reserved 2022 GGV</p>
+          <div className=" font-semibold flex justify-center items-center gap-3 mt-[3rem] mb-6 absolute bottom-0">
+            <div className="text-md border-solid border-2 rounded-full w-5 h-5 flex justify-center items-center border-black p-3">
+              C
+            </div>
+            <div className="text-xs md:text-lg">
+              All rights reserved 2022 GGV
             </div>
           </div>
         </div>

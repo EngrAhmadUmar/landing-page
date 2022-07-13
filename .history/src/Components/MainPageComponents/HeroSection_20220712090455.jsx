@@ -1,26 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
-import Button from "../UI/Button";
-import Logo from "../UI/Logo";
+import Head from "next/head";
 
 const HeroSection = () => {
   return (
-    <div className="text-white h-[100vh] relative bg-[#000107]">
+    <div className="text-white h-[100vh] relative">
+      <Head>
+        <title>Welcome to GGV</title>
+        <meta name="description" content="Welcome to GGV" />
+      </Head>
       <div
         className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
       >
-        <div className="flex pt-5 justify-between">
-          <Logo />
-          <div className="flex gap-2 md:gap-5 mr-5 mt-3">
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Investors</h3>
-            </Link>
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Login</h3>
-            </Link>
-          </div>
-        </div>
         <Image
           src="/hero.jpg"
           layout="fill"
@@ -40,8 +32,15 @@ const HeroSection = () => {
         <h3 className="text-3xl md:text-5xl mt-3">
           Your gateway to environmental tourism
         </h3>
-
-        <Button btnCaption="Apply for a Visa" href="apply" />
+        {/* <p className="text-lg italic leading-5">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+          turpis molestie, dictum est a, mattis tellus. Sed dignissim.
+        </p> */}
+        <Link href="/apply">
+          <button className="mt-4 border-green border-[3px] rounded-md text-xl md:text-2xl font-semibold px-4 py-1 md:py-2">
+            Apply for a Visa
+          </button>
+        </Link>
       </div>
 
       <div className="absolute bottom-2 ml-[3rem] flex gap-5 mb-2">
