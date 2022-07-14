@@ -17,6 +17,13 @@ import { useRouter } from "next/router";
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
+
+const conservationAreas = [
+  {
+    value: "megaFauna", label: 'mega fauna'
+  },
+  { value: "birdConservation", label: "bird conservation" }
+]
 const Apply = () => {
   function customTheme(theme) {
     return {
@@ -230,7 +237,31 @@ const Apply = () => {
         <div></div>
       </div>
     </div>
+
+    // <div className="">
+
+    //   <form action="">
+
+    //   </form>
+    //   <div className="mt-10">
+    //     <h1>hey</h1>
+    //     {data.conservationAreas.data.length > 0 ? (
+    //       <div>
+    //         {data.conservationAreas.data.map((area, index) => (
+    //           <div key={index}>
+
+    //             {area.attributes.title}
+    //           </div>
+    //         ))}
+    //       </div>
+    //     ) : (
+    //       <p>No areas</p>
+    //     )}
+    //   </div>
+
+    // </div>
   );
+
 };
 
 export default Apply;
