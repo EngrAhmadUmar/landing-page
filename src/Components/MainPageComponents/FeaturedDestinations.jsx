@@ -39,19 +39,19 @@ const FeaturedDestinations = () => {
 
   return (
     <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
-      <div className="mt-[1rem] max-w-[90vw]">
-        <div className="">
-          <h3 className="text-3xl lg:text-4xl mt-[7rem] text-[#418D89] font-semibold">
+      <div className=" ">
+        <div className="pt-[7rem]">
+          <h3 className="text-3xl lg:text-4xl text-[#418D89] font-semibold">
             Explore featured destinations
           </h3>
         </div>
-        <p className="mt-3 md:mt-4 text-center px-2 text-xl leading-loose ml-2 md:text-2xl md:leading-relaxed ">
+        <p className="mt-10 text-center px-2 text-xl leading-loose mx-2 md:text-2xl md:leading-relaxed lg:px-[10rem]">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id
           ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero
           ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?
         </p>
 
-        <div className="grid grid-cols-1 p-2 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
+        <div className="grid grid-cols-1 p-2 gap-12 mt-16 md:grid-cols-2 lg:grid-cols-3 lg:px-[10rem]">
           {destinations.map((destination) => {
             return (
               <DestinationCard
@@ -76,8 +76,8 @@ const FeaturedDestinations = () => {
 
 let destinations = [
   {
-    title: "Gorilla Lake in Gisenyi",
-    image: "/sample-pic.jpeg",
+    title: "Kivu Lake in Gisenyi",
+    image: "/kivu-lake.jpeg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },

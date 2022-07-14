@@ -2,18 +2,18 @@ import Image from "next/image";
 
 const VisaDesc = ({ title, description }) => {
   return (
-    <section className="bg-white shadow-md rounded-[10px] text-black lg:h-[38rem]">
+    <section className="bg-white shadow-md rounded-[10px] text-black ">
       <Image
         src="/img2.jpg"
         layout="responsive"
         width="300"
         height="250"
-        style={{ borderRadius: "10px" }}
+        style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}
       />
 
-      <div className="ml-3">
+      <div className="mx-5 my-10">
         <h5 className="mt-5 text-2xl font-semibold">{title}</h5>
-        <p className="text-[1.2rem] mt-3 pb-[5rem] md:pb-2 md:text-xl lg:text-[1.3rem]">
+        <p className="text-[1.2rem] mt-4 pb-[5rem] md:pb-2 md:text-xl lg:text-[1.3rem]">
           {description}
         </p>
       </div>

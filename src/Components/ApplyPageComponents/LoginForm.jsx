@@ -67,8 +67,9 @@ const Login = () => {
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
       </Head>
-      <div className="h-[100vh]">
+      <div className="h-[100vh]  mx-6">
         <div className="w-[50px] h-40 pt-5 ml-6">
+          <Link href="/main">
           <Image
             src="/logo.svg"
             layout="responsive"
@@ -76,6 +77,8 @@ const Login = () => {
             height={5}
             opacity={100}
           />
+          </Link>
+          
         </div>
         <h3 className="text-center text-xl mt-[3rem]">
           Welcome back, Please Login to apply for a Visa
@@ -109,14 +112,17 @@ const Login = () => {
               />
             </div>
 
-            <div className="mt-5 ml-[8vh]">
-              <FormButton buttonInfo={loading ? "Sending" : "Login"} />
+            <div className="mt-5 flex justify-center">
+              <FormButton buttonInfo={loading ? "Sending" : "Login"}/>
             </div>
-            <div className="text-sm mt-3  cursor-pointer">
+            <div className="text-sm mt-3 cursor-pointer text-center">
+              <Link href="/register" >
               <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
+              </Link>
+              
+              <Link href="/register" >
                 <h3 className="hover:text-green mt-3">
-                  Dont have an Account? Sign in
+                  Don't have an Account? Sign in
                 </h3>
               </Link>
             </div>

@@ -9,12 +9,15 @@ import styles from "../../../styles/Home.module.css";
 import { DELETE_USER, SIGNUP_MUTATION } from "../../mutations/auth";
 import { CREATE_USER_MUTATION } from "../../mutations/auth";
 import { AUTH_TOKEN } from "../constant";
-import { USER } from '../constant'
+import { USER } from "../constant";
 import { useForm } from "react-hook-form";
 
-
 const JoinUs = () => {
-  const { register, handleSubmit, formState:{errors}} = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [username, setUsername] = useState("");
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -36,25 +39,19 @@ const JoinUs = () => {
   const onChangeLastName = (e) => {
     setEnteredLastName(e.target.value);
   };
-  const [userID, setID] = useState(null)
+  const [userID, setID] = useState(null);
 
   const [signup, { loading }] = useMutation(SIGNUP_MUTATION, {
     variables: {
       username: username,
       email: email,
       password: password,
-
     },
-
-
   });
 
+  const router = useRouter();
 
-  const router = useRouter()
-
-  const [addDetails] = useMutation(CREATE_USER_MUTATION,);
-
-
+  const [addDetails] = useMutation(CREATE_USER_MUTATION);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -65,158 +62,168 @@ const JoinUs = () => {
       const { data } = await signup(username, password, email);
       localStorage.setItem(AUTH_TOKEN, data.register.jwt);
       localStorage.setItem(USER, JSON.stringify(data.register.user));
-      console.log(data)
-      console.log(data.register.user?.id)
-      console.log(data.register.user?.email)
-      console.log("dataa", data)
-      setID(data.register.user.id)
+      console.log(data);
+      console.log(data.register.user?.id);
+      console.log(data.register.user?.email);
+      console.log("dataa", data);
+      setID(data.register.user.id);
       try {
         const profile = await addDetails({
           variables: {
             data: {
               first_name: enteredFirstName,
               last_name: enteredLastName,
-              user: userID
-            }
-          }
-        })
-        console.log(profile)
-        console.log(enteredFirstName, enteredLastName, email, username, password)
-        toast.success("Account created succesfully")
+              user: userID,
+            },
+          },
+        });
+        console.log(profile);
+        console.log(
+          enteredFirstName,
+          enteredLastName,
+          email,
+          username,
+          password
+        );
+        toast.success("Account created succesfully");
 
         setEmail("");
         setPassword("");
         setUsername("");
-        router.push("/apply")
+        router.push("/apply");
       } catch (error) {
-        
-        toast.error(error.message)
+        toast.error(error.message);
 
-        console.log('error', error)
-    }
-
-
-
-
-
+        console.log("error", error);
+      }
     } catch (error) {
-      if(error.message.includes("Email is taken")){
-        return toast.error("Email is taken")
-      
+      if (error.message.includes("Email is taken")) {
+        return toast.error("Email is taken");
+      } else {
+        return toast.error("username is taken");
+      }
     }
-    else{
-      return toast.error("username is taken")
-    }
-    }
-    
-
   };
 
-
-
-
-
-
-
-
   return (
-    <div className=" font-syne " id="joinUs">
+    <div className=" font-syne " id="joinUs" >
       <Head>
         <title>Welcome to GGV</title>
         <meta name="description" content="Join Our Family" />
       </Head>
       <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
-        <div className="">
+        <div className="mx-6">
           <div className="w-[50px] h-40 pt-5 ml-6">
-            <Image
-              src="/logo.svg"
-              layout="responsive"
-              width={5}
-              height={5}
-              opacity={100}
-            />
+          <Link href="/main">
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            width={5}
+            height={5}
+            opacity={100}
+          />
+          </Link>
           </div>
           <h3
-            className={`${styles.headings
-              }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
+            className={`${
+              styles.headings
+            }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
           >
-            Login or Sign Up to apply the Visa
+            Sign Up to apply for the Visa
           </h3>
-          <form
-            onSubmit={onSubmit}
-            className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
-          >
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">
-                First name{" "}
-                <span className="text-sm">(As They appear on passport)</span>
-              </label>
-              <input
-                type="text"
-                name="first_name"
-                value={enteredFirstName}
-                onChange={(e) => onChangeFirstName(e)}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">
-                Last name{" "}
-                <span className="text-sm">(As They appear on passport)</span>
-              </label>
-              <input
-                type="text"
-                name="last_name"
-                value={enteredLastName}
-                onChange={(e) => onChangeLastName(e)}
-                placeholder=""
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">username</label>
-              <input
-                type="text"
-                name="username"
-                value={username}
-                onChange={(e) => onChangeUsername(e)}
-                placeholder="Enter Your Name"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              />
-            </div>
+          <div className="flex justify-center">
+            <form
+              onSubmit={onSubmit}
+              className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
+            >
+              <div className="mb-4">
+                <label className="text-lg md:text-xl">
+                  First name{" "}
+                  <span className="text-sm">(As it appears on passport)</span>
+                </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  value={enteredFirstName}
+                  onChange={(e) => onChangeFirstName(e)}
+                  placeholder="Enter Your First Name"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="text-lg md:text-xl">
+                  Last name{" "}
+                  <span className="text-sm">(As it appears on passport)</span>
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={enteredLastName}
+                  onChange={(e) => onChangeLastName(e)}
+                  placeholder="Enter Your Last Name"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="text-lg md:text-xl">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={username}
+                  onChange={(e) => onChangeUsername(e)}
+                  placeholder="Enter Your Username"
+                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                />
+              </div>
 
-            <div className="mb-6">
-              <label className="text-lg md:text-xl">Email</label>
-              <input
-                type="email"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="email"
-                onChange={onChangeEmail}
-                placeholder="Enter Your Email"
-                value={email}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="text-lg md:text-xl">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={onChangePassword}
-                placeholder="Enter Your Name"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              />
-            </div>
+              <div className="mb-6">
+                <label className="text-lg md:text-xl">Email</label>
+                <input
+                  type="email"
+                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  name="email"
+                  onChange={onChangeEmail}
+                  placeholder="Enter Your Email"
+                  value={email}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="text-lg md:text-xl">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={onChangePassword}
+                  placeholder="Enter Your Password"
+                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="text-lg md:text-xl">Confirm Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={onChangePassword}
+                  placeholder="Confirm Your Password"
+                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                />
+              </div>
 
-
-
-            <div className="mt-5 ml-[8vh]">
-              <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
-                {loading ? "Sending" : "Join Us"}
-              </button>
+              <div className="mt-5 flex justify-center">
+                <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
+                  {loading ? "Sending" : "Sign Up"}
+                </button>
+              </div>
+              <div className="text-sm mt-3  cursor-pointer text-center">
+              <Link href="/login">
+                <h3 className="hover:text-green mt-3">
+                  Already have an Account? Log in
+                </h3>
+              </Link>
             </div>
-          </form>
+            </form>
+          </div>
         </div>
 
         <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
@@ -231,7 +238,6 @@ const JoinUs = () => {
           <div></div>
         </div>
       </div>
-
     </div>
   );
 };

@@ -13,6 +13,7 @@ const HeroSection = () => {
       <div
         className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
       >
+        
         <Image
           src="/hero.jpg"
           layout="fill"
@@ -43,16 +44,16 @@ const HeroSection = () => {
         </Link>
       </div>
 
-      <div className="absolute bottom-2 ml-[3rem] flex gap-5 mb-2">
+      <div className="absolute bottom-5 ml-[3rem] flex gap-5 mb-2">
         <Image
           src="/visitRwanda.png"
-          width={100}
+          width={150}
           height={70}
           // style={{ marginBottom: "1.5rem" }}
           alt="visitRwanda"
         />
 
-        <Image src="/rdb.png" width={200} height={100} alt="visitRwanda" />
+        <Image src="/rdb.png" width={200} height={75} alt="RDB" />
       </div>
     </div>
   );

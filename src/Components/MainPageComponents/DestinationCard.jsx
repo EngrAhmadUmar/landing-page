@@ -11,7 +11,7 @@ const DestinationCard = ({ image, title, short_description }) => {
         src={image}
         style={{ opacity: 0.7 }}
       />}
-      <div className="text-left absolute top-10 left-5">
+      <div className="text-left absolute top-10 mx-5">
         <h3 className="text-2xl font-bold xl:text-4xl max-w-[18rem]">
           {title}
         </h3>

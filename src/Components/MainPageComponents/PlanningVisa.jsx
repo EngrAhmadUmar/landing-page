@@ -4,17 +4,15 @@ import VisaDesc from "./VisaDesc";
 const PlanningVisa = () => {
   return (
     <div className="font-syne flex justify-center bg-[#faf9f6]">
-      <div className="max-w-[90vw] mt-[4rem] md:mt-0 ">
-        <div className="">
+      <div className=" ">
+        <div className="pt-[7rem]">
           <h3
-            className={`${
-              styles.headings
-            }  ${"text-center text-3xl lg:text-4xl  text-[#418D89] font-semibold"}`}
+            className="text-3xl lg:text-4xl text-[#418D89] text-center font-semibold"
           >
             Planning for your Global Green Visa
           </h3>
         </div>
-        <div className=" mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
+        <div className=" mt-16 grid grid-cols-1 gap-12 md:grid-cols-3 px-2 text-xl leading-loose mx-2 md:text-2xl md:leading-relaxed lg:px-[10rem]">
           <VisaDesc
             title="Choose your destination"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -31,8 +29,6 @@ const PlanningVisa = () => {
             icon="/icons/bi_qr-code.png"
           />
         </div>
-
-        <p className="text-center mt-8 px-4 leading-loose text-[1.3rem] md:text-[1.5rem] lg:text-[2rem] lg:px-[4rem]"></p>
       </div>
     </div>
   );
