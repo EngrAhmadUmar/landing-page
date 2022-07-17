@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import {
   HeroSection,
   PlanningVisa,
@@ -10,18 +9,14 @@ import {
   Footer
 } from "../src/Components/MainPageComponents";
 
-export default function main({ areas }) {
+export default function Home() {
   return (
     <React.Fragment>
-      <Head>
-        <title>Welcome to GGV</title>
-        <meta name="description" content="Welcome to GGV" />
-      </Head>
-      <div className=" font-syne">
+      <div className="bg-[#000107] font-syne">
         <HeroSection />
         <About />
         <PlanningVisa />
-        <FeaturedDestination />
+        {/* <FeaturedDestination /> */}
         <AreasOfConservation />
         <Map />
         <Footer />
@@ -29,33 +24,3 @@ export default function main({ areas }) {
     </React.Fragment>
   );
 }
-
-// export async function getServerSideProps() {
-//   const client = new ApolloClient({
-//     uri: "http://localhost:1337/graphql",
-//     cache: new InMemoryCache()
-//   });
-
-//   const { data } = await client.query({
-//     query: gql`
-//       query GetInvestmentAreas {
-//         conservationAreas {
-//           data {
-//             id
-//             attributes {
-//               title
-//               short_description
-//             }
-//           }
-//         }
-//       }
-//     `
-//   });
-
-//   console.log("data", data);
-//   return {
-//     props: {
-//       areas: data.conservationAreas.data
-//     }
-//   };
-// }

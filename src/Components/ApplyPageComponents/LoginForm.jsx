@@ -1,15 +1,17 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import Router from "next/router";
+import {useRouter} from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
-import Logo from "../UI/Logo";
+import { toast } from "react-toastify";
+import  Logo  from "../UI/Logo";
 
 const Login = () => {
+  const router = useRouter()
   const [username, setUsername] = useState("");
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -18,34 +20,47 @@ const Login = () => {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (username === "" || password === "") {
-      return alert("please fill in all fields");
-    }
-    login(username, password);
-
-    // here check if the user is logged in and redirect him to the /apply
-    Router.push("/apply");
-
-    setUsername("");
-    setPassword("");
-  };
-
-  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading, }] = useMutation(LOGIN_MUTATION, {
     variables: {
       username: username,
       password: password
     }
   });
 
-  if (data) {
-    localStorage.setItem(AUTH_TOKEN, data.login.jwt);
-    console.log(data);
-    localStorage.setItem("user", JSON.stringify(data));
-    console.log("user logged in");
-  }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (username === "" || password === "") {
+      return alert("please fill in all fields");
+    }
+    console.log("Logging in");
+    try {
+      const {data } = await login(username, password);
+      toast.success("Login successful")
+      if (data) {
+        console.log("Completed");
+        localStorage.setItem(AUTH_TOKEN, data.login.jwt);
+        console.log(data);
+        localStorage.setItem("user", JSON.stringify(data));
+        console.log("user logged in");
+        setUsername("");
+        setPassword("");
+        router.push("/apply");
+      }
+      
+      
+    } catch (error) {
+      toast.error(error.message)
+    }
+    
+
+   
+    // here check if the user is logged in and redirect him to the /apply
+ 
+  
+
+    
+  };
+
 
   return (
     <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
@@ -53,8 +68,13 @@ const Login = () => {
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
       </Head>
-      <div className="h-[100vh]">
-        <Logo />
+      <div className="h-[100vh]  mx-6">
+        <div className="w-[50px] h-40 pt-5 ml-6">
+          <Link href="/">
+          <Logo/>
+          </Link>
+          
+        </div>
         <h3 className="text-center text-xl mt-[3rem]">
           Welcome back, Please Login to apply for a Visa
         </h3>
@@ -64,9 +84,9 @@ const Login = () => {
             className="pt-6 pb-8 mb-4 mt-[5rem] border-2 rounded-lg shadow-md px-7 border-gray "
           >
             <div className="mb-6">
-              <label className="text-lg md:text-xl">Email</label>
+              <label className="text-lg md:text-xl">Email or Username</label>
               <input
-                type="email"
+                type="text"
                 className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 name="username"
                 onChange={onChangeUsername}
@@ -87,14 +107,17 @@ const Login = () => {
               />
             </div>
 
-            <div className="mt-5 ml-[8vh]">
-              <FormButton buttonInfo={loading ? "Sending" : "Login"} />
+            <div className="mt-5 flex justify-center">
+              <FormButton buttonInfo={loading ? "Sending" : "Login"}/>
             </div>
-            <div className="text-sm mt-3  cursor-pointer">
+            <div className="text-sm mt-3 cursor-pointer text-center">
+              <Link href="/register" >
               <h3 className="hover:text-green">Forgot Password?</h3>
-              <Link href="/login">
+              </Link>
+              
+              <Link href="/register" >
                 <h3 className="hover:text-green mt-3">
-                  Don&apost have an Account? Sign in
+                  Don&apos;t have an Account? Sign in
                 </h3>
               </Link>
             </div>

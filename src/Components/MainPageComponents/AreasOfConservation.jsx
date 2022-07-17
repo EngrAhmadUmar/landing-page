@@ -1,6 +1,7 @@
+import React from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../UI/Button";
 
 const AreasOfConservation = () => {
   // const { loading, error, data } = useQuery(InvestmentAreas)
@@ -14,8 +15,8 @@ const AreasOfConservation = () => {
 
   return (
     <div className="bg-[#faf9f6] font-syne text-black flex flex-col justify-center items-center ">
-      <div className="max-w-[90vw]">
-        <div className="pt-[5rem]">
+      <div className="">
+        <div className="pt-[7rem]">
           <div className="max-w-[90vw]">
             <h3 className="text-center text-3xl lg:text-4xl text-[#418D89] font-semibold">
               Areas of Conservation
@@ -23,7 +24,7 @@ const AreasOfConservation = () => {
             {/* <div className={`${styles.header} ${"text-center w-[80vw]"}`}></div> */}
           </div>
 
-          <p className="mt-3 md:mt-4 text-center px-2 text-xl leading-loose ml-2 md:text-2xl md:leading-relaxed ">
+          <p className="mt-10 text-center px-2 text-xl leading-loose mx-2 md:text-2xl md:leading-relaxed lg:px-[10rem] ">
             At GGV we aim to conserve the environment via sustainable tourism.
             With every fee that you pay on the visa, it is directed to preserve
             the following areas.
@@ -56,7 +57,13 @@ const AreasOfConservation = () => {
             ))}
           </div>
 
-          <Button btnCaption="Apply for the Visa" href="register" />
+          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+            <Link href="/register">
+              <a className="px-10 text-lg md:text-xl lg:text-2xl">
+                Apply for the Visa
+              </a>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

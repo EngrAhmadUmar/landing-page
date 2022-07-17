@@ -7,7 +7,6 @@ const APPLY_VISA = gql`
     $user: ID!
     $first_name: String!
     $last_name: String!
-    $conservation_areas: [ID!]
   ) {
     createVisaHolder(
       data: {
@@ -16,17 +15,10 @@ const APPLY_VISA = gql`
         user: $user
         first_name: $first_name
         last_name: $last_name
-        conservation_areas: $conservation_areas
       }
     ) {
       data {
         id
-        attributes {
-          first_name
-          last_name
-          passport_no
-          
-        }
       }
     }
   }
