@@ -70,7 +70,7 @@ const Login = () => {
       </Head>
       <div className="h-[100vh]  mx-6">
         <div className="w-[50px] h-40 pt-5 ml-6">
-          <Link href="/main">
+          <Link href="/">
           <Logo/>
           </Link>
           
