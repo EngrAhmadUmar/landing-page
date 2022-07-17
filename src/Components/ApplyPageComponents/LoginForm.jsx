@@ -8,6 +8,7 @@ import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
 import { toast } from "react-toastify";
+import  Logo  from "../UI/Logo";
 
 const Login = () => {
   const router = useRouter()
@@ -70,13 +71,7 @@ const Login = () => {
       <div className="h-[100vh]  mx-6">
         <div className="w-[50px] h-40 pt-5 ml-6">
           <Link href="/main">
-          <Image
-            src="/logo.svg"
-            layout="responsive"
-            width={5}
-            height={5}
-            opacity={100}
-          />
+          <Logo/>
           </Link>
           
         </div>
@@ -122,7 +117,7 @@ const Login = () => {
               
               <Link href="/register" >
                 <h3 className="hover:text-green mt-3">
-                  Don't have an Account? Sign in
+                  Don&apos;t have an Account? Sign in
                 </h3>
               </Link>
             </div>

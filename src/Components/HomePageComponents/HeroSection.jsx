@@ -19,7 +19,7 @@ const HeroSection = () => {
           quality={100}
         />
         <div className="lg:w-[120px] lg: ml-[2rem]  w-[60px] h-50 py-5 ">
-          <Image src="/logo.svg" layout="responsive" width={5} height={5} opacity={100}/>
+          <Image src="/logo.svg" layout="responsive" width={5} height={5} opacity={100} alt=""/>
         </div>
         <div className={styles.headerline}></div>
           <div className="ml-[5rem] mt-[8vh]">

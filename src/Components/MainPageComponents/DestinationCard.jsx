@@ -6,6 +6,7 @@ const DestinationCard = ({ image, title, short_description }) => {
     <div className="relative h-[50vh] w-full text-white bg-[#000107] rounded-lg lg:h-[45rem]">
       {image && <Image
         className="rounded opacity-100"
+        alt=""
         layout="fill"
         objectFit="cover"
         src={image}

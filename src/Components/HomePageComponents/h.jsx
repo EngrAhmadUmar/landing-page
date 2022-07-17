@@ -19,7 +19,7 @@ const HeroSection = () => {
           quality={100}
         />
         <div className="ml-[5rem] w-[60px] h-50 py-5">
-          <Image src="/logo.svg" layout="responsive" width={5} height={5} />
+          <Image src="/logo.svg" layout="responsive" width={5} height={5} alt=""/>
         </div>
         <div className="ml-[5rem] mt-[8vh]">
           <h3

@@ -16,7 +16,7 @@ export default function main({ areas }) {
         <HeroSection />
         <About />
         <PlanningVisa />
-        <FeaturedDestination />
+        {/* <FeaturedDestination /> */}
         <AreasOfConservation />        
         <Footer />
       </div>

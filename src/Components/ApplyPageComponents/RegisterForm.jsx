@@ -11,6 +11,7 @@ import { CREATE_USER_MUTATION } from "../../mutations/auth";
 import { AUTH_TOKEN } from "../constant";
 import { USER } from "../constant";
 import { useForm } from "react-hook-form";
+import Logo from "../UI/Logo";
 
 const JoinUs = () => {
   const {
@@ -115,13 +116,7 @@ const JoinUs = () => {
         <div className="mx-6">
           <div className="w-[50px] h-40 pt-5 ml-6">
           <Link href="/main">
-          <Image
-            src="/logo.svg"
-            layout="responsive"
-            width={5}
-            height={5}
-            opacity={100}
-          />
+          <Logo/>
           </Link>
           </div>
           <h3

@@ -77,7 +77,7 @@ const Apply = () => {
     }
 
 
-  }, []);
+  }, [ success, canceled]);
 
   const [createVisaHolder, { loading }] = useMutation(APPLY_VISA, {
     variables: {
@@ -150,6 +150,7 @@ const Apply = () => {
           <Image
             src="/logo.svg"
             layout="responsive"
+            alt=""
             width={5}
             height={5}
             opacity={100}
