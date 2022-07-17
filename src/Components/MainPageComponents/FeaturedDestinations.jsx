@@ -8,7 +8,7 @@
 
 // const featuredDestinations = gql`
 //   query GetfeaturedDestinations {
-//     futureDestinations {
+//     featuredDestinations {
 //       data {
 //         id
 //         attributes {

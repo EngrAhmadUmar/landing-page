@@ -1,10 +1,13 @@
 import React from "react";
 import {
   HeroSection,
+  PlanningVisa,
+  FeaturedDestination,
   About,
-  JoinUs,
-  Partners
-} from "../src/Components/HomePageComponents/Index";
+  AreasOfConservation,
+  Map,
+  Footer
+} from "../src/Components/MainPageComponents";
 
 export default function Home() {
   return (
@@ -12,8 +15,11 @@ export default function Home() {
       <div className="bg-[#000107] font-syne">
         <HeroSection />
         <About />
-        <Partners />
-        <JoinUs />
+        <PlanningVisa />
+        {/* <FeaturedDestination /> */}
+        <AreasOfConservation />
+        <Map />
+        <Footer />
       </div>
     </React.Fragment>
   );
