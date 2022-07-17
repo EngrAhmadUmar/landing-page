@@ -6,6 +6,7 @@ import {
   FeaturedDestination,
   About,
   AreasOfConservation,
+  Map,
   Footer
 } from "../src/Components/MainPageComponents";
 
@@ -21,7 +22,8 @@ export default function main({ areas }) {
         <About />
         <PlanningVisa />
         <FeaturedDestination />
-        <AreasOfConservation />
+        < AreasOfConservation />   
+        <Map />     
         <Footer />
       </div>
     </React.Fragment>
@@ -46,6 +48,17 @@ export default function main({ areas }) {
 //             }
 //           }
 //         }
+//         featuredDestinations {
+//           data {
+//             id
+//             attributes {
+//               title
+//               short_description
+//               longitude
+//               latitude
+//             }
+//           }
+//         }
 //       }
 //     `
 //   });
@@ -53,7 +66,8 @@ export default function main({ areas }) {
 //   console.log("data", data);
 //   return {
 //     props: {
-//       areas: data.conservationAreas.data
+//       areas: data.conservationAreas.data,
+//       destinations: data.featuredDestinations.data
 //     }
 //   };
 // }

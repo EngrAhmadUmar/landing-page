@@ -6,36 +6,36 @@ import fazhenda from "../../../public/fazhenda.jpg";
 import gorilla from "../../../public/gorilla.jpg";
 import akagera from "../../../public/akagera.jpg";
 
-const featuredDestinations = gql`
-  query GetfeaturedDestinations {
-    futureDestinations {
-      data {
-        id
-        attributes {
-          title
-          short_description
-        }
-      }
-    }
-  }
-`;
+// const featuredDestinations = gql`
+//   query GetfeaturedDestinations {
+//     featuredDestinations {
+//       data {
+//         id
+//         attributes {
+//           title
+//           short_description
+//         }
+//       }
+//     }
+//   }
+// `;
 
 // componentDidMount, ComponentDidUpdate, ComponentDIdRemove
 
 const FeaturedDestinations = () => {
-  try {
-    const { loading, error, data } = useQuery(featuredDestinations);
-    if (loading) return <p>Loading...</p>;
-    if (error) {
-      console.log("couldn't fetch");
-      console.log(error);
-    } else {
-      destinations = data.futureDestinations.data;
-    }
-  } catch (error) {
-    console.log("couldn't fetch");
-    console.log(error);
-  }
+  // try {
+  //   const { loading, error, data } = useQuery(featuredDestinations);
+  //   if (loading) return <p>Loading...</p>;
+  //   if (error) {
+  //     console.log("couldn't fetch");
+  //     console.log(error);
+  //   } else {
+  //     destinations = data.featuredDestinations.data;
+  //   }
+  // } catch (error) {
+  //   console.log("couldn't fetch");
+  //   console.log(error);
+  // }
 
   return (
     <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
@@ -55,6 +55,7 @@ const FeaturedDestinations = () => {
           {destinations.map((destination) => {
             return (
               <DestinationCard
+                key={destination.id}
                 title={destination.title}
                 image={destination.image}
                 short_description={destination.short_description}
@@ -76,24 +77,28 @@ const FeaturedDestinations = () => {
 
 let destinations = [
   {
+    id: 1,
     title: "Gorilla Lake in Gisenyi",
     image: "/sample-pic.jpeg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
+    id: 2,
     title: "Akagera National Park",
     image: "/akagera.jpg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
+    id: 3,
     title: "Fazhenda Sengha",
     image: "/fazhenda.jpg",
     short_description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
   },
   {
+    id: 4,
     title: "Gorilla Nest",
     image: "/gorilla.jpg",
     short_description:

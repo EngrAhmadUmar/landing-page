@@ -4,3 +4,4 @@ export { default as FeaturedDestination } from "./FeaturedDestinations";
 export { default as AreasOfConservation } from "./AreasOfConservation";
 export { default as Footer } from "./Footer";
 export { default as About } from "./About";
+export { default as Map } from "./Map";
