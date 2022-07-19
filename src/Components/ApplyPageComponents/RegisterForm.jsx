@@ -21,7 +21,7 @@ const JoinUs = () => {
 
   const router = useRouter();
 
-  const [addDetails] = useMutation(CREATE_USER_MUTATION);
+  const [addDetails, {loading}] = useMutation(CREATE_USER_MUTATION);
 
   const onSubmit = async (data) => {
     
@@ -94,7 +94,7 @@ console.log(error)
               
           <form
               onSubmit={handleSubmit(onSubmit)}
-            className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
+              className="pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray "
           >
             <div className="mb-4">
               <label className="text-lg md:text-xl">
@@ -131,7 +131,7 @@ console.log(error)
                 type="text"
                 
                 placeholder="Enter Your Name"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
             </div>
@@ -141,7 +141,7 @@ console.log(error)
               <input
               {...register("email", {required: "Email is required"})}
                 type="email"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 
                 placeholder="Enter Your Email"
                 
@@ -154,46 +154,43 @@ console.log(error)
               {...register("password", {required: "Password is required"})}
                 type="password"
                 placeholder="Password"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.password && <p className="text-red-500 text-xs ">{errors.password.message}</p>}
             </div>
 
 
 
-            <div className="mt-5 ml-[8vh]">
-              <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
-               send
-              </button>
-            </div>
+          
             <div className="mt-5 flex justify-center">
                 <button className="shadow bg-green focus:shadow-outline focus:outline-none text-white font-bold px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
-                  {/* {loading ? "Sending" : "Sign Up"} */} 
+                  {loading ? "Sending" : "Sign Up"} 
                 </button>
               </div>
+              <div className="text-sm mt-3  cursor-pointer text-center">
+             <Link href="/login">
+               <h3 className="hover:text-green mt-3">
+                 Already have an Account? Log in
+               </h3>
+             </Link>
+           </div>
               
             </form>
-            <div className="text-sm mt-3  cursor-pointer text-center">
-              <Link href="/login">
-                <h3 className="hover:text-green mt-3">
-                  Already have an Account? Log in
-                </h3>
-              </Link>
-              </div>
+            
           </div>
         </div>
 
         <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
-          <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
-            <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
-              GGV
-            </h3>
-            <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
-              Your gateway to <br></br>environmental tourism
-            </p>
-          </div>
-          <div></div>
-        </div>
+         <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
+           <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
+             GGV
+           </h3>
+           <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
+             Your gateway to <br></br>environmental tourism
+           </p>
+         </div>
+         <div></div>
+       </div>
       </div>
     </div>
   );
