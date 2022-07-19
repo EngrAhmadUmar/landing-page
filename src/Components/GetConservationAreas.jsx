@@ -11,17 +11,12 @@ import { GET_AREAS_OF_CONSERVATION } from "../Queries/conservationAreas";
 
 const GetConservationAreas = () => {
 
-
-
   const { loading, error, data } = useQuery(GET_AREAS_OF_CONSERVATION);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>something went wrong ...</p>;
  
-
-  
   return (
     <div className="font-syne bg-cover text-red grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
-
       <div className=" my-auto max-w-md md:max-w-3xl  flex justify-center">
 
         <form
