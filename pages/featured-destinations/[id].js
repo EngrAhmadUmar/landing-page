@@ -57,7 +57,7 @@ const FeaturedDestinationDetails = () => {
             // objectFit="cover"
             width="500px"
             height="500px"
-            src="/an1.svg"
+            src="/an3.svg"
           />
         </div>
         <h2 className="text-center text-3xl lg:text-4xl text-[#418D89] font-bold mt-8">
