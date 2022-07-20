@@ -2,16 +2,34 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery, gql } from "@apollo/client";
+import areaPic from "../../../public/an1.svg";
+
+const GET_AREAS_OF_CONSERVATION = gql`
+  query conservationAreas {
+    conservationAreas {
+      data {
+        id
+        attributes {
+          title
+          short_description
+        }
+      }
+    }
+  }
+`;
 
 const AreasOfConservation = () => {
-  // const { loading, error, data } = useQuery(InvestmentAreas)
-  // if (loading) return <p>Loading...</p>
-  // if (error) {
-  //   console.log(error)
-  //   return <p>Couldn't fetch</p>
-  // }
+  const { loading, error, data } = useQuery(GET_AREAS_OF_CONSERVATION);
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    console.log(error);
+    return <p>Couldn't fetch</p>;
+  }
 
-  // console.log(areas);
+  // console.log(data)
+  const areas = data.conservationAreas.data;
+  // console.log(areas)
 
   return (
     <div className="bg-[#faf9f6] font-syne text-black flex flex-col justify-center items-center ">
@@ -32,30 +50,43 @@ const AreasOfConservation = () => {
         </div>
 
         <div className="w-full flex flex-col justify-content items-center">
-          <div className="grid grid-cols-1 p-2 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="grid grid-cols-1 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
             {areas.map((area) => (
-              <div
-                key={area.id}
-                className="w-full h-[35rem] md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+              <Link
+                href={{
+                  pathname: "/conservation-areas/[id]",
+                  query: { id: area.id },
+                }}
               >
-                <div className="p-2">
-                  <Image
-                    src={area.image}
-                    alt=""
-                    width={500}
-                    // layout="fill"
-                    height={300}
-                  ></Image>
-                  <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
-                    {area.title}
-                  </h2>
-                  <p className=" text-lg lg:text-xl leading-relaxed">
-                    {area.short_description.substring(0, 200)}
-                  </p>
+                <div
+                  key={area.id}
+                  className="w-full h-[35rem] md:w-[23rem] lg:w-[25rem]  p-2 rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+                >
+                  <div className="p-2">
+                    <Image
+                      src={areaPic}
+                      alt=""
+                      width={500}
+                      // layout="fill"
+                      height={300}
+                    ></Image>
+                    <h2 className="my-4 text-2xl font-bold xl:text-4xl max-w-[18rem]">
+                      {area.attributes.title}
+                    </h2>
+                    <p className=" text-lg lg:text-xl leading-relaxed">
+                      {area.attributes.short_description.substring(0, 200)}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
+
+          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+            <Link href="#">
+              <a className="px-10 text-lg md:text-xl lg:text-2xl">View more</a>
+            </Link>
+          </button>
 
           <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
             <Link href="/register">
@@ -70,31 +101,43 @@ const AreasOfConservation = () => {
   );
 };
 
-let areas = [
-  {
-    title: "MegaFauna",
-    image: "/an1.svg",
-    short_description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
-  },
-  {
-    title: "Water protection",
-    image: "/an2.svg",
-    short_description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
-  },
-  {
-    title: "Bird Conservation",
-    image: "/an3.svg",
-    short_description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
-  },
-  {
-    title: "Forest Restoration",
-    image: "/an4.svg",
-    short_description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
-  }
-];
+// let areas = [
+//   {
+//     title: "MegaFauna",
+//     image: "/an1.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   },
+//   {
+//     title: "Water protection",
+//     image: "/an2.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   },
+//   {
+//     title: "Bird Conservation",
+//     image: "/an3.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   },
+//   {
+//     title: "Forest Restoration",
+//     image: "/an4.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   },
+//   {
+//     title: "Forest Restoration",
+//     image: "/an4.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   },
+//   {
+//     title: "Forest Restoration",
+//     image: "/an4.svg",
+//     short_description:
+//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam omnis. Minus cupiditate at sit suscipit aperiam earum libero ipsa! Quaerat natus architecto nostrum aut vero, illo fuga qui?"
+//   }
+// ];
 
 export default AreasOfConservation;

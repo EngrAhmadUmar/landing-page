@@ -9,14 +9,14 @@ import {
   Footer
 } from "../src/Components/MainPageComponents";
 
-export default function main({ areas }) {
+export default function main() {
   return (
     <React.Fragment>
       <div className=" font-syne">
         <HeroSection />
         <About />
         <PlanningVisa />
-        {/* <FeaturedDestination /> */}
+        <FeaturedDestination />
         <AreasOfConservation />        
         <Footer />
       </div>
