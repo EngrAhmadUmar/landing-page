@@ -6,11 +6,18 @@ import {
   FeaturedDestination,
   About,
   AreasOfConservation,
+<<<<<<< HEAD
   Map,
   Footer
 } from "../src/Components/MainPageComponents";
 
 export default function main({ areas }) {
+=======
+  Footer
+} from "../src/Components/MainPageComponents";
+
+export default function main() {
+>>>>>>> 126c32a (Fixed styling on the homepage, and /register)
   return (
     <React.Fragment>
       <Head>
@@ -22,8 +29,16 @@ export default function main({ areas }) {
         <About />
         <PlanningVisa />
         <FeaturedDestination />
+<<<<<<< HEAD
         < AreasOfConservation />   
         <Map />     
+=======
+<<<<<<<< HEAD:pages/main.js
+        <AreasOfConservation />        
+========
+        <AreasOfConservation />
+>>>>>>>> 126c32a (Fixed styling on the homepage, and /register):.history/pages/index_20220712090526.js
+>>>>>>> 126c32a (Fixed styling on the homepage, and /register)
         <Footer />
       </div>
     </React.Fragment>
@@ -48,6 +63,7 @@ export default function main({ areas }) {
 //             }
 //           }
 //         }
+<<<<<<< HEAD
 //         featuredDestinations {
 //           data {
 //             id
@@ -59,6 +75,8 @@ export default function main({ areas }) {
 //             }
 //           }
 //         }
+=======
+>>>>>>> 126c32a (Fixed styling on the homepage, and /register)
 //       }
 //     `
 //   });
@@ -66,8 +84,12 @@ export default function main({ areas }) {
 //   console.log("data", data);
 //   return {
 //     props: {
+<<<<<<< HEAD
 //       areas: data.conservationAreas.data,
 //       destinations: data.featuredDestinations.data
+=======
+//       areas: data.conservationAreas.data
+>>>>>>> 126c32a (Fixed styling on the homepage, and /register)
 //     }
 //   };
 // }

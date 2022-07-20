@@ -1,17 +1,16 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
-import { toast } from "react-toastify";
-import  Logo  from "../UI/Logo";
+import Logo from "../UI/Logo";
 
 const Login = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -20,11 +19,11 @@ const Login = () => {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
-  const [login, { data, loading, }] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
     variables: {
       username: username,
-      password: password
-    }
+      password: password,
+    },
   });
 
   const onSubmit = async (e) => {
@@ -34,8 +33,8 @@ const Login = () => {
     }
     console.log("Logging in");
     try {
-      const {data } = await login(username, password);
-      toast.success("Login successful")
+      const { data } = await login(username, password);
+      toast.success("Login successful");
       if (data) {
         console.log("Completed");
         localStorage.setItem(AUTH_TOKEN, data.login.jwt);
@@ -46,21 +45,12 @@ const Login = () => {
         setPassword("");
         router.push("/apply");
       }
-      
-      
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-    
 
-   
     // here check if the user is logged in and redirect him to the /apply
- 
-  
-
-    
   };
-
 
   return (
     <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
@@ -71,9 +61,8 @@ const Login = () => {
       <div className="h-[100vh]  mx-6">
         <div className="w-[50px] h-40 pt-5 ml-6">
           <Link href="/">
-          <Logo/>
+            <Logo />
           </Link>
-          
         </div>
         <h3 className="text-center text-xl mt-[3rem]">
           Welcome back, Please Login to apply for a Visa
@@ -108,16 +97,16 @@ const Login = () => {
             </div>
 
             <div className="mt-5 flex justify-center">
-              <FormButton buttonInfo={loading ? "Sending" : "Login"}/>
+              <FormButton buttonInfo={loading ? "Sending" : "Login"} />
             </div>
             <div className="text-sm mt-3 cursor-pointer text-center">
-              <Link href="/register" >
-              <h3 className="hover:text-green">Forgot Password?</h3>
+              <Link href="/register">
+                <h3 className="hover:text-green">Forgot Password?</h3>
               </Link>
-              
-              <Link href="/register" >
+
+              <Link href="/register">
                 <h3 className="hover:text-green mt-3">
-                  Don&apos;t have an Account? Sign in
+                  Don&apost have an Account? Sign in
                 </h3>
               </Link>
             </div>
