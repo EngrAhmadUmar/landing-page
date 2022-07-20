@@ -2,7 +2,7 @@ import styles from "../../../styles/Home.module.css";
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { AUTH_TOKEN } from "../constant";
+import { AUTH_TOKEN, USER } from "../constant";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { GET_AREAS_OF_CONSERVATION } from "../../Queries/conservationAreas";
 import { APPLY_VISA } from "../../mutations/applyVisa.jsx";
@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import { useForm } from 'react-hook-form'
 import { Controller } from "react-hook-form"
 import moment from "moment";
-
 
 
 
@@ -69,6 +68,13 @@ const Apply = () => {
     setEnteredConservationAreas(choices);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem(AUTH_TOKEN);
+    localStorage.removeItem(USER);
+    router.push("/")
+    toast.success("Logged out succesfully")
+  }
+
 
   const onSubmit = async (data) => {
     console.log(data)
@@ -108,6 +114,9 @@ const Apply = () => {
         >
           Apply for Global Green Visa
         </h3>
+        <button onClick={handleLogout} className="mt-4 bg-green shadow-md rounded-md text-xl md:text-2xl font-semibold px-4 py-1 md:py-2">
+          Logout
+        </button>
         <form
 
           onSubmit={handleSubmit(onSubmit)}

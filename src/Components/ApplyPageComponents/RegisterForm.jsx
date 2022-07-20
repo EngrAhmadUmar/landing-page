@@ -26,8 +26,8 @@ const JoinUs = () => {
   const onSubmit = async (data) => {
     
     try {
-const {username, email, password, last_name, first_name} = data
-      const {data: res} = await signup({variables:{username, email, password}});
+const {email, password, last_name, first_name} = data
+      const {data: res} = await signup({variables:{ email, password}});
 
       localStorage.setItem(AUTH_TOKEN, res.register.jwt);
       localStorage.setItem(USER, JSON.stringify(res.register.user));
@@ -47,7 +47,7 @@ const {username, email, password, last_name, first_name} = data
       } catch (error) {
         
         toast.error(error.message)
-        console.log('error', error)
+        console.log('error', JSON.stringify(error, null, 2))
     }
 
 
@@ -61,8 +61,8 @@ const {username, email, password, last_name, first_name} = data
       
     }
     else{
-console.log(error)
-      return toast.error("username is taken")
+      console.log(JSON.stringify(error, null, 2))
+      return toast.error("something went wrong")
     }
     }
     
@@ -124,7 +124,7 @@ console.log(error)
               />
               {errors.last_name && <p className="text-red-500 text-xs ">{errors.last_name.message}</p>}
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="text-lg md:text-xl">username</label>
               <input
               {...register("username", {required: "Username is required"})}
@@ -134,7 +134,7 @@ console.log(error)
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
-            </div>
+            </div> */}
 
             <div className="mb-6">
               <label className="text-lg md:text-xl">Email</label>
