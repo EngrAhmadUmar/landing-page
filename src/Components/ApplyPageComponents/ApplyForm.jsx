@@ -4,12 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { AUTH_TOKEN } from "../constant";
 import { useQuery, gql, useMutation } from "@apollo/client";
-import { GET_AREAS_OF_CONSERVATION } from "../../Queries/areaOfConservationQuery";
+import {GET_AREAS_OF_CONSERVATION}  from "../../Queries/areaOfConservationQuery";
 import { APPLY_VISA } from "../../mutations/applyVisa.jsx";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import GetConservationAreas from "../GetConservationAreas";
-import Logo from "../UI/Logo";
+import { toast } from "react-toastify";
+import { useForm } from 'react-hook-form'
+import { Controller } from "react-hook-form"
+import moment from "moment";
 
 
 
@@ -89,7 +92,16 @@ const Apply = () => {
         <meta name="description" content="Apply for Global Green Visa" />
       </Head>
       <div className="grid grid-column-1">
-        <Logo />
+        <div className="w-[50px] h-40 pt-5 ml-6">
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            alt=""
+            width={5}
+            height={5}
+            opacity={100}
+          />
+        </div>
         <h3
           className={`${styles.headings
             }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}

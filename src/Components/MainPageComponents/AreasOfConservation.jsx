@@ -27,8 +27,8 @@ const AreasOfConservation = () => {
 
   // console.log(data)
   const areas = data.conservationAreas.data;
-  // console.log(areas)
-  const topConservationAreas = areas.slice(0,6)
+  // console.log(areas) 
+  const topConservationAreas = areas.slice(0,6) 
 
   return (
     <div className="bg-[#faf9f6] font-syne text-black flex flex-col justify-center items-center ">
@@ -51,6 +51,7 @@ const AreasOfConservation = () => {
         <div className="w-full flex flex-col justify-content items-center">
           <div className="grid grid-cols-1 gap-12 mt-[4rem] md:grid-cols-2 lg:grid-cols-3 ">
             {topConservationAreas.map((area) => (
+ 
               <Link
                 href={{
                   pathname: "/conservation-areas/[id]",
@@ -81,8 +82,8 @@ const AreasOfConservation = () => {
             ))}
           </div>
 
-          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
-            <Link href="/conservation-areas">
+          <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3"> 
+            <Link href="/conservation-areas"> 
               <a className="px-10 text-lg md:text-xl lg:text-2xl">View more</a>
             </Link>
           </button>
