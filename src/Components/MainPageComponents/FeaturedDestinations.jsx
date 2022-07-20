@@ -34,7 +34,8 @@ const FeaturedDestinations = () => {
 
   console.log(data);
   const destinations = data.futureDestinations.data;
-  console.log(destinations);
+  const topDestinations = destinations.slice(0,6)
+  console.log(topDestinations);
 
   return (
     <div className="bg-[#faf9f6] font-syne flex justify-center text-center">
@@ -51,7 +52,7 @@ const FeaturedDestinations = () => {
         </p>
 
         <div className="grid grid-cols-1 p-2 gap-12 mt-16 md:grid-cols-2 lg:grid-cols-3 lg:px-[10rem]">
-          {destinations.map((destination) => {
+          {topDestinations.map((destination) => {
             return (
 
               <Link
@@ -75,7 +76,7 @@ const FeaturedDestinations = () => {
         </div>
 
         <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
-          <Link href="#">
+          <Link href="/featured-destinations">
             <a className="px-10 text-lg md:text-xl lg:text-2xl">View more</a>
           </Link>
         </button>

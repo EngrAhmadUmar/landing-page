@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { AUTH_TOKEN } from "../constant";
 import { useQuery, gql, useMutation } from "@apollo/client";
-import { GET_AREAS_OF_CONSERVATION } from "../../Queries/conservationAreas";
+import { GET_AREAS_OF_CONSERVATION } from "../../Queries/areaOfConservationQuery";
 import { APPLY_VISA } from "../../mutations/applyVisa.jsx";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
