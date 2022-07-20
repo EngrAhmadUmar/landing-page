@@ -1,13 +1,12 @@
 import { gql } from "@apollo/client";
 
 const SIGNUP_MUTATION = gql`
-  mutation  register($username: String!, $password: String!, $email:String!) {
-    register(input: {username:$username, email: $email password:$password}) {
+  mutation  register($password: String!, $email:String!) {
+    register(input: {username:"", email: $email, password:$password}) {
         jwt
         user {
             id
             email
-            username
         }
     },
 
@@ -30,7 +29,6 @@ mutation user_details($data: UserDetailInput!) {
           id
           attributes {
             email
-            username
           }
 
         }
@@ -42,13 +40,12 @@ mutation user_details($data: UserDetailInput!) {
   
   `
 const LOGIN_MUTATION = gql`
-  mutation  login($username: String!, $password: String!) {
-    login(input: {identifier:$username, password:$password}) {
+  mutation  login($email: String!, $password: String!) {
+    login(input: {identifier:$email, password:$password}) {
         jwt
         user {
             id
             email
-            username
         }
     }
 }

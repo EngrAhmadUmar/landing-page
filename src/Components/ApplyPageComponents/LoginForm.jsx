@@ -12,9 +12,9 @@ import  Logo  from "../UI/Logo";
 
 const Login = () => {
   const router = useRouter()
-  const [username, setUsername] = useState("");
-  const onChangeUsername = (e) => {
-    setUsername(e.target.value);
+  const [email, setEmail] = useState("");
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
   };
   const [password, setPassword] = useState("");
   const onChangePassword = (e) => {
@@ -22,19 +22,19 @@ const Login = () => {
   };
   const [login, { data, loading, }] = useMutation(LOGIN_MUTATION, {
     variables: {
-      username: username,
+      email: email,
       password: password
     }
   });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (username === "" || password === "") {
+    if (email === "" || password === "") {
       return alert("please fill in all fields");
     }
     console.log("Logging in");
     try {
-      const {data } = await login(username, password);
+      const {data } = await login(email, password);
       toast.success("Login successful")
       if (data) {
         console.log("Completed");
@@ -42,9 +42,10 @@ const Login = () => {
         console.log(data);
         localStorage.setItem("user", JSON.stringify(data));
         console.log("user logged in");
-        setUsername("");
+        setEmail("");
         setPassword("");
-        router.push("/apply");
+        router.reload();
+        // router.push("/apply");
       }
       
       
@@ -84,14 +85,14 @@ const Login = () => {
             className="pt-6 pb-8 mb-4 mt-[5rem] border-2 rounded-lg shadow-md px-7 border-gray "
           >
             <div className="mb-6">
-              <label className="text-lg md:text-xl">Email or Username</label>
+              <label className="text-lg md:text-xl">Email</label>
               <input
-                type="text"
+                type="email"
                 className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="username"
-                onChange={onChangeUsername}
+                name="email"
+                onChange={onChangeEmail}
                 placeholder="Enter Your Email"
-                value={username}
+                value={email}
               />
             </div>
 
