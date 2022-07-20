@@ -2,11 +2,18 @@ import styles from "../../../styles/Home.module.css";
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { AUTH_TOKEN } from "../constant";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { GET_AREAS_OF_CONSERVATION } from "../../Queries/conservationAreas";
-import { APPLY_VISA } from "../../mutations/applyVisa";
+import { APPLY_VISA } from "../../mutations/applyVisa.jsx";
 import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import GetConservationAreas from "../GetConservationAreas";
 import { toast } from "react-toastify";
+import { useForm } from 'react-hook-form'
+import { Controller } from "react-hook-form"
+import moment from "moment";
+
 
 
 
@@ -25,6 +32,10 @@ const conservationAreas = [
   { value: "birdConservation", label: "bird conservation" }
 ]
 const Apply = () => {
+
+
+
+  const { register, control, handleSubmit, formState: { errors } } = useForm()
   function customTheme(theme) {
     return {
       ...theme,
@@ -35,60 +46,22 @@ const Apply = () => {
       },
     };
   }
-  const [enteredFirstName, setEnteredFirstName] = useState("");
-  const onChangeFirstName = (e) => {
-    setEnteredFirstName(e.target.value);
-  };
-  const [enteredLastName, setEnteredLastName] = useState("");
-  const onChangeLastName = (e) => {
-    setEnteredLastName(e.target.value);
-  };
-
-  const [enteredPassportNo, setEnteredPassportNo] = useState("");
-  const onChangePassportNo = (e) => {
-    setEnteredPassportNo(e.target.value);
-  };
-  const [enteredExpiryDate, setEnteredExpiryDate] = useState("");
-  const onChangeExpiryDate = (e) => {
-    setEnteredExpiryDate(e.target.value);
-  };
   const [enteredConservationAreas, setEnteredConservationAreas] = useState([]);
-
-  const [user, setUser] = useState(null);
-
+  // const [options, setoptions] = useState([]);
+  // const [user, setUser] = useState(null);
   const router = useRouter();
   const { success, canceled } = router.query;
+  const [createVisaHolder, { loading }] = useMutation(APPLY_VISA);
 
-  useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem("user") || "{}");
-    setUser(auth);
+  const { data, loading: areaLoading, error } = useQuery(GET_AREAS_OF_CONSERVATION);
+  if (areaLoading) return <p>Loading...</p>;
+  if (error) return <p>something went wrong ...</p>;
 
-    if (success !== undefined || canceled !== undefined) {
-      if (success) {
-        alert("Payment Succesful! You will receive an email confirmation.");
-        // console.log("Order placed! You will receive an email confirmation.");
-      }
-
-      if (canceled) {
-        console.log(
-          "Order canceled -- continue to shop around and checkout when you’re ready."
-        );
-      }
-    }
-
-
-  }, [ success, canceled]);
-
-  const [createVisaHolder, { loading }] = useMutation(APPLY_VISA, {
-    variables: {
-      first_name: enteredFirstName,
-      last_name: enteredLastName,
-      user: parseInt(user?.id),
-      conservation_areas: enteredConservationAreas,
-      passport_no: enteredPassportNo,
-      passport_expiry: enteredExpiryDate,
-    },
+  const options = data?.conservationAreas?.data.map((area) => {
+    return { value: area.id, label: area.attributes.title };
   });
+
+  const auth = JSON.parse(localStorage.getItem("user") || "{}");
 
   const handleSelect = (e) => {
     // console.log(e)
@@ -96,48 +69,21 @@ const Apply = () => {
     setEnteredConservationAreas(choices);
   };
 
-  const {
-    loading: areaLoading,
-    error: areaError,
-    data,
-  } = useQuery(GET_AREAS_OF_CONSERVATION);
 
-  if (areaError) {
-    console.log(areaError);
-    return <p>Error :{areaError?.message}</p>;
-  }
-  const availableOptions = data?.conservationAreas?.data.map((area) => {
-    return { value: area.id, label: area.attributes.title };
-  });
+  const onSubmit = async (data) => {
+    console.log(data)
+    try {
+      await createVisaHolder({ variables: { ...data, user: auth.id, conservation_areas: enteredConservationAreas } });
+      toast.success("visa holder created succesfully");
+      router.push('/api/checkout_sessions')
+    } catch (error) {
+      toast(error.message);
+    }
+  };
+  const minDate = moment().format("YYYY-MM-DD");
+  const maxDate = moment().add(10, "years").format("YYYY-MM-DD");
 
-  // const onSubmit = async (e) => {
-    
-  //   e.preventDefault();
-  //   if (
-    
-  //     enteredPassportNo === "" ||
-  //     enteredExpiryDate === "" ||
-  //     enteredConservationAreas.length === 0
-  //   ) {
-  //     return alert("please .... fill all the fields");
-  //   }
-  //   try {
-  //     await createVisaHolder();
-  //     toast.success("visa holder created succesfully");
-  //     setEnteredLastName("");
-  //     setEnteredFirstName("");
-  //     setEnteredPassportNo("");
-  //     setEnteredExpiryDate("");
-  //     setEnteredConservationAreas("");
 
-  //     router.push('../../../pages/api/checkout_sessions');
-
-  //   } catch (error) {
-  //     toast(error.message);
-  //   }
-  // };
-
-  
 
   return (
     <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
@@ -157,15 +103,14 @@ const Apply = () => {
           />
         </div>
         <h3
-          className={`${
-            styles.headings
-          }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
+          className={`${styles.headings
+            }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
         >
           Apply for Global Green Visa
         </h3>
         <form
-        action="/api/checkout_sessions" method="POST"
-          // onSubmit={onSubmit}
+
+          onSubmit={handleSubmit(onSubmit)}
           className="shadow-md rounded-lg px-7 pt-6 pb-8 m-5 border-gray border-2 "
         >
 
@@ -173,31 +118,44 @@ const Apply = () => {
           <div className="mb-4">
             <label className="text-lg md:text-xl">Passport Number</label>
             <input
+              {...register("passport_no", { required: "Passport number is required", pattern: { value: /^[0-9]{10}$/, message: "Must be 10 digit number" } })}
               type="text"
-              name="passport_no"
-              value={enteredPassportNo}
-              onChange={(e) => onChangePassportNo(e)}
+              // name="passport_no"
+
+
               placeholder=""
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
+            {errors.passport_no && <p className="text-red-500 text-xs">{errors.passport_no.message}</p>}
           </div>
           <div className="mb-6">
             <label className="text-lg md:text-xl">Expiry Date</label>
-            <input
+            <input min= {minDate} max= {maxDate}
+              {...register("passport_expiry", {
+                required: "Passport expiry date is required", validate: (value) => {
+                  const now = new Date()
+                  const val = new Date(value)
+                  if (now.getHours() < val.getHours()) return "Must be in future"
+                  const ft = new Date(now.setFullYear(now.getFullYear() + 10))
+                  console.log("FT", ft)
+                  if (ft.getFullYear() < val.getFullYear()) return "Expired"
+                  return true
+                }
+              })}
               type="date"
-              name="passport_expiry"
-              value={enteredExpiryDate}
-              onChange={(e) => onChangeExpiryDate(e)}
+              // name="passport_expiry"
+
+
+
+
+
+
+
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder=""
             />
+            {errors.passport_expiry && <p className="text-red-500 text-xs ">{errors.passport_expiry.message}</p>}
           </div>
-
-          <input
-              type="hidden"
-              name="user_id"
-              value={user}
-          />
 
           <div>
             <label className="text-lg md:text-xl">
@@ -205,17 +163,26 @@ const Apply = () => {
             </label>
           </div>
           <div className="flex items-center mt-4">
-            <Select
-              className=" px-2 py-1"
+            <Controller
+              rules={{ required: "required" }}
               name="conservation_areas"
-              id=""
-              onChange={handleSelect}
-              options={availableOptions}
-              theme={customTheme}
-              isSearchable
-              isMulti
-              autoFocus
-            ></Select>
+              control={control}
+              render={({ field: { onChange, value, ref } }) => (
+                <Select
+
+                  inputRef={ref}
+                  className=" px-2 py-1"
+                  value={options.find(c => c.value === value)}
+                  onChange={val => onChange(val.map(c => c.value))}
+                  options={options}
+                  theme={customTheme}
+                  isSearchable
+                  isMulti
+                  autoFocus
+
+                />)}
+            />
+            {errors.conservation_areas && <p className="text-red-500 text-xs ">{errors.conservation_areas.message}</p>}
           </div>
 
           <div className="mt-5 ml-[8vh]">
