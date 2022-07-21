@@ -18,6 +18,11 @@ const JoinUs = () => {
   const [userID, setID] = useState(null)
   const [signup] = useMutation(SIGNUP_MUTATION);
   const router = useRouter();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = (e) => {
+    e.preventDefault()
+    setPasswordShown(!passwordShown);
+  };
   const [addDetails, {loading}] = useMutation(CREATE_USER_MUTATION);
   const onSubmit = async (data) => {
     
@@ -114,7 +119,7 @@ const {email, password, last_name, first_name} = data
               />
               {errors.last_name && <p className="text-red-500 text-xs ">{errors.last_name.message}</p>}
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               
               <input
               {...register("username", {required: "Username is required"})}
@@ -124,7 +129,7 @@ const {email, password, last_name, first_name} = data
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
-            </div> 
+            </div>  */}
 
             <div className="mb-6">
        
@@ -142,13 +147,14 @@ const {email, password, last_name, first_name} = data
               
               <input
               {...register("password", {required: "Password is required"})}
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 placeholder="Password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
+              <button  onClick={togglePassword}>{passwordShown ? "Hide password" : "Show Password"}</button>
               {errors.password && <p className="text-red-500 text-xs ">{errors.password.message}</p>}
             </div>
-            <button className="shadow bg-green focus:shadow-outline focus:outline-none hover:  text-white font-bold px-6 md:text-l bg-[#418d89] rounded-sm w-full mb-3 py-1">
+            <button type="submit" className="shadow bg-green focus:shadow-outline focus:outline-none hover:  text-white font-bold px-6 md:text-l bg-[#418d89] rounded-sm w-full mb-3 py-1">
                   {loading ? "Sending" : "Sign Up"} 
                 </button>
                 <Link href="/login">

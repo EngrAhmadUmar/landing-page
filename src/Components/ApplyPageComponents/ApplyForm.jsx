@@ -26,16 +26,9 @@ import { useRouter } from "next/router";
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 
-const conservationAreas = [
-  {
-    value: "megaFauna", label: 'mega fauna'
-  },
-  { value: "birdConservation", label: "bird conservation" }
-]
+
 const Apply = () => {
-
-
-
+  
   const { register, control, handleSubmit, formState: { errors } } = useForm()
   function customTheme(theme) {
     return {
@@ -48,12 +41,9 @@ const Apply = () => {
     };
   }
   const [enteredConservationAreas, setEnteredConservationAreas] = useState([]);
-  // const [options, setoptions] = useState([]);
-  // const [user, setUser] = useState(null);
   const router = useRouter();
   const { success, canceled } = router.query;
   const [createVisaHolder, { loading }] = useMutation(APPLY_VISA);
-
   const { data, loading: areaLoading, error } = useQuery(GET_AREAS_OF_CONSERVATION);
   if (areaLoading) return <p>Loading...</p>;
   if (error) return <p>something went wrong ...</p>;
@@ -76,8 +66,6 @@ const Apply = () => {
     router.push("/")
     toast.success("Logged out succesfully")
   }
-
-
   const onSubmit = async (data) => {
     console.log(data)
     try {
@@ -90,9 +78,6 @@ const Apply = () => {
   };
   const minDate = moment().format("YYYY-MM-DD");
   const maxDate = moment().add(10, "years").format("YYYY-MM-DD");
-
-
-
   return (
     <div className="font-syne h-screen bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 ">
       <Head>
@@ -121,15 +106,11 @@ const Apply = () => {
           className="w-full sm:w-[80%]   pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray  md:w-[80%] lg:w-[100%] xl:w-3/5 "
         >
 
-
           <div className="mb-4">
             
             <input
                {...register("passport_no", { required: "Passport number is required", pattern: { value: /^[0-9]{10}$/, message: "Must be 10 digit number" } })}
                type="text"
-               // name="passport_no"
- 
- 
                placeholder="Passport number"
                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
              />
@@ -151,14 +132,6 @@ const Apply = () => {
               })}
               type="date"
               placeholder="Passport expiry date"
-              // name="passport_expiry"
-
-
-
-
-
-
-
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               
             />
@@ -199,7 +172,6 @@ const Apply = () => {
         </form>
       </div>
       </div>
-
       <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
          <div className="flex flex-col justify-center h-full w-4/5 items-center gap-y-2">
            <h3 className="text-4xl w-2/3 text-green font-extrabold">
@@ -211,30 +183,7 @@ const Apply = () => {
          </div>
         </div>
        </div>
-  
 
-    // <div className="">
-
-    //   <form action="">
-
-    //   </form>
-    //   <div className="mt-10">
-    //     <h1>hey</h1>
-    //     {data.conservationAreas.data.length > 0 ? (
-    //       <div>
-    //         {data.conservationAreas.data.map((area, index) => (
-    //           <div key={index}>
-
-    //             {area.attributes.title}
-    //           </div>
-    //         ))}
-    //       </div>
-    //     ) : (
-    //       <p>No areas</p>
-    //     )}
-    //   </div>
-
-    // </div>
   );
 
 };

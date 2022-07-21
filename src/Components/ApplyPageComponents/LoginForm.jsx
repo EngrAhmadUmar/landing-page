@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FormButton from "./FormButton";
 import { AUTH_TOKEN } from "../constant";
+import { USER } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
 import { toast } from "react-toastify";
 import  Logo  from "../UI/Logo";
@@ -15,17 +16,23 @@ const Login = () => {
   const { register, handleSubmit, formState:{errors}} = useForm()
   const router = useRouter()
   const [login, {loading, }] = useMutation(LOGIN_MUTATION);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = (e) => {
+    e.preventDefault()
+    setPasswordShown(!passwordShown);
+  };
 
   const onSubmit = async (data) => {
     console.log(data)
 
     try {
-      const {username, password} = data
-      const {data: res} = await login({variables:{ username, password}});
-      localStorage.setItem(AUTH_TOKEN, res.register.jwt);
-      localStorage.setItem(USER, JSON.stringify(res.register.user));
-      setID(res.register.user.id)
+      const {email, password} = data
+      const {data: res} = await login({variables:{ email, password}});
+      localStorage.setItem(AUTH_TOKEN, res.login.jwt);
+      localStorage.setItem(USER, JSON.stringify(res.login.user));
       router.push("/apply")
+     toast.success("Logged in successfully")
+      
       
     } catch (error) {
       toast.error(error.message)
@@ -67,13 +74,13 @@ const Login = () => {
             <div className="mb-4">
               
               <input
-              {...register("username", {required: "username is required"})}
+              {...register("email", {required: "email is required"})}
                 type="text"
                 
                 placeholder="Email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
+              {errors.email && <p className="text-red-500 text-xs ">{errors.email.message}</p>}
             </div>
 
            
@@ -81,10 +88,11 @@ const Login = () => {
               
               <input
               {...register("password", {required: "Password is required"})}
-                type="password"
+              type={passwordShown ? "text" : "password"}
                 placeholder="Password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
+              <button  onClick={togglePassword}>{passwordShown ? "Hide password" : "Show Password"}</button>
               {errors.password && <p className="text-red-500 text-xs ">{errors.password.message}</p>}
             </div>
             <button className="shadow bg-green focus:shadow-outline focus:outline-none hover:  text-white font-bold px-6 md:text-l bg-[#418d89] rounded-sm w-full mb-3 py-1">

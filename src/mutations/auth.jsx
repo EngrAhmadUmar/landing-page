@@ -40,17 +40,16 @@ mutation user_details($data: UserDetailInput!) {
   
   `
 const LOGIN_MUTATION = gql`
-mutation  login($username: String!, $password: String!) {
-  login(input: {identifier:$username, password:$password}) {
-      jwt
-      user {
-          id
-          email
-          username
-      }
-  }
+  mutation  login($email: String!, $password: String!) {
+    login(input: {identifier:$email, password:$password}) {
+        jwt
+        user {
+            id
+            email
+        }
+    }
 }
-  
+    
 `;
 
 export const DELETE_USER = gql`
