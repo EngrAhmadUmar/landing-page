@@ -12,6 +12,6 @@ export default function Apply() {
     setToken(authToken);
   }, []);
 
-  if (!token) return <LoginForm />;
-  return <React.Fragment>{token && <ApplyForm />}</React.Fragment>;
+  //if (!token) return <LoginForm />;
+  return <React.Fragment><ApplyForm /></React.Fragment>;
 }

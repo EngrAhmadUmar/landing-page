@@ -1,4 +1,5 @@
 import styles from "../../../styles/Home.module.css";
+import React from "react";
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -32,6 +33,19 @@ const conservationAreas = [
   { value: "birdConservation", label: "bird conservation" }
 ]
 const Apply = () => {
+  // const token=localStorage.getItem(AUTH_TOKEN)
+  React.useEffect(() => {
+    const token=localStorage.getItem(AUTH_TOKEN)
+
+    // checks if the user is authenticated
+    if(!token){
+      router.push("/login")
+    }
+    else{
+      router.push("/apply");
+
+     }
+   }, []);
 
 
 

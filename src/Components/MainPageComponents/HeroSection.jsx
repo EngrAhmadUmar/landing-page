@@ -1,27 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
+import { logoutUser } from "../constant";
 import Button from "../UI/Button";
 import Logo from "../UI/Logo";
 
 const HeroSection = () => {
   return (
     <div className="text-white h-[100vh] relative bg-[#000107]">
-      <div
-        className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
-      >
-        <div className="flex pt-5 justify-between">
-          <Logo />
-          <div className="flex gap-2 md:gap-5 mr-5 mt-3">
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Investors</h3>
-            </Link>
-            <Link href="#">
-              <h3 className="text-white text-2xl ">Login</h3>
-            </Link>
-          </div>
-        </div>
-        <Image
+      <Image
           src="/hero.jpg"
           layout="fill"
           objectFit="cover"
@@ -33,6 +20,23 @@ const HeroSection = () => {
             overflow: "hidden"
           }}
         />
+      <div
+        className={`${"absolute h-[100vh] w-[100vw] -z-1 overflow-x-hidden bg-[rgba(0,0,0,0.1)] md:overflow-x-hidden"}`}
+      >
+        
+        <div className="flex pt-5 justify-between">
+          <Logo />
+          <div className="flex gap-2 md:gap-5 mr-5 mt-3">
+            <Link href="#">
+              <h3 className="text-white text-2xl ">Investors</h3>
+            </Link>
+            <Link href="/login">
+              <h3 className="text-white text-2xl ">Login</h3>
+            </Link>
+            <h3 className="text-white text-2xl "><button onClick={logoutUser}>Logout</button></h3>
+          </div>
+        </div>
+        
       </div>
       <div className={`${"absolute ml-[2rem] mt-[30vh] "} ${styles.heroText}`}>
         <h3 className="text-5xl md:text-[5.5rem]">GGV</h3>

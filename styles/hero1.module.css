@@ -1,0 +1,132 @@
+.header {
+    position: relative;
+    font-size: clamp(3.8rem, -0.875rem + 8.333vw, 3.5rem);
+  
+  }
+  
+  
+  /* .headerContainer {
+    max-width: 300px;
+  } */
+  
+  .header::before {
+    content: "";
+    position: absolute;
+    background: #418d89;
+    width: 100px;
+    height: 6px;
+    border-radius: 40px;
+    font-family: "Syne";
+  
+    
+  
+    
+  }
+  
+  
+  
+  .heros{
+    position: relative;
+    height: 90vh;
+    width: 100vw;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 65%;
+  }
+  .innerhero{
+    font-size: 1.25rem;
+    line-height: 1.75rem; 
+    z-index: 2;
+    position: relative;
+    opacity: transparent;
+  
+  
+    @media (min-width: 768px) { 
+      font-size: 1.875rem;
+      line-height: 2.25rem; 
+    }
+    @media (min-width: 1024px) { 
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  
+  
+  
+  }
+  .innerhero__one{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem; 
+    margin-bottom: 0.75rem; 
+    margin-top: 2rem; 
+    border-radius: 0.125rem; 
+    background: #418d89;
+    z-index: 2;
+    position: relative;
+  
+  }
+  .innerhero__one__one{
+    padding: 1.5rem; 
+    font-size: 1.25rem;
+    line-height: 1.75rem; 
+  
+  
+  
+  
+  }
+  .headerline{
+    position: absolute;
+    width: 13px;
+    height: 240px;
+    margin-left: 40px;
+    top: 230px;
+    content: "";
+    background: #418D89;
+    border-radius: 20px;
+    z-index: 20;
+      
+  }
+  .headerprops{
+    position: relative;
+    font-size: clamp(3.8rem, -0.875rem + 8.333vw, 3.5rem); 
+  
+  }
+  @media screen and (max-width:790px){
+    .heros{
+      height: 100vh;
+    
+    }
+    .headerprops{
+      font-size: 50px;
+  
+    }
+    .headerline{
+      height: 200px;
+      width: 5px;
+      top: 180px
+    }
+    .innerhero{
+      font-size: 1rem;
+    }
+    .innerhero__one{
+      border-radius: 0.15rem;
+  
+    }
+    .innerhero__one__one{
+      font-size: 0;
+  
+    }
+    .innerhero__one__one::before{
+      content: "Join";
+      font-size: initial;
+    }
+  
+    
+     
+  }
+  
+  
+  
+  
+  
+  
+  
