@@ -10,7 +10,6 @@ import { LOGIN_MUTATION } from "../../mutations/auth";
 import { toast } from "react-toastify";
 import Logo from "../UI/Logo";
 import LoginForm_ from "./FormComponents/LoginForm_";
-import RightImage from "./FormComponents/RightImage";
 
 const Login = () => {
   const router = useRouter();
@@ -57,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
@@ -76,7 +75,19 @@ const Login = () => {
         </div>
       </div>
 
-      <RightImage />
+      <div className="hidden md:flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+        <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
+          <h3
+            className=" text-white
+           text-4xl md:text-5xl lg:text-6xl font-semibold"
+          >
+            GGV
+          </h3>
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5 text-white">
+            Your gateway to <br></br>environmental tourism
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

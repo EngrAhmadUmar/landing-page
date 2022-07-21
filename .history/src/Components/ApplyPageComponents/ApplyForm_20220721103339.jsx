@@ -98,7 +98,7 @@ const Apply = () => {
   const maxDate = moment().add(10, "years").format("YYYY-MM-DD");
 
   return (
-    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
       <Head>
         <title>Apply for Visa</title>
         <meta name="description" content="Apply for Global Green Visa" />

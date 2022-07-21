@@ -10,7 +10,6 @@ import { LOGIN_MUTATION } from "../../mutations/auth";
 import { toast } from "react-toastify";
 import Logo from "../UI/Logo";
 import LoginForm_ from "./FormComponents/LoginForm_";
-import RightImage from "./FormComponents/RightImage";
 
 const Login = () => {
   const router = useRouter();
@@ -57,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
@@ -75,8 +74,6 @@ const Login = () => {
           <LoginForm_ />
         </div>
       </div>
-
-      <RightImage />
     </div>
   );
 };

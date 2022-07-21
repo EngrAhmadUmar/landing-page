@@ -57,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />

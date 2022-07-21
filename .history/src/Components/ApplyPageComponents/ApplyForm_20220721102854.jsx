@@ -14,7 +14,6 @@ import moment from "moment";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
-import RightImage from "./FormComponents/RightImage";
 
 // const fs = require("fs");
 
@@ -98,7 +97,7 @@ const Apply = () => {
   const maxDate = moment().add(10, "years").format("YYYY-MM-DD");
 
   return (
-    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
       <Head>
         <title>Apply for Visa</title>
         <meta name="description" content="Apply for Global Green Visa" />
@@ -221,7 +220,17 @@ const Apply = () => {
         </form>
       </div>
 
-      <RightImage />
+      <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+        <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
+          <h3 className="  text-4xl md:text-5xl lg:text-6xl font-semibold">
+            GGV
+          </h3>
+          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5">
+            Your gateway to <br></br>environmental tourism
+          </p>
+        </div>
+        <div></div>
+      </div>
     </div>
   );
 };
