@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 import areaPic from "../../public/an3.svg";
+import { Footer } from "../../src/Components/MainPageComponents";
 
 const GET_AREAS_OF_CONSERVATION = gql`
   query conservationAreas {
@@ -88,6 +89,7 @@ const ConservationAreasList = () => {
 
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

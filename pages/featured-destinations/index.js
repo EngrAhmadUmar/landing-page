@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import Link from "next/link";
 // import gorillaLake from "../../../public/sample-pic.jpeg";
 import fazhenda from "../../public/fazhenda.jpg";
+import { Footer } from "../../src/Components/MainPageComponents";
 // import gorilla from "../../../public/gorilla.jpg";
 // import akagera from "../../../public/akagera.jpg";
 // import destinationPic from "../../../public/sample-pic.jpeg";
@@ -73,13 +74,15 @@ const FeaturedDestinationsList = () => {
             );
           })}
         </div>
-
+          
         <button className="bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
           <Link href="/">
             <a className="px-10 text-lg md:text-xl lg:text-2xl">Go back Home</a>
           </Link>
         </button>
+        <Footer/>
       </div>
+      
     </div>
   );
 };

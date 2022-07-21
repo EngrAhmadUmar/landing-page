@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 import { Footer } from "../../src/Components/MainPageComponents";
 
 const GET_AREAS_OF_CONSERVATION = gql`
@@ -78,6 +79,11 @@ const ConservationAreaDetails = () => {
           {area.attributes.long_description}
         </p>
       </div>
+      <button className=" justify-self bg-[#418d89] py-2 rounded-lg mt-8 mb-3">
+        <Link href="/">
+          <a className="px-10 text-lg md:text-xl lg:text-2xl">Go back Home</a>
+        </Link>
+      </button>
       <Footer />
     </div>
   );
