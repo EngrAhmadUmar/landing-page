@@ -14,42 +14,18 @@ import { useForm } from "react-hook-form";
 const Login = () => {
   const { register, handleSubmit, formState:{errors}} = useForm()
   const router = useRouter()
-  const [email, setEmail] = useState("");
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const [password, setPassword] = useState("");
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const [login, { data, loading, }] = useMutation(LOGIN_MUTATION, {
-    variables: {
-      email: email,
-      password: password
-    }
-  });
+  const [login, {loading, }] = useMutation(LOGIN_MUTATION);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (email === "" || password === "") {
-      return alert("please fill in all fields");
-    }
-    console.log("Logging in");
+  const onSubmit = async (data) => {
+    console.log(data)
+
     try {
-      const {data } = await login(email, password);
-      toast.success("Login successful")
-      if (data) {
-        console.log("Completed");
-        localStorage.setItem(AUTH_TOKEN, data.login.jwt);
-        console.log(data);
-        localStorage.setItem("user", JSON.stringify(data));
-        console.log("user logged in");
-        setEmail("");
-        setPassword("");
-        router.reload();
-        // router.push("/apply");
-      }
-      
+      const {username, password} = data
+      const {data: res} = await login({variables:{ username, password}});
+      localStorage.setItem(AUTH_TOKEN, res.register.jwt);
+      localStorage.setItem(USER, JSON.stringify(res.register.user));
+      setID(res.register.user.id)
+      router.push("/apply")
       
     } catch (error) {
       toast.error(error.message)
@@ -91,13 +67,13 @@ const Login = () => {
             <div className="mb-4">
               
               <input
-              {...register("email", {required: "Email is required"})}
+              {...register("username", {required: "username is required"})}
                 type="text"
                 
                 placeholder="Email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.email && <p className="text-red-500 text-xs ">{errors.email.message}</p>}
+              {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
             </div>
 
            

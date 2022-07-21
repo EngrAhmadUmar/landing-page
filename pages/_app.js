@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const httpLink = createHttpLink({
-  uri:'http://localhost:1337/graphql'
+  uri:'http://localhost:5000/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
