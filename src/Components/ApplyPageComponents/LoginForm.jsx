@@ -9,8 +9,10 @@ import { AUTH_TOKEN } from "../constant";
 import { LOGIN_MUTATION } from "../../mutations/auth";
 import { toast } from "react-toastify";
 import  Logo  from "../UI/Logo";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { register, handleSubmit, formState:{errors}} = useForm()
   const router = useRouter()
   const [email, setEmail] = useState("");
   const onChangeEmail = (e) => {
@@ -76,69 +78,68 @@ const Login = () => {
           </Link>
           
         </div>
-        <h3 className="text-center text-xl mt-[3rem]">
-          Welcome back, Please Login to apply for a Visa
+        <h3 className="text-center text-green text-3xl md:text-3xl mb-5 font-semibold ">
+          Login
         </h3>
         <div className="flex justify-center">
-          <form
-            onSubmit={onSubmit}
-            className="pt-6 pb-8 mb-4 mt-[5rem] border-2 rounded-lg shadow-md px-7 border-gray "
+        <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full   pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray md:w-full lg:w-5/6 xl:w-3/5"
           >
-            <div className="mb-6">
-              <label className="text-lg md:text-xl">Email</label>
-              <input
-                type="email"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="email"
-                onChange={onChangeEmail}
-                placeholder="Enter Your Email"
-                value={email}
-              />
-            </div>
-
+            
+            
             <div className="mb-4">
-              <label className="text-lg md:text-xl">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={onChangePassword}
-                placeholder="Enter Password"
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              />
-            </div>
-
-            <div className="mt-5 flex justify-center">
-              <FormButton buttonInfo={loading ? "Sending" : "Login"}/>
-            </div>
-            <div className="text-sm mt-3 cursor-pointer text-center">
-              <Link href="/register" >
-              <h3 className="hover:text-green">Forgot Password?</h3>
-              </Link>
               
-              <Link href="/register" >
-                <h3 className="hover:text-green mt-3">
-                  Don&apos;t have an Account? Sign in
-                </h3>
-              </Link>
+              <input
+              {...register("email", {required: "Email is required"})}
+                type="text"
+                
+                placeholder="Email"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors.email && <p className="text-red-500 text-xs ">{errors.email.message}</p>}
             </div>
-          </form>
+
+           
+            <div className="mb-4">
+              
+              <input
+              {...register("password", {required: "Password is required"})}
+                type="password"
+                placeholder="Password"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors.password && <p className="text-red-500 text-xs ">{errors.password.message}</p>}
+            </div>
+            <button className="shadow bg-green focus:shadow-outline focus:outline-none hover:  text-white font-bold px-6 md:text-l bg-[#418d89] rounded-sm w-full mb-3 py-1">
+                  {loading ? "Sending" : "Login"} 
+                </button>
+                <Link href="/login">
+               <h3 className="hover:text-green ">
+                 Dont have an Account? <span className="text-green font-extrabold cursor-pointer">Register</span> 
+               </h3>
+             </Link>
+
+
+
+          
+          
+              
+            </form>
         </div>
       </div>
 
-      <div className="hidden md:flex bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
-        <div className="mt-[50px] md:mt-[150px] mx-4 md:mx-12">
-          <h3
-            className=" text-white
-           text-4xl md:text-5xl lg:text-6xl font-semibold"
-          >
-            GGV
-          </h3>
-          <p className="max-w-md md:max-w-xl text-2xl md:text-4xl mt-5 text-white">
-            Your gateway to <br></br>environmental tourism
-          </p>
-        </div>
-      </div>
+      <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
+         <div className="flex flex-col justify-center h-full w-4/5 items-center gap-y-2">
+           <h3 className="text-4xl w-2/3 text-green font-extrabold">
+             GGV
+           </h3>
+           <p className="text-xl w-2/3">
+             Your gateway to <br></br>environmental tourism
+           </p>
+         </div>
+         <div></div>
+       </div>
     </div>
   );
 };
