@@ -12,7 +12,7 @@ import {
 export default function Home() {
   return (
     <React.Fragment>
-      <div className="font-Poppins">
+      <div className="font-syne">
         <HeroSection />
         <About />
         <PlanningVisa />

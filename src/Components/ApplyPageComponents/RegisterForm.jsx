@@ -25,14 +25,13 @@ const JoinUs = () => {
   };
   const [addDetails, {loading}] = useMutation(CREATE_USER_MUTATION);
   const onSubmit = async (data) => {
-    
     try {
-const {email, password, last_name, first_name} = data
-      const {data: res} = await signup({variables:{ email, password}});
+      const { email, password, last_name, first_name } = data;
+      const { data: res } = await signup({ variables: { email, password } });
 
       localStorage.setItem(AUTH_TOKEN, res.register.jwt);
       localStorage.setItem(USER, JSON.stringify(res.register.user));
-      setID(res.register.user.id)
+      setID(res.register.user.id);
       try {
         const profile = await addDetails({
           variables: {
@@ -42,36 +41,25 @@ const {email, password, last_name, first_name} = data
               user: res.register.user.id
             }
           }
-        })
-        toast.success("Account created succesfully")
-        router.push("/apply")
+        });
+        toast.success("Account created succesfully");
+        router.push("/apply");
       } catch (error) {
-        
-        toast.error(error.message)
-        console.log('error', JSON.stringify(error, null, 2))
-    }
-
-
-
-
-
-      
+        toast.error(error.message);
+        console.log("error", JSON.stringify(error, null, 2));
+      }
     } catch (error) {
-      if(error.message.startsWith("Email is taken")){
-        return toast.error("Email is taken")
-      
+      if (error.message.startsWith("Email is taken")) {
+        return toast.error("Email is taken");
+      } else {
+        console.log(JSON.stringify(error, null, 2));
+        return toast.error("something went wrong");
+      }
     }
-    else{
-      console.log(JSON.stringify(error, null, 2))
-      return toast.error("something went wrong")
-    }
-    }
-    
-
   };
 
   return (
-    <div className=" font-syne " id="joinUs" >
+    <div className=" font-Poppinss" id="joinUs">
       <Head>
         <title>Welcome to GGV</title>
         <meta name="description" content="Join Our Family" />
@@ -169,7 +157,6 @@ const {email, password, last_name, first_name} = data
           
               
             </form>
-            
           </div>
         </div>
 
@@ -190,4 +177,3 @@ const {email, password, last_name, first_name} = data
 };
 
 export default JoinUs;
-

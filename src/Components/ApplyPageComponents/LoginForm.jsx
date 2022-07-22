@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import Head from "next/head";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,21 +35,14 @@ const Login = () => {
       
       
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-    
 
-   
     // here check if the user is logged in and redirect him to the /apply
- 
-  
-
-    
   };
 
-
   return (
-    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
+    <div className="font-Poppins bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 md:h-[100vh]">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login to GGV" />
@@ -57,9 +50,8 @@ const Login = () => {
       <div className="h-[100vh]  mx-6">
         <div className="w-[50px] h-40 pt-5 ml-6">
           <Link href="/">
-          <Logo/>
+            <Logo />
           </Link>
-          
         </div>
         <h3 className="text-center text-green text-3xl md:text-3xl mb-5 font-semibold ">
           Login
