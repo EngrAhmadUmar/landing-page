@@ -1,5 +1,4 @@
 import styles from "../../../styles/Home.module.css";
-import React from "react";
 import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
@@ -12,8 +11,6 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import moment from "moment";
-import Link from "next/link";
-import  Logo  from "../UI/Logo";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
@@ -23,23 +20,20 @@ import RightImage from "./FormComponents/RightImage";
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-
-
+const conservationAreas = [
+  {
+    value: "megaFauna",
+    label: "mega fauna"
+  },
+  { value: "birdConservation", label: "bird conservation" }
+];
 const Apply = () => {
-  React.useEffect(() => {
-    const token=localStorage.getItem(AUTH_TOKEN)
-
-    // checks if the user is authenticated
-    if(!token){
-      router.push("/login")
-    }
-    else{
-      router.push("/apply");
-
-     }
-   }, []);
-  
-  const { register, control, handleSubmit, formState: { errors } } = useForm()
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
   function customTheme(theme) {
     return {
       ...theme,
@@ -51,10 +45,17 @@ const Apply = () => {
     };
   }
   const [enteredConservationAreas, setEnteredConservationAreas] = useState([]);
+  // const [options, setoptions] = useState([]);
+  // const [user, setUser] = useState(null);
   const router = useRouter();
   const { success, canceled } = router.query;
   const [createVisaHolder, { loading }] = useMutation(APPLY_VISA);
-  const { data, loading: areaLoading, error } = useQuery(GET_AREAS_OF_CONSERVATION);
+
+  const {
+    data,
+    loading: areaLoading,
+    error
+  } = useQuery(GET_AREAS_OF_CONSERVATION);
   if (areaLoading) return <p>Loading...</p>;
   if (error) return <p>something went wrong ...</p>;
 
@@ -73,9 +74,10 @@ const Apply = () => {
   const handleLogout = () => {
     localStorage.removeItem(AUTH_TOKEN);
     localStorage.removeItem(USER);
-    router.push("/")
-    toast.success("Logged out succesfully")
-  }
+    router.push("/");
+    toast.success("Logged out succesfully");
+  };
+
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -94,21 +96,30 @@ const Apply = () => {
   };
   const minDate = moment().format("YYYY-MM-DD");
   const maxDate = moment().add(10, "years").format("YYYY-MM-DD");
+
   return (
-    <div className="font-syne h-screen bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 ">
+    <div className="font-syne bg-[#d1be84] bg-cover grid grid-col-1 md:grid-cols-2 2xl:h-[100vh]">
       <Head>
-        <title>Login</title>
-        <meta name="description" content="Login to GGV" />
+        <title>Apply for Visa</title>
+        <meta name="description" content="Apply for Global Green Visa" />
       </Head>
-      <div className=" mx-6">
+      <div className="grid grid-column-1">
         <div className="w-[50px] h-40 pt-5 ml-6">
-          <Link href="/">
-          <Logo/>
-          </Link>
-          
+          <Image
+            src="/logo.svg"
+            layout="responsive"
+            alt=""
+            width={5}
+            height={5}
+            opacity={100}
+          />
         </div>
-        <h3 className="text-center text-green text-3xl md:text-3xl mb-5 font-semibold ">
-          Apply for visa
+        <h3
+          className={`${
+            styles.headings
+          }  ${"text-center text-3xl md:text-4xl mb-5 font-semibold"}`}
+        >
+          Apply for Global Green Visa
         </h3>
         <button
           onClick={handleLogout}
@@ -116,27 +127,37 @@ const Apply = () => {
         >
           Logout
         </button>
-      
-        <div className="flex justify-center">
-       
-        <form method="POST"
-
+        <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full sm:w-[80%]   pt-6 pb-8 mb-4 border-2 rounded-lg shadow-md px-7 border-gray  md:w-[80%] lg:w-[100%] xl:w-3/5 "
+          className="shadow-md rounded-lg px-7 pt-6 pb-8 m-5 border-gray border-2 "
         >
           <div className="mb-4">
-            
+            <label className="text-lg md:text-xl">Passport Number</label>
             <input
-               {...register("passport_no", { required: "Passport number is required", pattern: { value: /^[0-9]{10}$/, message: "Must be 10 digit number" } })}
-               type="text"
-               placeholder="Passport number"
-               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             />
-            {errors.passport_no && <p className="text-red-500 text-xs">{errors.passport_no.message}</p>}
+              {...register("passport_no", {
+                required: "Passport number is required",
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: "Must be 10 digit number"
+                }
+              })}
+              type="text"
+              // name="passport_no"
+
+              placeholder=""
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+            {errors.passport_no && (
+              <p className="text-red-500 text-xs">
+                {errors.passport_no.message}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-
-            <input min= {minDate} max= {maxDate}
+            <label className="text-lg md:text-xl">Expiry Date</label>
+            <input
+              min={minDate}
+              max={maxDate}
               {...register("passport_expiry", {
                 required: "Passport expiry date is required",
                 validate: (value) => {
@@ -151,9 +172,8 @@ const Apply = () => {
                 }
               })}
               type="date"
-              placeholder="Passport expiry date"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              
+              placeholder=""
             />
             {errors.passport_expiry && (
               <p className="text-red-500 text-xs ">
@@ -163,22 +183,21 @@ const Apply = () => {
           </div>
 
           <div>
-           
+            <label className="text-lg md:text-xl">
+              Preferred Areas of Conservation
+            </label>
           </div>
-          <div className="flex items-center w-full ">
+          <div className="flex items-center mt-4">
             <Controller
-            
               rules={{ required: "required" }}
               name="conservation_areas"
               control={control}
               render={({ field: { onChange, value, ref } }) => (
                 <Select
-                placeholder="Prefered conservation areas"
-
                   inputRef={ref}
-                  className=" shadow appearance-none  rounded w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={options.find(c => c.value === value)}
-                  onChange={val => onChange(val.map(c => c.value))}
+                  className=" px-2 py-1"
+                  value={options.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.map((c) => c.value))}
                   options={options}
                   theme={customTheme}
                   isSearchable
@@ -194,24 +213,16 @@ const Apply = () => {
             )}
           </div>
 
-          <button className="shadow mt-3 bg-green focus:shadow-outline focus:outline-none hover:  text-white font-bold px-6 md:text-l bg-[#418d89] rounded-sm w-full mb-3 py-1">
-                  {loading ? "Sending" : "Proceed to payment"} 
-                </button>
+          <div className="mt-5 ml-[8vh]">
+            <button className="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 md:text-xl bg-[#418d89] rounded-sm mt-8 mb-3 py-1">
+              {loading ? "Sending..." : "Proceed to payment"}
+            </button>
+          </div>
         </form>
       </div>
-      </div>
-      <div className="md:flex hidden text-white bg-[url('/apply_for_visa_bg.png')]  bg-cover bg-no-repeat sm:bg-center md:bg-bottom lg:bg-bottom xl:bg-bottom 2xl:center">
-         <div className="flex flex-col justify-center h-full w-4/5 items-center gap-y-2">
-           <h3 className="text-4xl w-2/3 text-green font-extrabold">
-             GGV
-           </h3>
-           <p className="text-xl w-2/3">
-             Your gateway to <br></br>environmental tourism
-           </p>
-         </div>
-        </div>
-       </div>
 
+      <RightImage />
+    </div>
   );
 };
 

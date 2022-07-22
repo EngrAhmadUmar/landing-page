@@ -1,23 +1,24 @@
 import React from "react";
-import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import {
   HeroSection,
   PlanningVisa,
   FeaturedDestination,
   About,
   AreasOfConservation,
+  Map,
   Footer
 } from "../src/Components/MainPageComponents";
 
-export default function main({ areas }) {
+export default function Home() {
   return (
     <React.Fragment>
-      <div className=" font-syne">
+      <div className="font-Poppins">
         <HeroSection />
         <About />
         <PlanningVisa />
-        {/* <FeaturedDestination /> */}
-        <AreasOfConservation />        
+        <FeaturedDestination />
+        <AreasOfConservation />
+        <Map />
         <Footer />
       </div>
     </React.Fragment>
