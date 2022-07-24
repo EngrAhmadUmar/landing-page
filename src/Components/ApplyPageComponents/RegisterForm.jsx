@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { toast } from "react-toastify";
 import styles from "../../../styles/Home.module.css";
 import { DELETE_USER, SIGNUP_MUTATION } from "../../mutations/auth";
@@ -12,6 +12,8 @@ import { AUTH_TOKEN } from "../constant";
 import { USER } from "../constant";
 import { useForm } from "react-hook-form";
 import Logo from "../UI/Logo";
+import countryList from "react-select-country-list";
+import Select from "react-select";
 
 const JoinUs = () => {
   const {
@@ -20,6 +22,14 @@ const JoinUs = () => {
     formState: { errors }
   } = useForm();
   const [userID, setID] = useState(null);
+  
+  const [value, setValue] = useState("");
+
+  const options = useMemo(() => countryList().getData(), []);
+  
+  const changeHandler = (value) => {
+    setValue(value);
+  };
 
   const [signup] = useMutation(SIGNUP_MUTATION);
 
@@ -135,7 +145,14 @@ const JoinUs = () => {
               />
               {errors.username && <p className="text-red-500 text-xs ">{errors.username.message}</p>}
             </div> */}
-
+              <div className="mb-4">
+              <label className="text-lg md:text-xl">Country</label>
+              <Select
+                options={options}
+                value={value}
+                onChange={changeHandler}
+              />
+              </div>
               <div className="mb-6">
                 <label className="text-lg md:text-xl">Email</label>
                 <input
